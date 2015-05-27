@@ -1,0 +1,410 @@
+﻿html
+{
+	overflow-y: scroll;
+}
+
+body
+{
+    background-color:#CCCCCC;
+    font-family:Verdana;
+    font-size:0.70em;
+    margin:0 auto;
+    color:#909090;
+}
+
+p
+{
+	margin:0;
+	padding:5px 0 10px 0;
+}
+
+h1
+{
+	color:#FF6A00;
+    font-weight:bold;
+    font-size:1.4em;
+    padding: 0 0 10px 0;
+}
+
+h2
+{
+	color:#FF6A00;
+    font-weight:bold;
+    font-size:1.1em;
+    padding:0 0 5px 0;
+}
+
+h3
+{
+	color:#FF6A00;
+    font-weight:bold;
+    font-size:0.9em;
+    padding:0 0 5px 0;
+}
+
+ul
+{
+	list-style-type:none;
+}
+
+li
+{
+	display:inline;
+}
+
+/** Placements **/
+#top
+{
+    height:177px;
+    background-color:#616161;
+    border-bottom:solid 1px #000000;
+}
+
+#logowrapper
+{
+    margin:0 auto;
+    position:relative;
+    height:177px;
+    width:900px;
+}
+
+#logoimage
+{
+	width:500px;
+	height:177px;
+	background-image:url(../Images/logo_13.png);
+	background-repeat:no-repeat;
+}
+
+#menu
+{
+    height:30px;
+	width:870px;
+    margin:-26px auto;
+}
+
+#wrapper
+{
+    margin:0 auto;
+    background-color: #FFFFFF;
+    border-left:solid 1px #909090;
+    border-right:solid 1px #909090;
+    border-bottom:solid 1px #909090;
+    width:900px;
+    min-height:400px;
+}
+
+#content
+{
+	border:solid 15px #FFFFFF;
+}
+
+/** End placements **/
+
+/** Elements **/
+
+.MainContent
+{
+	width:630px;
+	float:left;
+	margin: 15px 0 15px 15px;
+}
+
+.RightContent
+{
+	width:200px;
+	float:right;
+}
+
+.BoxWrapper
+{
+	border: solid 1px #909090;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-border-radius:4px;
+	position: relative;
+	background:#CECECE;
+}
+
+.BoxContent
+{
+	border: solid 1px #909090;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-border-radius:4px;
+	position: relative;
+	background:#FFFFFF;
+	margin:5px;
+	width:173px;
+	padding: 5px 5px 10px 8px;
+}
+
+.TopListContent
+{
+	padding-bottom:5px;
+}
+
+.Button
+{
+	border:solid 1px #CCCCCC;
+	font-family:Verdana;
+	font-size:1.1em;
+	color:#FF6A00;
+	width:80px;
+	height:30px;
+	margin-right:10px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-border-radius:4px;
+	position: relative;
+	cursor:pointer;
+}
+
+.AdminButton
+{
+	font-family:Verdana;
+	font-size:1.1em;
+	color:#FF6A00;
+	width:70px;
+	text-decoration:none;	
+}
+
+.BigButton
+{
+	border:solid 1px #CCCCCC;
+	font-family:Verdana;
+	font-size:1.1em;
+	color:#FF6A00;
+	width:160px;
+	height:30px;
+	margin-right:10px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-border-radius:4px;
+	position: relative;
+	cursor:pointer;
+}
+
+.SmallButton
+{
+	border:solid 1px #CCCCCC;
+	font-family:Verdana;
+	font-size:1.1em;
+	color:#FF6A00;
+	width:55px;
+	height:22px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-border-radius:4px;
+	position: relative;
+	cursor:pointer;
+	margin:0 0 5px 5px;
+}
+
+.AdvancedSearchButton
+{
+	position:relative;
+	top: -20px;
+	margin-right:12px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-border-radius:4px;
+	cursor:pointer;
+}
+
+.TextBox, .DropDownList
+{
+	width:145px;
+	border:solid 1px #CCCCCC;
+	font-family:Verdana;
+	font-size:1.1em;
+}
+
+.ListBox
+{
+	padding-left:10px;
+}
+
+.LoginTextBox
+{
+	width:145px;
+	border:solid 1px #CCCCCC;
+	font-family:Verdana;
+	font-size:1.1em;
+}
+
+.InfoBox .DropDownList
+{
+	position:relative;
+	top:-37px;
+}
+
+.LongTextBox
+{
+	width:395px;
+	border:solid 1px #CCCCCC;
+	font-family:Verdana;
+}
+
+.MultilineTextBox
+{
+	width:617px;
+	color:#999999;
+	border:solid 1px #CCCCCC;
+	font-weight:normal;
+	font-size:1.1em;
+	font-family:Verdana;
+	height: 150px;
+}
+
+.Icons
+{
+	padding-top:4px;
+}
+
+#rating
+{
+	padding-top:3px;
+}
+
+/** End elements **/
+
+/** Text and links **/
+p a:link, a:visited, li a:link
+{
+    color:#FF6A00;
+    text-decoration:none;
+}
+
+p a:hover, p a:active, li a:hover, li a:active
+{
+    color:#CECECE;
+    text-decoration:underline;
+}
+
+a:link.Text, a:visited.Text
+{
+	color:#999999;
+	text-decoration:none;
+}
+
+a:hover.Text, a:active.Text
+{
+	color:#FF6A00;
+	text-decoration:underline;
+}
+
+a:link.UnitText, a:visited.UnitText
+{
+	color:#FF6A00;
+	text-decoration:none;
+}
+
+a:hover.UnitText, a:active.UnitText
+{
+	text-decoration:underline;
+}
+
+.MenuText
+{
+    color:#909090;
+    font-weight:bold;
+    font-size:1.1em;
+    float:right;
+}
+
+.Text
+{
+	color:#999999;
+	font-weight:normal;
+	font-size:1.1em;
+}
+
+.UnitText
+{
+	color:#999999;
+	font-weight:normal;
+	font-size:0.9em;
+}
+
+.ErrorText
+{
+	color:#FF6A00;
+	font-weight:normal;
+	font-size:0.9em;
+}
+
+.InfoBox
+{ 
+	border: solid 1px #CCCCCC;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-border-radius:4px;	
+	background:#FFFFFF;
+	padding: 12px;
+}
+
+/** End text and links **/
+
+/** Other fixes **/
+
+.MarginRight
+{
+	margin-right:15px;
+}
+
+.FloatLeft
+{
+    float:left;
+}
+
+.FloatRight
+{
+    float:right;
+}
+
+.ClearFix
+{
+    clear:both;
+}
+
+.MinHeight
+{
+	min-height:500px;
+}
+
+.FontItalic
+{
+	font-style:italic;
+}
+
+.FontBold
+{
+	font-weight:bold;
+}
+
+.FontColorOrange
+{
+	color:#FF6A00;
+}
+
+.NoBorder
+{
+	border:none;
+}
+
+.recipe-list
+{
+	background-color:#FFFFFF;
+	padding:3px;
+	display:block;
+}
+
+/*.GreyBackground
+{
+	background-color:#F4F4F4;
+	padding:3px;
+	display:block;
+}*/
+
+/** End other fixes **/

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="robots" content="noindex,nofollow"/>
+	    <meta http-equiv="content-type" content="charset=utf-8"/>
+	    <meta name="HandheldFriendly" content="true"/>
+	    <meta name="apple-mobile-web-app-title" content="Receptsamlingen"/>
+	    <meta name="viewport" content="width=device-width.1, initial-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+	    <meta name="apple-mobile-web-app-capable" content="yes"/>
+	    <link href="~/Content/Styles/reset.css" rel="stylesheet" type="text/css"/>
+        <link href="~/Content/Styles/style.css" rel="stylesheet" type="text/css"/>
+	    <link href="~/Content/Images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <meta name="viewport" content="width=device-width"/>
+        <title>Receptsamlingen</title>
+    </head>
+    <body>
+        <div id="top">
+		    <div id="logowrapper">
+			    <a href="/"><div id="logoimage"><!-- --></div></a>
+			    <div id="menu">
+				    <ul class="MenuText">
+					    <li>
+						    @Html.ActionLink("Lägg in recept", "Index", "Recipe") |
+					    </li>
+					    <li>
+						    @Html.ActionLink("Alla recept", "Index", "List") |
+					    </li>
+					    <li>
+						    <a href="/">Sök</a> |
+					    </li>
+	                    <li>
+		                    <a href="/">Skaffa konto</a>
+	                    </li>
+                    </ul>
+			    </div>
+		    </div>
+	    </div>
+	    <div id="wrapper">
+	        <div id="content">
+	            <div class="MainContent">
+	                @RenderBody()
+	            </div>
+                <div class="RightContent">
+                    @Html.Partial("Login", new Receptsamlingen.Mvc.Models.LoginModel())
+                </div>
+				<div class="ClearFix"><!-- --></div>
+	        </div>
+	    </div>
+    </body>
+</html>

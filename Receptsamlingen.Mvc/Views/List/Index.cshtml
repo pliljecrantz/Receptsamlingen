@@ -1,0 +1,11 @@
+﻿@model Receptsamlingen.Mvc.Models.ListModel
+
+<h1>Alla recept</h1>
+<ul>
+    @foreach (var r in Model.Recipes)
+    {
+        <li>
+            <span class="WhiteBackground">&rsaquo;&rsaquo;&nbsp;@Html.ActionLink(r.Name, "Index","Recipe", new { id = r.ID }, new { @class="Text" })</span>
+        </li>
+    }
+</ul>
