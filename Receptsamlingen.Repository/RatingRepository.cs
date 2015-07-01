@@ -6,7 +6,7 @@ namespace Receptsamlingen.Repository
 {
 	public class RatingRepository
 	{
-		#region
+		#region Singleton
 
 		private static RatingRepository _instance;
 
@@ -25,7 +25,7 @@ namespace Receptsamlingen.Repository
 
 			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
 			{
-				var query = context.Votes.Where(x => x.Username == username && x.RecipeGuid == guid).ToList().First();
+				var query = context.Votes.FirstOrDefault(x => x.Username == username && x.RecipeGuid == guid);
 
 				if (query != null)
 				{
@@ -82,9 +82,12 @@ namespace Receptsamlingen.Repository
 		{
 			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
 			{
-				var q = context.Votes.Where(x => x.RecipeGuid == guid).ToList().FirstOrDefault();
-				context.Votes.DeleteOnSubmit(q);
-				context.SubmitChanges();
+				var query = context.Votes.FirstOrDefault(x => x.RecipeGuid == guid);
+				if (query != null)
+				{
+					context.Votes.DeleteOnSubmit(query);
+					context.SubmitChanges();
+				}
 			}
 		}
 	}

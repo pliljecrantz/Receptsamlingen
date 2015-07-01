@@ -72,6 +72,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\bg-squares.png" />
+    <Content Include="Images\jqueryui\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Images\jqueryui\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Images\jqueryui\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Images\jqueryui\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Images\jqueryui\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Images\jqueryui\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Images\jqueryui\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Images\jqueryui\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Images\jqueryui\ui-icons_222222_256x240.png" />
+    <Content Include="Images\jqueryui\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Images\jqueryui\ui-icons_454545_256x240.png" />
+    <Content Include="Images\jqueryui\ui-icons_888888_256x240.png" />
+    <Content Include="Images\jqueryui\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Styles\bootstrap-theme.min.css" />
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="Global.asax" />
@@ -93,7 +106,9 @@
     <Content Include="Images\star-off.png" />
     <Content Include="Images\star-on.png" />
     <Content Include="Scripts\rating-handler.js" />
-    <Content Include="Styles\jquery-ui-1.8.16.custom.css" />
+    <Content Include="Styles\jquery-ui.min.css" />
+    <Content Include="Styles\jquery-ui.structure.min.css" />
+    <Content Include="Styles\jquery-ui.theme.min.css" />
     <Content Include="Styles\normalize.css" />
     <Content Include="Units\ConfirmDialog.ascx" />
     <Content Include="Units\MainMenu.ascx" />

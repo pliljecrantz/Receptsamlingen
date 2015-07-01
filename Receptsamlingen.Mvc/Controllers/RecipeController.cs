@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Receptsamlingen.Mvc.Models;
 using Receptsamlingen.Repository;
-using Receptsamlingen.Repository.Domain;
 
 namespace Receptsamlingen.Mvc.Controllers
 {
@@ -55,7 +54,7 @@ namespace Receptsamlingen.Mvc.Controllers
 	        model.NewRecipe.Guid = Guid.NewGuid().ToString();
             var result = Repository.Save(model.NewRecipe);
 
-            if (result > 0)
+            if (result)
             {
                 return View("Done");
             }

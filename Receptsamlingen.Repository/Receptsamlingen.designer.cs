@@ -22,7 +22,7 @@ namespace Receptsamlingen.Repository
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="103421-recipe")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="103421-recipetest")]
 	public partial class ReceptsamlingenDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -48,13 +48,10 @@ namespace Receptsamlingen.Repository
     partial void InsertVote(Vote instance);
     partial void UpdateVote(Vote instance);
     partial void DeleteVote(Vote instance);
+    partial void InsertSpecialAssign(SpecialAssign instance);
+    partial void UpdateSpecialAssign(SpecialAssign instance);
+    partial void DeleteSpecialAssign(SpecialAssign instance);
     #endregion
-		
-		public ReceptsamlingenDataContext() : 
-				base(global::Receptsamlingen.Repository.Properties.Settings.Default._103421_recipeConnectionString, mappingSource)
-		{
-			OnCreated();
-		}
 		
 		public ReceptsamlingenDataContext(string connection) : 
 				base(connection, mappingSource)
@@ -112,14 +109,6 @@ namespace Receptsamlingen.Repository
 			}
 		}
 		
-		public System.Data.Linq.Table<SpecialAssign> SpecialAssigns
-		{
-			get
-			{
-				return this.GetTable<SpecialAssign>();
-			}
-		}
-		
 		public System.Data.Linq.Table<User> Users
 		{
 			get
@@ -133,6 +122,14 @@ namespace Receptsamlingen.Repository
 			get
 			{
 				return this.GetTable<Vote>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SpecialAssign> SpecialAssigns
+		{
+			get
+			{
+				return this.GetTable<SpecialAssign>();
 			}
 		}
 	}
@@ -649,51 +646,6 @@ namespace Receptsamlingen.Repository
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SpecialAssign")]
-	public partial class SpecialAssign
-	{
-		
-		private int _SpecialId;
-		
-		private string _RecipeGuid;
-		
-		public SpecialAssign()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SpecialId", DbType="Int NOT NULL")]
-		public int SpecialId
-		{
-			get
-			{
-				return this._SpecialId;
-			}
-			set
-			{
-				if ((this._SpecialId != value))
-				{
-					this._SpecialId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecipeGuid", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string RecipeGuid
-		{
-			get
-			{
-				return this._RecipeGuid;
-			}
-			set
-			{
-				if ((this._RecipeGuid != value))
-				{
-					this._RecipeGuid = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -985,6 +937,116 @@ namespace Receptsamlingen.Repository
 					this._Username = value;
 					this.SendPropertyChanged("Username");
 					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SpecialAssign")]
+	public partial class SpecialAssign : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _SpecialId;
+		
+		private string _RecipeGuid;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnSpecialIdChanging(int value);
+    partial void OnSpecialIdChanged();
+    partial void OnRecipeGuidChanging(string value);
+    partial void OnRecipeGuidChanged();
+    #endregion
+		
+		public SpecialAssign()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SpecialId", DbType="Int NOT NULL")]
+		public int SpecialId
+		{
+			get
+			{
+				return this._SpecialId;
+			}
+			set
+			{
+				if ((this._SpecialId != value))
+				{
+					this.OnSpecialIdChanging(value);
+					this.SendPropertyChanging();
+					this._SpecialId = value;
+					this.SendPropertyChanged("SpecialId");
+					this.OnSpecialIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecipeGuid", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string RecipeGuid
+		{
+			get
+			{
+				return this._RecipeGuid;
+			}
+			set
+			{
+				if ((this._RecipeGuid != value))
+				{
+					this.OnRecipeGuidChanging(value);
+					this.SendPropertyChanging();
+					this._RecipeGuid = value;
+					this.SendPropertyChanged("RecipeGuid");
+					this.OnRecipeGuidChanged();
 				}
 			}
 		}

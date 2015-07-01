@@ -134,7 +134,7 @@ namespace Receptsamlingen.Web.Pages
 			}
 			else if (!String.IsNullOrEmpty(dishType) && isEditMode)
 			{
-				dishTypeDdl.Text = dishType;
+				dishTypeDdl.SelectedValue = Convert.ToString(recipe.DishTypeId);
 				dishTypeDdl.Enabled = true;
 			}
 			else
@@ -149,7 +149,7 @@ namespace Receptsamlingen.Web.Pages
 			}
 			else if (!String.IsNullOrEmpty(category) && isEditMode)
 			{
-				categoryDdl.Text = Convert.ToString(category);
+				categoryDdl.SelectedValue = Convert.ToString(recipe.CategoryId);
 			}
 
 			// Set portions
@@ -327,7 +327,7 @@ namespace Receptsamlingen.Web.Pages
 
 		private void OnAddButtonClick(object sender, EventArgs e)
 		{
-			if (!String.IsNullOrEmpty(nameTextbox.Text) && categoryDdl.SelectedIndex != 0)
+			if (!String.IsNullOrEmpty(nameTextbox.Text) && categoryDdl.SelectedValue != "0")
 			{
 				var guid = String.Empty;
 				var name = HttpUtility.HtmlEncode(nameTextbox.Text.Trim());
@@ -353,6 +353,7 @@ namespace Receptsamlingen.Web.Pages
 				else // New recipe that need to be saved
 				{
 					guid = Convert.ToString(Guid.NewGuid());
+					recipe.Guid = guid;
 					result = RecipeRepository.Instance.Save(recipe);
 				}
 
@@ -411,18 +412,10 @@ namespace Receptsamlingen.Web.Pages
 
 		private void OnDeleteLinkButtonClick(object sender, EventArgs e)
 		{
-			var recipeDeleted = RecipeRepository.Instance.Delete(SessionHandler.CurrentGuid);
-			var specialsDeleted = RecipeRepository.Instance.DeleteSpecials(SessionHandler.CurrentGuid);
+			RecipeRepository.Instance.Delete(SessionHandler.CurrentGuid);
+			RecipeRepository.Instance.DeleteSpecials(SessionHandler.CurrentGuid);
 			RatingRepository.Instance.Delete(SessionHandler.CurrentGuid);
-			if (recipeDeleted && specialsDeleted)
-			{
-				Response.Redirect(Globals.DefaultUrl);
-			}
-			else
-			{
-				errorLabel.Text = Globals.ErrorDeletingRecipe;
-				errorLabel.Visible = true;
-			}
+			Response.Redirect(Globals.DefaultUrl);
 		}
 
 		private void OnEditLinkButtonClick(object sender, EventArgs e)

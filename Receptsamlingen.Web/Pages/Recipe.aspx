@@ -2,7 +2,8 @@
 <%@ Register TagPrefix="Artep" TagName="ConfirmDialog" Src="~/Units/ConfirmDialog.ascx" %>
 
 <asp:Content ContentPlaceHolderID="headContent" runat="server">
-	<link href="../Styles/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
+	<link href="../Styles/jquery-ui.min.css" rel="stylesheet" />
+	<link href="../Styles/jquery-ui.theme.min.css" rel="stylesheet" />
 	<script src="../Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
 	<script src="../Scripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
 	<script src="../Scripts/jquery.raty.min.js" type="text/javascript"></script>
@@ -12,7 +13,7 @@
 			$("#dialog-confirm").dialog({
 				autoOpen: false,
 				resizable: false,
-				height: 150,
+				height: 180,
 				width: 340,
 				modal: true,
 				buttons: {
@@ -47,6 +48,7 @@
 				</div>
 				<asp:Button ID="rateButton" runat="server" CssClass="btn btn-warning" Text="Rösta!" Enabled="false" />
 				<br />
+				<br />
 				<asp:Label ID="infoRatingLabel" CssClass="float-right label label-warning info-text" runat="server" Visible="false" />
 			</asp:Panel>
 		</div>
@@ -66,20 +68,16 @@
 		<asp:View ID="readView" runat="server">
 			<div class="row">
 				<div class="col-xs-12">
-					<em>
-						<asp:Label runat="server" Text="Kategori:" /></em>
+						<asp:Label runat="server" Text="Kategori:" CssClass="orange" />
 					<asp:Label ID="categoryLabel" runat="server" /><br />
 					<br />
-					<em>
-						<asp:Label runat="server" Text="Huvudråvara:" /></em>
+						<asp:Label runat="server" Text="Huvudråvara:" CssClass="orange" />
 					<asp:Label ID="dishTypeLabel" runat="server" /><br />
 					<br />
-					<em>
-						<asp:Label runat="server" Text="Portioner:" /></em>
+						<asp:Label runat="server" Text="Portioner:" CssClass="orange" />
 					<asp:Label ID="portionsLabel" runat="server" /><br />
 					<br />
-					<em>
-						<asp:Label ID="specialIntroLabel" runat="server" Text="Receptet är:" /></em>
+						<asp:Label ID="specialIntroLabel" runat="server" Text="Receptet är:" CssClass="orange" />
 					<asp:Label ID="specialLabel" runat="server" />
 				</div>
 			</div>

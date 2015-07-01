@@ -34,7 +34,7 @@ namespace Receptsamlingen.Web.Units
 
 		private void SetLoggedInView()
 		{
-			loggedinLabel.Text = "Du är inloggad som " + SessionHandler.User.Username;
+			loggedinLabel.Text = "Inloggad som: " + SessionHandler.User.Username;
 			loginPanel.Visible = false;
 			logoutPanel.Visible = true;
 		}

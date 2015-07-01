@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="103421-recipe" Class="ReceptsamlingenDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=mssql04.citynetwork.se;Initial Catalog=103421-recipe;User ID=103421-ib28016" SettingsObjectName="Receptsamlingen.Repository.Properties.Settings" SettingsPropertyName=Globals.ConnectionString Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="103421-recipetest" Class="ReceptsamlingenDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Table Name="dbo.Category" Member="Categories">
     <Type Name="Category">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -31,12 +30,6 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.SpecialAssign" Member="SpecialAssigns">
-    <Type Name="SpecialAssign">
-      <Column Name="SpecialId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="RecipeGuid" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.[User]" Member="Users">
     <Type Name="User">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -53,6 +46,13 @@
       <Column Name="Rating" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="RecipeGuid" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SpecialAssign" Member="SpecialAssigns">
+    <Type Name="SpecialAssign">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SpecialId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RecipeGuid" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

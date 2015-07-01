@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Receptsamlingen.Repository.Domain;
+using Receptsamlingen.Repository;
 
 namespace Receptsamlingen.Mvc.Models
 {
