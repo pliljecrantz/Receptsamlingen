@@ -28,8 +28,8 @@ namespace Receptsamlingen.Web
 				{
 					if (route != null)
 					{
-						var routeUrl = route["url"].InnerText;
-						var file = route["file"].InnerText;
+						var routeUrl = route["url"] != null ? route["url"].InnerText : String.Empty;
+						var file = route["file"] != null ? route["file"].InnerText : String.Empty;
 						routes.RouteExistingFiles = true;     
 						routes.MapPageRoute("", routeUrl, file, true);
 					}
@@ -37,7 +37,7 @@ namespace Receptsamlingen.Web
 			}
 			catch (Exception error)
 			{
-				// Log routing errors
+				// TODO: Log routing errors
 			}
 		}
 
@@ -48,29 +48,7 @@ namespace Receptsamlingen.Web
 
 		void Application_Error(object sender, EventArgs e)
 		{
-			var ex = Server.GetLastError();
-			var exception = ex.InnerException ?? ex.GetBaseException();
-			if (exception.GetType() == typeof(HttpException))
-			{
-				var httpException = exception as HttpException;
-				if (httpException != null && httpException.GetHttpCode() == 404)
-				{
-					if (!HttpContext.Current.Request.Path.EndsWith("/404", StringComparison.InvariantCultureIgnoreCase))
-					{
-						Response.Redirect("~/404");
-					}
-				}
-			}
-			else
-			{
-				LogHandler.Log(LogType.Error, exception);
-				if (!HttpContext.Current.Request.Path.EndsWith("/fel", StringComparison.InvariantCultureIgnoreCase))
-				{
-					Response.Redirect("~/fel");
-				}
-				
-			}
-			Server.ClearError();
+			// Code that runs when an application error occurs
 		}
 
 		void Session_Start(object sender, EventArgs e)

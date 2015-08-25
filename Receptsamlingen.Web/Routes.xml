@@ -36,9 +36,9 @@
 		<file>~/Pages/Search.aspx</file>
 	</route>
 	<route>
-		<name>404</name>
+		<name>NotFound</name>
 		<url>404</url>
-		<file>~/404.aspx</file>
+		<file>~/NotFound.aspx</file>
 	</route>
 	<route>
 		<name>Error</name>

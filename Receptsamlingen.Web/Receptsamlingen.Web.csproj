@@ -85,6 +85,7 @@
     <Content Include="Images\jqueryui\ui-icons_454545_256x240.png" />
     <Content Include="Images\jqueryui\ui-icons_888888_256x240.png" />
     <Content Include="Images\jqueryui\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="NotFound.aspx" />
     <Content Include="Styles\bootstrap-theme.min.css" />
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="Global.asax" />
@@ -119,13 +120,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="404.aspx.cs">
-      <DependentUpon>404.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="404.aspx.designer.cs">
-      <DependentUpon>404.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Classes\Common.cs" />
     <Compile Include="Classes\Enums.cs" />
     <Compile Include="Classes\Globals.cs" />
@@ -147,6 +141,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="NotFound.aspx.cs">
+      <DependentUpon>NotFound.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotFound.aspx.designer.cs">
+      <DependentUpon>NotFound.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Apply.aspx.cs">
       <DependentUpon>Apply.aspx</DependentUpon>
@@ -242,7 +243,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="404.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Images\icon-search_small.png" />
@@ -268,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\recept.liljecrantz.nu.pubxml" />
+    <None Include="Properties\PublishProfiles\Receptsamlingen.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
