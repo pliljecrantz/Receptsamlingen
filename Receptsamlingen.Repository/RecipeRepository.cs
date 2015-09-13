@@ -7,6 +7,8 @@ namespace Receptsamlingen.Repository
 {
 	public class RecipeRepository
 	{
+		private const string ConnectionString = "connectionString";
+
 		#region Singleton
 
 		private static RecipeRepository _instance;
@@ -22,7 +24,7 @@ namespace Receptsamlingen.Repository
 
 		public IList<Recipe> GetLatest()
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				var query = (from w in context.Recipes
 							 orderby w.Date descending
@@ -34,7 +36,7 @@ namespace Receptsamlingen.Repository
 
 		public Recipe GetById(int id)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return context.Recipes.Where(x => x.Id == id).ToList().FirstOrDefault();
 			}
@@ -42,7 +44,7 @@ namespace Receptsamlingen.Repository
 
 		private static Recipe GetByGuid(string guid)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return context.Recipes.Where(x => x.Guid == guid).ToList().FirstOrDefault();
 			}
@@ -50,7 +52,7 @@ namespace Receptsamlingen.Repository
 
 		public IList<Recipe> GetAll()
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return (from r in context.Recipes select r).ToList();
 			}
@@ -58,7 +60,7 @@ namespace Receptsamlingen.Repository
 
 		public IList<DishType> GetAllDishTypes()
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return (from d in context.DishTypes select d).ToList();
 			}
@@ -66,7 +68,7 @@ namespace Receptsamlingen.Repository
 
 		public string GetDishTypeById(int id)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return context.DishTypes.Where(x => x.Id == id).Select(x => x.Name).ToList().FirstOrDefault();
 			}
@@ -74,7 +76,7 @@ namespace Receptsamlingen.Repository
 
 		public IList<Category> GetAllCategories()
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return (from c in context.Categories select c).ToList();
 			}
@@ -82,7 +84,7 @@ namespace Receptsamlingen.Repository
 
 		public string GetCategoryById(int id)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return context.Categories.Where(x => x.Id == id).Select(x => x.Name).ToList().FirstOrDefault();
 			}
@@ -90,7 +92,7 @@ namespace Receptsamlingen.Repository
 
 		public IList<Special> GetAllSpecials()
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return (from s in context.Specials select s).ToList();
 			}
@@ -98,7 +100,7 @@ namespace Receptsamlingen.Repository
 
 		public IList<SpecialAssign> GetSpecialsForRecipe(string guid)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return (from s in context.SpecialAssigns where s.RecipeGuid == guid select s).ToList();
 			}
@@ -106,7 +108,7 @@ namespace Receptsamlingen.Repository
 
 		public IList<int> GetAllIds()
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return (from r in context.Recipes select r.Id).ToList();
 			}
@@ -117,7 +119,7 @@ namespace Receptsamlingen.Repository
 			bool result;
 			try
 			{
-				using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+				using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 				{
 					var oldRecipe = (from r in context.Recipes where r.Id == recipe.Id select r).FirstOrDefault();
 					if (oldRecipe != null)
@@ -148,7 +150,7 @@ namespace Receptsamlingen.Repository
 			bool result;
 			try
 			{
-				using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+				using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 				{
 					var newRecipe = new Recipe
 							{
@@ -175,7 +177,7 @@ namespace Receptsamlingen.Repository
 
 		public void SaveSpecial(string guid, int specialId)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				var assign = new SpecialAssign
 						{
@@ -189,7 +191,7 @@ namespace Receptsamlingen.Repository
 
 		public void Delete(string guid)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				var q = context.Recipes.Where(x => x.Guid == guid).ToList().FirstOrDefault();
 				context.Recipes.DeleteOnSubmit(q);
@@ -199,7 +201,7 @@ namespace Receptsamlingen.Repository
 
 		public void DeleteSpecials(string guid)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				var query = context.SpecialAssigns.FirstOrDefault(x => x.RecipeGuid == guid);
 				if (query != null)
@@ -213,7 +215,7 @@ namespace Receptsamlingen.Repository
 		public IList<Recipe> GetToplist()
 		{
 			var toplist = new List<Recipe>();
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				var query = context.Votes.GroupBy(x => x.RecipeGuid)
 										 .Select(x => new { Total = x.Sum(z => z.Rating), Id = x.Key })
@@ -226,7 +228,7 @@ namespace Receptsamlingen.Repository
 
 		public IList<Recipe> Search(string text)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return context.Recipes.Where(r => r.Name.Contains(text) || r.Ingredients.Contains(text) || r.Description.Contains(text))
 									  .OrderBy(r => r.Date)

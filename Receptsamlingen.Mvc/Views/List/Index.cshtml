@@ -5,7 +5,7 @@
     @foreach (var r in Model.Recipes)
     {
         <li>
-            <span class="WhiteBackground">&rsaquo;&rsaquo;&nbsp;@Html.ActionLink(r.Name, "Index","Recipe", new { id = r.ID }, new { @class="Text" })</span>
+            <span class="WhiteBackground">&rsaquo;&rsaquo;&nbsp;@Html.ActionLink(r.Name, "id", "recipe", new { id = r.Id }, new { @class="Text" })</span>
         </li>
     }
 </ul>

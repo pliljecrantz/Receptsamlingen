@@ -8,51 +8,55 @@ namespace Receptsamlingen.Mvc.Classes
     public static class SessionHandler
 	{
 
-		#region Members
-
-		private const string CurrentRecipeIdSessionString = "CurrentRecipeID";
-		private const string RecipeIdListSessionString = "RecipeIDList";
-		private const string UserSessionString = "User";
-
-		#endregion
-
 		#region Properties
 
 		public static User User
 		{
 			get
 			{
-				return Get(UserSessionString) as User;
+				return Get(Globals.UserSessionString) as User;
 			}
 			set
 			{
-				Set(UserSessionString, value);
+				Set(Globals.UserSessionString, value);
 			}
 		}
 
-		public static int CurrentRecipeId
+		public static bool IsAuthenticated
 		{
 			get
-			{ 
-				return Convert.ToInt32(Get(CurrentRecipeIdSessionString));
+			{
+				return Get(Globals.IsAuthenticatedSessionString) != null && (bool)Get(Globals.IsAuthenticatedSessionString);
 			}
 			set
-			{ 
-				Set(CurrentRecipeIdSessionString, value); 
+			{
+				Set(Globals.IsAuthenticatedSessionString, value);
 			}
 		}
 
-		public static IList<int> RecipeIdList
-		{
-			get
-			{
-				return Get(RecipeIdListSessionString) as IList<int>;
-			}
-			set
-			{
-				Set(RecipeIdListSessionString, value);
-			}
-		}
+		//public static int CurrentRecipeId
+		//{
+		//	get
+		//	{
+		//		return Convert.ToInt32(Get(Globals.CurrentRecipeIdSessionString));
+		//	}
+		//	set
+		//	{
+		//		Set(Globals.CurrentRecipeIdSessionString, value); 
+		//	}
+		//}
+
+		//public static IList<int> RecipeIdList
+		//{
+		//	get
+		//	{
+		//		return Get(Globals.RecipeIdListSessionString) as IList<int>;
+		//	}
+		//	set
+		//	{
+		//		Set(Globals.RecipeIdListSessionString, value);
+		//	}
+		//}
 
 		#endregion
 

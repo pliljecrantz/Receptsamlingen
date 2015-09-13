@@ -15,7 +15,6 @@
                 <br />
                 @Html.PasswordFor(model => model.Password, new { @class="LoginTextBox" })
                 <input type="submit" value="Logga in" />
-            @*<asp:ImageButton ID="loginImageButton" runat="server" ImageUrl="~/Images/round_orange_arrow_right.png" ImageAlign="Top" />*@
                 <br />
                 
                 if (Model.LoggedIn != null && (bool)!Model.LoggedIn)
@@ -29,7 +28,7 @@
             <label class="UnitText">
                 Du är inloggad som @if (SessionHandler.User != null)
                                    {
-                                       @SessionHandler.User.UserName
+                                       @SessionHandler.User.Username
                                    }
             </label>
             <br />

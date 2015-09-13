@@ -1,5 +1,6 @@
 ﻿@using Receptsamlingen.Mvc.Classes
-@model Receptsamlingen.Mvc.Models.AddModel
+@using System.Web.Mvc
+@model Receptsamlingen.Mvc.Models.RecipeModel
 
 <h1>Lägg in recept</h1>
 @if (SessionHandler.User == null)
@@ -12,36 +13,39 @@ else
 {
     <label class="Text">Receptnamn:</label>
     <br />
-    @Html.TextBoxFor(model => model.NewRecipe.Name, new { @class = "LongTextBox" })
+    @Html.TextBoxFor(x => x.Recipe.Name, new { @class = "LongTextBox" })
     <br />
     <br />
     <div class="FloatLeft MarginRight">
         <label class="Text">Kategori:</label>
         <br />
-        @Html.DropDownListFor(model => model.CategorySelection, new SelectList(Model.Categories, "Id", "Name"), new { @class = "DropDownList" })
+        @Html.DropDownListFor(x => x.SelectedCategory, new SelectList(Model.CategoryList, "Value", "Text", Model.Recipe.CategoryId), new { @class = "DropDownList" })
     </div>
     <div class="FloatLeft">
         <label class="Text">Huvudråvara:</label>
         <br />
-        @Html.DropDownListFor(model => model.DishTypeSelection, new SelectList(Model.DishTypes, "Id", "Name"), new { @class = "DropDownList" })
+        @Html.DropDownListFor(x => x.SelectedDishType, new SelectList(Model.DishTypeList, "Value", "Text", Model.Recipe.DishTypeId), new { @class = "DropDownList" })
     </div>
-    <div class="ClearFix"></div>
-    @*@Html.CheckBoxFor(model => model.NewRecipe.Special, new { @class = "Text" })
-    <asp:checkboxlist id="specialCheckBoxList" runat="server" repeatdirection="Vertical" cssclass="Text" />*@
-    <br />
+	<div class="ClearFix"></div>
+	<br/>
+	<label class="Text">Special:</label>
+	<br />
+    @Html.CheckBoxListFor(x=>x.SpecialList, x => x.SpecialList, x=>x.Id, x=>x.Name, x=>x.SelectedSpecials)
+	<br />
+	<br/>
     <label class="Text">Antal portioner:</label>
     <br />
-    @Html.DropDownListFor(model => model.PortionSelection, new SelectList(Model.Portions, "Value", "Text"), new { @class = "DropDownList" })
+    @Html.DropDownListFor(x => x.SelectedPortions, new SelectList(Model.Portions, "Value", "Text"), new { @class = "DropDownList" })
     <br />
     <br />
     <label class="Text">Ingredienser:</label>
     <br />
-    @Html.TextBoxFor(model => model.NewRecipe.Content, new { @class = "TextBox, MultilineTextBox" })
+    @Html.TextAreaFor(x => x.Recipe.Ingredients, new { @class = "TextBox, MultilineTextBox" })
     <br />
     <br />
     <label class="Text">Beskrivning:</label>
     <br />
-    @Html.TextBoxFor(model => model.NewRecipe.Description, new { @class = "TextBox, MultilineTextBox" })
+    @Html.TextAreaFor(x => x.Recipe.Description, new { @class = "TextBox, MultilineTextBox" })
     <div class="ClearFix">
         <!-- -->
     </div>

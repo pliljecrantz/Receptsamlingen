@@ -171,10 +171,6 @@ namespace Receptsamlingen.Web.Pages
 			{
 				if (!isEditMode)
 				{
-					var specials = String.Empty;
-					var counter = 0;
-					var nrOfSpecials = recipeSpecialIdList.Count;
-
 					var list = (from item in recipeSpecialIdList 
 								from special in allSpecialsList 
 								where item.SpecialId == special.Id 

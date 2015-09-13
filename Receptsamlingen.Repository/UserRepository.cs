@@ -5,6 +5,8 @@ namespace Receptsamlingen.Repository
 {
 	public class UserRepository
 	{
+		private const string ConnectionString = "connectionString";
+
 		#region Singleton
 
 		private static UserRepository _instance;
@@ -20,7 +22,7 @@ namespace Receptsamlingen.Repository
 
 		public User Get(string username, string password)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[Globals.ConnectionString].ConnectionString))
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return context.Users.Where(x => x.Username == username && x.Password == password).ToList().FirstOrDefault();
 			}

@@ -19,17 +19,19 @@ namespace Receptsamlingen.Mvc.Controllers
         {
             if (!string.IsNullOrWhiteSpace(model.Username) && !string.IsNullOrWhiteSpace(model.Password))
             {
-                var username = model.Username.Trim().RemoveHtml();
-                var password = model.Password.Trim().RemoveHtml();
+                var username = Server.HtmlEncode(model.Username.Trim());
+                var password = Server.HtmlEncode(model.Password.Trim());
                 var user = Repository.Get(username, password);
 
                 if (user != null)
                 {
                     SessionHandler.User = user;
+	                SessionHandler.IsAuthenticated = true;
                     model.LoggedIn = true;
                 }
                 else
                 {
+	                SessionHandler.IsAuthenticated = false;
                     model.LoggedIn = false;
                 }
             }
@@ -38,7 +40,8 @@ namespace Receptsamlingen.Mvc.Controllers
 
         public ActionResult DoLogout()
         {
-            SessionHandler.Remove("User");
+            SessionHandler.Remove(Globals.UserSessionKeyString);
+			SessionHandler.Remove(Globals.IsAuthenticatedSessionString);
             return RedirectToAction("Index", "Home");
         }
     }

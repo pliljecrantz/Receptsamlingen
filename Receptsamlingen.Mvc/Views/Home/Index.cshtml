@@ -11,7 +11,7 @@ måste du dock logga in. Har du inget konto? Gå till <a href="/ansok">kontosida
     @foreach (var r in Model.Recipes)
     {
         <li>
-            &rsaquo;&rsaquo;&nbsp;@Html.ActionLink(r.Name, "Index","Recipe", new { id = r.ID }, new { @class="Text" })
+            &rsaquo;&rsaquo;&nbsp;@Html.ActionLink(r.Name, "id", "recipe", new { id = r.Id }, new { @class="Text" })
             <br/>
         </li>
     }
