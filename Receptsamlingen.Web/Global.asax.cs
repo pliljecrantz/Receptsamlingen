@@ -48,7 +48,10 @@ namespace Receptsamlingen.Web
 
 		void Application_Error(object sender, EventArgs e)
 		{
-			// Code that runs when an application error occurs
+			var ex = Server.GetLastError();
+			Server.ClearError();
+			var exception = ex.InnerException ?? ex.GetBaseException();
+			LogHandler.Log(LogType.Error, exception);
 		}
 
 		void Session_Start(object sender, EventArgs e)
