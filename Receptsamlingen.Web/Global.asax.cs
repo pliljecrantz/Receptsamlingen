@@ -37,7 +37,7 @@ namespace Receptsamlingen.Web
 			}
 			catch (Exception error)
 			{
-				// TODO: Log routing errors
+				LogHandler.Log(LogType.Error, error);
 			}
 		}
 
