@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Receptsamlingen.Repository;
@@ -27,14 +26,14 @@ namespace Receptsamlingen.Web.Pages
 			addButton.Click += OnAddButtonClick;
 			clearButton.Click += OnClearButtonClick;
 			cancelButton.Click += OnCancelButtonClick;
-			editLinkButton.Click += OnEditLinkButtonClick;
-			deleteLinkButton.Click += OnDeleteLinkButtonClick;
+			editButton.Click += OnEditButtonClick;
+			deleteButton.Click += OnDeleteButtonClick;
 			categoryDdl.SelectedIndexChanged += OnCategoryDdlSelectedIndexChanged;
 			rateButton.Click += OnRateButtonClick;
 
 			#endregion
 
-			DeleteLinkButtonEvent = Page.ClientScript.GetPostBackEventReference(deleteLinkButton, string.Empty);
+			DeleteLinkButtonEvent = Page.ClientScript.GetPostBackEventReference(deleteButton, string.Empty);
 
 			if (!IsPostBack)
 			{
@@ -63,6 +62,14 @@ namespace Receptsamlingen.Web.Pages
 					SetView(SessionHandler.User != null ? addEditView : anonymousView);
 				}
 			}
+		}
+
+		private void editLinkButton_Click(object sender, EventArgs e)
+		{
+			LoadRecipe(SessionHandler.CurrentId, true);
+			SetView(addEditView);
+			addButton.Text = "Uppdatera!";
+			clearButton.Visible = false;
 		}
 
 		#region Private methods
@@ -120,11 +127,11 @@ namespace Receptsamlingen.Web.Pages
 			if (isEditMode)
 			{
 				headerLabel.Text = Globals.HeaderEditString;
-				nameTextbox.Text = recipe.Name;
+				nameTextbox.Text = Server.HtmlDecode(recipe.Name);
 			}
 			else
 			{
-				headerLabel.Text = recipe.Name;
+				headerLabel.Text = Server.HtmlDecode(recipe.Name);
 			}
 
 			// Set dishtype
@@ -174,7 +181,7 @@ namespace Receptsamlingen.Web.Pages
 					var list = (from item in recipeSpecialIdList 
 								from special in allSpecialsList 
 								where item.SpecialId == special.Id 
-								select special).Aggregate(String.Empty, (current, special) => current + (special.Name + ", "));
+								select special).Aggregate(String.Empty, (current, special) => current + (special.Name.ToLower() + ", "));
 
 					if (list.EndsWith(", "))
 					{
@@ -207,15 +214,15 @@ namespace Receptsamlingen.Web.Pages
 			{
 				readIngredientsTextBox.ReadOnly = true;
 				readDescriptionTextBox.ReadOnly = true;
-				readIngredientsTextBox.Text = recipe.Ingredients;
-				readDescriptionTextBox.Text = recipe.Description;
+				readIngredientsTextBox.Text = Server.HtmlDecode(recipe.Ingredients);
+				readDescriptionTextBox.Text = Server.HtmlDecode(recipe.Description);
 			}
 			else
 			{
 				addEditIngredientsTextBox.ReadOnly = false;
 				addEditDescriptionTextBox.ReadOnly = false;
-				addEditIngredientsTextBox.Text = recipe.Ingredients;
-				addEditDescriptionTextBox.Text = recipe.Description;
+				addEditIngredientsTextBox.Text = Server.HtmlDecode(recipe.Ingredients);
+				addEditDescriptionTextBox.Text = Server.HtmlDecode(recipe.Description);
 			}
 
 			// Set avaragerating
@@ -326,13 +333,13 @@ namespace Receptsamlingen.Web.Pages
 			if (!String.IsNullOrEmpty(nameTextbox.Text) && categoryDdl.SelectedValue != "0")
 			{
 				var guid = String.Empty;
-				var name = HttpUtility.HtmlEncode(nameTextbox.Text.Trim());
+				var name = Server.HtmlEncode(nameTextbox.Text.Trim());
 				var recipeName = Helper.CapitalizeFirstLetter(name);
 				var recipe = new Repository.Recipe
 									{
 										Name = recipeName,
-										Ingredients = HttpUtility.HtmlEncode(addEditIngredientsTextBox.Text.Trim()),
-										Description = HttpUtility.HtmlEncode(addEditDescriptionTextBox.Text.Trim()),
+										Ingredients = Server.HtmlEncode(addEditIngredientsTextBox.Text.Trim()),
+										Description = Server.HtmlEncode(addEditDescriptionTextBox.Text.Trim()),
 										Portions = Convert.ToInt32(portionsDdl.SelectedValue),
 										CategoryId = Convert.ToInt32(categoryDdl.SelectedItem.Value),
 										DishTypeId = Convert.ToInt32(dishTypeDdl.SelectedItem.Value)
@@ -406,7 +413,7 @@ namespace Receptsamlingen.Web.Pages
 			Response.Redirect(Globals.DefaultUrl);
 		}
 
-		private void OnDeleteLinkButtonClick(object sender, EventArgs e)
+		private void OnDeleteButtonClick(object sender, EventArgs e)
 		{
 			RecipeRepository.Instance.Delete(SessionHandler.CurrentGuid);
 			RecipeRepository.Instance.DeleteSpecials(SessionHandler.CurrentGuid);
@@ -414,7 +421,7 @@ namespace Receptsamlingen.Web.Pages
 			Response.Redirect(Globals.DefaultUrl);
 		}
 
-		private void OnEditLinkButtonClick(object sender, EventArgs e)
+		private void OnEditButtonClick(object sender, EventArgs e)
 		{
 			LoadRecipe(SessionHandler.CurrentId, true);
 			SetView(addEditView);

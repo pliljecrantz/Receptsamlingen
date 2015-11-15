@@ -32,7 +32,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<asp:Button ID="logoutButton" runat="server" CssClass="btn btn-warning float-right width-100-percent" Text="Logga ut &raquo;" />
+					<asp:Button runat="server" ID="logoutButton" CssClass="btn btn-warning float-right width-100-percent" Text="Logga ut &raquo;"/>
 				</div>
 			</div>
 		</asp:Panel>

@@ -11,8 +11,8 @@ namespace Receptsamlingen.Web.Units
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            logoutButton.Click += OnLogoutClick;
 			loginButton.Click += OnLoginClick;
+	        logoutButton.Click += OnLogoutClick;
 
 			if (!IsPostBack)
 			{

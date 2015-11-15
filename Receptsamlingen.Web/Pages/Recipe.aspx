@@ -89,8 +89,8 @@
 					<asp:TextBox ID="readDescriptionTextBox" runat="server" Rows="10" Wrap="True" TextMode="MultiLine" CssClass="form-control" />
 					<br />
 					<asp:PlaceHolder ID="adminButtonsPlaceHolder" runat="server" Visible="false">
-						<asp:Button ID="editLinkButton" runat="server" Text="Redigera" CssClass="btn btn-warning float-right" />
-						<asp:Button ID="deleteLinkButton" runat="server" Text="Radera" CssClass="btn btn-default float-right margin-right-15" />
+						<asp:Button runat="server" ID="editButton" Text="Redigera" CssClass="btn btn-warning float-right"/>
+						<asp:Button runat="server" ID="deleteButton" Text="Radera" CssClass="btn btn-default float-right margin-right-15"/>
 					</asp:PlaceHolder>
 					<Artep:ConfirmDialog ID="confirmDialog" runat="server" />
 				</div>

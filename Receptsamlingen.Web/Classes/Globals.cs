@@ -8,7 +8,7 @@ namespace Receptsamlingen.Web.Classes
 		// Mailsettings
 		public static readonly string MailSubjectString = ConfigKey("MailSubject", "Ansökan om konto");
 		public static readonly string MailRecieverString = ConfigKey("MailReceiver", "p.liljecrantz@live.com");
-		public static readonly string MailServerString = ConfigKey("MailServer", "mail.liljecrantz.nu");
+		public static readonly string MailServerString = ConfigKey("MailServer", "smtp.live.com");
 		
 		// Other strings
 		public static string MainCourseString = "Huvudrätt";
