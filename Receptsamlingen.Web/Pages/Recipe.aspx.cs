@@ -64,14 +64,6 @@ namespace Receptsamlingen.Web.Pages
 			}
 		}
 
-		private void editLinkButton_Click(object sender, EventArgs e)
-		{
-			LoadRecipe(SessionHandler.CurrentId, true);
-			SetView(addEditView);
-			addButton.Text = "Uppdatera!";
-			clearButton.Visible = false;
-		}
-
 		#region Private methods
 
 		private void SetupAdminControls()
