@@ -3,64 +3,63 @@
 @model Receptsamlingen.Mvc.Models.RecipeModel
 
 <h1>Lägg in recept</h1>
-@if (SessionHandler.User == null)
+@if (!SessionHandler.IsAuthenticated && SessionHandler.User == null)
 {
-    <div class="InfoBox">
-        <label class="ErrorText">Du kan bara lägga in recept om du har loggat in.</label>
-    </div>
+	<label class="label label-warning info-text">Du kan bara lägga in recept om du har loggat in.</label>
 }
 else
 {
-    <label class="Text">Receptnamn:</label>
-    <br />
-    @Html.TextBoxFor(x => x.Recipe.Name, new { @class = "LongTextBox" })
-    <br />
-    <br />
-    <div class="FloatLeft MarginRight">
-        <label class="Text">Kategori:</label>
-        <br />
-        @Html.DropDownListFor(x => x.SelectedCategory, new SelectList(Model.CategoryList, "Value", "Text", Model.Recipe.CategoryId), new { @class = "DropDownList" })
-    </div>
-    <div class="FloatLeft">
-        <label class="Text">Huvudråvara:</label>
-        <br />
-        @Html.DropDownListFor(x => x.SelectedDishType, new SelectList(Model.DishTypeList, "Value", "Text", Model.Recipe.DishTypeId), new { @class = "DropDownList" })
-    </div>
-	<div class="ClearFix"></div>
-	<br/>
-	<label class="Text">Special:</label>
+	<div class="row">
+		<div class="col-md-12">
+			<label class="Text">Receptnamn:</label>
+			<br />
+			@Html.TextBoxFor(x => x.Recipe.Name, new {@class = "form-control"})
+		</div>
+	</div>
 	<br />
-    @Html.CheckBoxListFor(x=>x.SpecialList, x => x.SpecialList, x=>x.Id, x=>x.Name, x=>x.SelectedSpecials)
 	<br />
-	<br/>
-    <label class="Text">Antal portioner:</label>
-    <br />
-    @Html.DropDownListFor(x => x.SelectedPortions, new SelectList(Model.Portions, "Value", "Text"), new { @class = "DropDownList" })
-    <br />
-    <br />
-    <label class="Text">Ingredienser:</label>
-    <br />
-    @Html.TextAreaFor(x => x.Recipe.Ingredients, new { @class = "TextBox, MultilineTextBox" })
-    <br />
-    <br />
-    <label class="Text">Beskrivning:</label>
-    <br />
-    @Html.TextAreaFor(x => x.Recipe.Description, new { @class = "TextBox, MultilineTextBox" })
-    <div class="ClearFix">
-        <!-- -->
-    </div>
-    <br />
-    <br />
-    using(Html.BeginForm("Index", "Home", FormMethod.Post))
-    {
-    <input type="submit" value="Avbryt" class="Button FloatLeft" />
-    }
-    using(Html.BeginForm("Index", "Recipe", FormMethod.Post))
-    {
-    <input type="submit" value="Rensa" class="Button FloatLeft" />
-    }
-    using(Html.BeginForm("Save", "Recipe", FormMethod.Post))
-    {
-    <input type="submit" value="Spara!" class="Button FloatRight" />
-    }
+	<div class="row">
+		<div class="col-md-3 margin-bottom-10">
+			<label class="Text">Kategori:</label>
+			<br />
+			@Html.DropDownListFor(x => x.SelectedCategory, new SelectList(Model.CategoryList, "Value", "Text", Model.Recipe.CategoryId), new {@class = "dropdownlist"})
+		</div>
+		<div class="col-md-3 margin-bottom-10">
+			<label class="Text">Huvudråvara:</label>
+			<br />
+			@Html.DropDownListFor(x => x.SelectedDishType, new SelectList(Model.DishTypeList, "Value", "Text", Model.Recipe.DishTypeId), new {@class = "dropdownlist"})
+		</div>
+		<div class="col-md-3 margin-bottom-10">
+			<label class="Text">Antal portioner:</label>
+			<br />
+			@Html.DropDownListFor(x => x.SelectedPortions, new SelectList(Model.Portions, "Value", "Text"), new {@class = "dropdownlist"})
+		</div>
+		<div class="col-md-3 margin-bottom-10">
+			<label class="Text">Special:</label>
+			<br />
+			@Html.CheckBoxListFor(x => x.SpecialList, x => x.SpecialList, x => x.Id, x => x.Name, x => x.SelectedSpecials)
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<label class="Text">Ingredienser:</label>
+			<br />
+			@Html.TextAreaFor(x => x.Recipe.Ingredients, new {@class = "form-control"})
+			<label class="Text">Beskrivning:</label>
+			<br />
+			@Html.TextAreaFor(x => x.Recipe.Description, new {@class = "form-control"})
+			@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+			{
+				<input type="submit" value="Avbryt" class="btn btn-default float-left" />
+			}
+			@using (Html.BeginForm("Index", "Recipe", FormMethod.Post))
+			{
+				<input type="submit" value="Rensa" class="btn btn-default float-right margin-right-15" />
+			}
+			@using (Html.BeginForm("Save", "Recipe", FormMethod.Post))
+			{
+				<input type="submit" value="Spara!" class="btn btn-warning float-right" />
+			}
+		</div>
+	</div>
 }

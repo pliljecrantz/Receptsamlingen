@@ -1,67 +1,63 @@
 ﻿@using Receptsamlingen.Mvc.Classes
 @model Receptsamlingen.Mvc.Models.RecipeModel
 
-<h1>@Model.Recipe.Name</h1>
-
-<div class="FloatLeft">
-	<label class="Text FontItalic">Kategori:</label>
-	<span class="Text">
+<div class="row">
+	<div class="col-md-8">
+		<h1>@Model.Recipe.Name.HtmlDecode()</h1>
+	</div>
+	<div class="col-md-4 margin-top-25">
+		@Html.HiddenFor(x => x.AvarageRating) @* TODO: Move to ViewBag *@
+		@Html.Hidden("Authenticated", SessionHandler.IsAuthenticated) @* TODO: Move to ViewBag *@
+		<div id="rating" class="float-left">
+			<!-- -->
+		</div>
+		@*@Html.BeginForm("Vote", "Recipe", FormMethod.Post)
+			{
+				@if (SessionHandler.IsAuthenticated)
+				{
+					<input type="submit" value="Rösta!" class="btn btn-warning" />
+					<br />
+					<br/>
+					<label class="float-right label label-warning info-text">@ViewBag.Response</label>
+				}
+			}*@
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<label class="orange">Kategori:</label>
 		@Html.DisplayFor(x => x.Category)
-	</span>
-	<br />
-	<label class="Text FontItalic">Huvudråvara:</label>
-	<span class="Text">
+		<br />
+		<br />
+		<label class="orange">Huvudråvara:</label>
 		@Html.DisplayFor(x => x.DishType)
-	</span>
-	<br />
-	<label class="Text FontItalic">Antal portioner:</label>
-	<span class="Text">
+		<br />
+		<br />
+		<label class="orange">Portioner:</label>
 		@if (Model.Recipe.Portions.HasValue && Model.Recipe.Portions.Value > 0)
 		{
 			@Html.DisplayFor(x => x.Recipe.Portions.Value)
 		}
-	</span>
-	<br />
-	<br />
-	<label class="Text FontItalic">Receptet är:</label>
-	<span class="Text">
+		<br />
+		<br />
+		<label class="orange">Receptet är:</label>
 		@Html.DisplayFor(x => x.Specials)
-	</span>
-</div>
-<div id="ratingPanel" class="FloatRight MarginRight">
-	@Html.HiddenFor(x => x.AvarageRating)
-	@Html.Hidden("Authenticated", SessionHandler.IsAuthenticated)
-	<div id="rating" class="FloatLeft" style="">
-		<!-- -->
 	</div>
-	@*@Html.BeginForm("Vote", "Recipe", FormMethod.Post)
-	{
-		@if (SessionHandler.IsAuthenticated)
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h3>Ingredienser:</h3>
+		@Html.TextAreaFor(x => x.Recipe.Ingredients, new { @class = "form-control", @readonly = true })
+		<h3>Gör så här:</h3>
+		@Html.TextAreaFor(x => x.Recipe.Description, new { @class = "form-control", @readonly = true })
+		<br />
+		@if (SessionHandler.IsAuthenticated && SessionHandler.User.Role.Equals(20))
 		{
-			<input type="submit" value="Rösta!" class="SmallButton" />
-			<label class="FloatRight ErrorText">fel</label>
+			<div class="float-right">
+				@Html.ActionLink("Redigera »", "edit", "recipe", new { id = Model.Recipe.Id }, null)
+				@Html.ActionLink("Radera »", "delete", "recipe", new { id = Model.Recipe.Id }, new { @class = "delete margin-left-20" })
+			</div>
 		}
-	}*@
-</div>
-<div class="ClearFix">
-	<!-- -->
-</div>
-<br />
-<label class="Text FontItalic FontColorOrange">Ingredienser:</label>
-<br />
-@Html.TextAreaFor(x => x.Recipe.Ingredients, new { @class = "TextBox MultilineTextBox NoBorder", @readonly = true })
-<br />
-<br />
-<label class="Text FontItalic FontColorOrange">Gör så här:</label>
-<br />
-@Html.TextAreaFor(x => x.Recipe.Description, new { @class = "TextBox MultilineTextBox NoBorder", @readonly = true })
-<br />
-<br />
-@if (SessionHandler.User != null && SessionHandler.User.Role.Equals(20))
-{
-	<div id="adminPanel">
-		@Html.ActionLink(">> Redigera", "edit", "recipe", new { id = Model.Recipe.Id }, new { @class = "UnitText" })
-		@Html.ActionLink(">> Radera", "delete", "recipe", new { id = Model.Recipe.Id }, new { @class = "UnitText FloatRight" })
 	</div>
-}
-@*<Artep:ConfirmDialog ID="confirmDialog" runat="server" />*@
+</div>
+@Html.Partial("~/Views/Shared/Partials/Confirm.cshtml")

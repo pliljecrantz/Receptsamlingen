@@ -6,10 +6,9 @@ namespace Receptsamlingen.Mvc.Classes
     public static class Globals
     {
 		// Session strings
-		public const string CurrentRecipeIdSessionString = "CurrentRecipeId";
-		public const string RecipeIdListSessionString = "RecipeIdList";
 		public const string UserSessionString = "User";
 		public const string IsAuthenticatedSessionString = "IsAuthenticated";
+		public const string CurrentGuidString = "CurrentGuid";
 
         // Mailsettings
         public static readonly string MailSubjectString = ConfigKey("MailSubject", "Ansökan om konto");
@@ -24,18 +23,19 @@ namespace Receptsamlingen.Mvc.Classes
 	    public const string UserSessionKeyString = "User";
 
         // Error- and infomessages
-        public const string ERROR_SAVING_VOTE = "Det gick inte att rösta, försök igen senare";
-        public const string ERROR_USER_HAS_VOTED = "Du har redan röstat en gång";
-        public const string ERROR_DELETING_RECIPE = "Det gick inte att radera receptet.";
-        public const string ERROR_UPDATING_RECIPE = "Det gick inte att uppdatera receptet.";
-        public const string ERROR_SAVING_RECIPE = "Det gick inte att spara receptet, försök igen senare.";
-        public const string ERROR_VALIDATING_RECIPE = "Du måste skriva ett namn på receptet och välja kategori.";
-        public const string INFO_VOTE_SAVED = "Tack, din röst är sparad";
-        public const string INFO_RECIPE_UPDATED = "Tack, receptet är uppdaterat.";
-        public const string INFO_RECIPE_SAVED = "Tack, receptet är sparat.";
+        public const string ErrorSavingVote = "Det gick inte att rösta, försök igen senare";
+        public const string ErrorUserHasVoted = "Du har redan röstat en gång";
+        public const string ErrorDeletingRecipe = "Det gick inte att radera receptet.";
+        public const string ErrorUpdatingRecipe = "Det gick inte att uppdatera receptet.";
+        public const string ErrorSavingRecipe = "Det gick inte att spara receptet, försök igen senare.";
+        public const string ErrorValidatingRecipe = "Du måste skriva ett namn på receptet och välja kategori.";
+        public const string InfoVoteSaved = "Tack, din röst är sparad";
+        public const string InfoRecipeUpdated = "Tack, receptet är uppdaterat.";
+        public const string InfoRecipeSaved = "Tack, receptet är sparat.";
+	    public const string InfoRecipeDeleted = "Receptet är raderat.";
 
         // URLs
-        public const string DEFAULT_URL = "~/start";
+        public const string DefaultUrl = "~/start";
 
         #region Internal Functions
 

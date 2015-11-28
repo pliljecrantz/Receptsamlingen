@@ -1,50 +1,109 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta name="robots" content="noindex,nofollow"/>
-	    <meta http-equiv="content-type" content="charset=utf-8"/>
-	    <meta name="HandheldFriendly" content="true"/>
-	    <meta name="apple-mobile-web-app-title" content="Receptsamlingen"/>
-	    <meta name="viewport" content="width=device-width.1, initial-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
-	    <meta name="apple-mobile-web-app-capable" content="yes"/>
-	    <link href="~/Content/Styles/reset.css" rel="stylesheet" type="text/css"/>
-        <link href="~/Content/Styles/style.css" rel="stylesheet" type="text/css"/>
-	    <link href="~/Content/Images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-        <meta name="viewport" content="width=device-width"/>
-        <title>Receptsamlingen</title>
-    </head>
-    <body>
-        <div id="top">
-		    <div id="logowrapper">
-			    <a href="/"><div id="logoimage"><!-- --></div></a>
-			    <div id="menu">
-				    <ul class="MenuText">
-					    <li>
-						    @Html.ActionLink("Lägg in recept", "add", "recipe") |
-					    </li>
-					    <li>
-						    @Html.ActionLink("Alla recept", "index", "list") |
-					    </li>
-					    <li>
-						    <a href="/">Sök</a> |
-					    </li>
-	                    <li>
-		                    <a href="/">Skaffa konto</a>
-	                    </li>
-                    </ul>
-			    </div>
-		    </div>
-	    </div>
-	    <div id="wrapper">
-	        <div id="content">
-	            <div class="MainContent">
-	                @RenderBody()
-	            </div>
-                <div class="RightContent">
-                    @Html.Partial("Login", new Receptsamlingen.Mvc.Models.LoginModel())
-                </div>
-				<div class="ClearFix"><!-- --></div>
-	        </div>
-	    </div>
-    </body>
+<head>
+	<meta name="robots" content="noindex,nofollow" />
+	<meta http-equiv="content-type" content="charset=utf-8" />
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="apple-mobile-web-app-title" content="Receptsamlingen" />
+	<meta name="viewport" content="width=device-width.1, initial-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<title>Receptsamlingen</title>
+	<link href="~/Content/Styles/normalize.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/Styles/bootstrap.min.css" rel="stylesheet" />
+	<link href="~/Content/Styles/bootstrap-theme.min.css" rel="stylesheet" />
+	<link href="~/Content/Styles/jquery-ui.min.css" rel="stylesheet" />
+	<link href="~/Content/Styles/jquery-ui.structure.min.css" rel="stylesheet" />
+	<link href="~/Content/Styles/jquery-ui.theme.min.css" rel="stylesheet" />
+	<link href="~/Content/Styles/style.css" rel="stylesheet" type="text/css" />
+	<link rel="shortcut icon" type="image/x-icon" href="~/Content/Images/favicon.ico" />
+	<script src="~/Content/Scripts/external/jquery.js"></script>
+	<script src="~/Content/Scripts/bootstrap.min.js"></script>
+	<script src="~/Content/Scripts/jquery-ui.min.js"></script>
+	@*<script src="~/Content/Scripts/jquery.raty.min.js" type="text/javascript"></script>
+	<script src="~/Content/Scripts/rating-handler.js" type="text/javascript"></script>*@
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#dialog-confirm").dialog({
+				autoOpen: false,
+				modal: true,
+				resizable: false,
+				height: 180,
+				width: 340
+			});
+
+			$(".delete").click(function (e) {
+				e.preventDefault();
+				var targetUrl = $(this).attr("href");
+				$("#dialog-confirm").dialog({
+					buttons: {
+						"Ja, radera!": function () {
+							window.location.href = targetUrl;
+						},
+						"Avbryt": function () {
+							$(this).dialog("close");
+						}
+					}
+				});
+
+				$("#dialog-confirm").dialog("open");
+			});
+		});
+	</script>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="/">
+								<img alt="Brand" src="~/Content/Images/brand.png">
+							</a>
+						</div>
+						<div id="navbar" class="navbar-collapse collapse">
+							<ul class="nav navbar-nav">
+								<li role="presentation">
+									@Html.ActionLink("Lägg in recept", "add", "recipe")
+								</li>
+								<li role="presentation">
+									@Html.ActionLink("Alla recept", "index", "list")
+								</li>
+								<li role="presentation">
+									<a href="/">Sök</a>
+								</li>
+								<li role="presentation">
+									<a href="/">Skaffa konto</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div class="wrapper row">
+			<div class="col-md-9">
+				@RenderBody()
+			</div>
+			<div class="col-md-3">
+				@Html.Partial("~/Views/Shared/Partials/Login.cshtml", new Receptsamlingen.Mvc.Models.LoginModel())
+				@* TODO: Add seach partial*@
+				@* TODO: Add toplist partial*@
+				@* TODO: Add random partial*@
+			</div>
+		</div>
+	</div>
+</body>
 </html>

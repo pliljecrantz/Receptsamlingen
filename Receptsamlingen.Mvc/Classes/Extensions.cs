@@ -3,6 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using Receptsamlingen.Repository;
 
 namespace Receptsamlingen.Mvc.Classes
 {
@@ -30,6 +31,16 @@ namespace Receptsamlingen.Mvc.Classes
 			}
 			sb.Append("</table>");
 			return MvcHtmlString.Create(sb.ToString());
+		}
+
+		public static string HtmlDecode(this string text)
+		{
+			return HttpUtility.HtmlDecode(text);
+		}
+
+		public static string HtmlEncode(this string text)
+		{
+			return HttpUtility.HtmlEncode(text);
 		}
 	}
 }

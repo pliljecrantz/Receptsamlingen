@@ -126,6 +126,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\Images\bg-squares.png" />
+    <Content Include="Content\Images\brand.png" />
     <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Images\icon-search_small.png" />
     <Content Include="Content\Images\logo_13.png" />
@@ -133,26 +135,31 @@
     <Content Include="Content\Images\star-half.png" />
     <Content Include="Content\Images\star-off.png" />
     <Content Include="Content\Images\star-on.png" />
-    <Content Include="Content\Scripts\jquery-1.6.2.min.js" />
-    <Content Include="Content\Scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\jquery-ui.min.js" />
+    <Content Include="Content\Scripts\external\jquery.js" />
     <Content Include="Content\Scripts\jquery.raty.min.js" />
+    <Content Include="Content\Scripts\npm.js" />
     <Content Include="Content\Scripts\rating-handler.js" />
-    <Content Include="Content\Styles\images\ui-bg_flat_30_cccccc_40x100.png" />
-    <Content Include="Content\Styles\images\ui-bg_flat_50_5c5c5c_40x100.png" />
-    <Content Include="Content\Styles\images\ui-bg_glass_40_ffc73d_1x400.png" />
-    <Content Include="Content\Styles\images\ui-bg_highlight-hard_20_0972a5_1x100.png" />
-    <Content Include="Content\Styles\images\ui-bg_highlight-soft_33_003147_1x100.png" />
-    <Content Include="Content\Styles\images\ui-bg_highlight-soft_35_222222_1x100.png" />
-    <Content Include="Content\Styles\images\ui-bg_highlight-soft_44_444444_1x100.png" />
-    <Content Include="Content\Styles\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
-    <Content Include="Content\Styles\images\ui-bg_loop_25_000000_21x21.png" />
+    <Content Include="Content\Styles\bootstrap-theme.min.css" />
+    <Content Include="Content\Styles\bootstrap.min.css" />
+    <Content Include="Content\Styles\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\Styles\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\Styles\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\Styles\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\Styles\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Styles\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\Styles\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\Styles\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
     <Content Include="Content\Styles\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\Styles\images\ui-icons_4b8e0b_256x240.png" />
-    <Content Include="Content\Styles\images\ui-icons_a83300_256x240.png" />
-    <Content Include="Content\Styles\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Content\Styles\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\Styles\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\Styles\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\Styles\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Content\Styles\jquery-ui-1.8.16.custom.css" />
-    <Content Include="Content\Styles\reset.css" />
+    <Content Include="Content\Styles\jquery-ui.min.css" />
+    <Content Include="Content\Styles\jquery-ui.structure.min.css" />
+    <Content Include="Content\Styles\jquery-ui.theme.min.css" />
+    <Content Include="Content\Styles\normalize.css" />
     <Content Include="Content\Styles\style.css" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -174,9 +181,10 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Shared\Partials\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\Login.cshtml" />
+    <Content Include="Views\Shared\Partials\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -210,8 +218,9 @@
     <Content Include="Views\Recipe\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Recipe\Done.cshtml" />
+    <Content Include="Views\Recipe\Response.cshtml" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

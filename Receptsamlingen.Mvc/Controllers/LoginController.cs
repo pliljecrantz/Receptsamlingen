@@ -38,6 +38,7 @@ namespace Receptsamlingen.Mvc.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+		[HttpPost]
         public ActionResult DoLogout()
         {
             SessionHandler.Remove(Globals.UserSessionKeyString);

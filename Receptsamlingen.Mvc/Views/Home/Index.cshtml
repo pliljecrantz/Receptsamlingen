@@ -1,9 +1,9 @@
 ﻿@model Receptsamlingen.Mvc.Models.HomeModel
 
 <h1>Receptsamlingen</h1>
-<p class="Text">Här kan du söka i en ständigt växande samling av recept av olika slag. För att lägga in ett recept själv 
+<p>Här kan du söka i en ständigt växande samling av recept av olika slag. För att lägga in ett recept själv 
 måste du dock logga in. Har du inget konto? Gå till <a href="/ansok">kontosidan</a> för att skaffa ett.</p>
-<p class="Text">Nu kan du ge betyg på recept när du är inloggad, se genomsnittsbetyg på recept och se vilka recept som ligger på topplistan.</p>
+<p>Nu kan du ge betyg på recept när du är inloggad, se genomsnittsbetyg på recept och se vilka recept som ligger på topplistan.</p>
 <br />
 <div>
     <h2>10 senaste recepten</h2>
@@ -11,7 +11,7 @@ måste du dock logga in. Har du inget konto? Gå till <a href="/ansok">kontosida
     @foreach (var r in Model.Recipes)
     {
         <li>
-            &rsaquo;&rsaquo;&nbsp;@Html.ActionLink(r.Name, "id", "recipe", new { id = r.Id }, new { @class="Text" })
+            &rsaquo;&rsaquo;&nbsp;@Html.ActionLink(r.Name, "id", "recipe", new { id = r.Id }, null)
             <br/>
         </li>
     }

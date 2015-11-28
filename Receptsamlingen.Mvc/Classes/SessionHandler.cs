@@ -1,6 +1,4 @@
 ﻿using System.Web;
-using System;
-using System.Collections.Generic;
 using Receptsamlingen.Repository;
 
 namespace Receptsamlingen.Mvc.Classes
@@ -34,29 +32,17 @@ namespace Receptsamlingen.Mvc.Classes
 			}
 		}
 
-		//public static int CurrentRecipeId
-		//{
-		//	get
-		//	{
-		//		return Convert.ToInt32(Get(Globals.CurrentRecipeIdSessionString));
-		//	}
-		//	set
-		//	{
-		//		Set(Globals.CurrentRecipeIdSessionString, value); 
-		//	}
-		//}
-
-		//public static IList<int> RecipeIdList
-		//{
-		//	get
-		//	{
-		//		return Get(Globals.RecipeIdListSessionString) as IList<int>;
-		//	}
-		//	set
-		//	{
-		//		Set(Globals.RecipeIdListSessionString, value);
-		//	}
-		//}
+		public static string CurrentGuid
+		{
+			get
+			{
+				return Get(Globals.CurrentGuidString).ToString();
+			}
+			set
+			{
+				Set(Globals.CurrentGuidString, value);
+			}
+		}
 
 		#endregion
 

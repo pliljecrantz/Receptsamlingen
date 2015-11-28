@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models;
 using Receptsamlingen.Repository;
 
@@ -31,7 +31,6 @@ namespace Receptsamlingen.Mvc.Controllers
 			return View("Detail", model);
 		}
 
-		// TODO: Add functionality for editing a recipe
 		public ActionResult Edit(int id)
 		{
 			var model = GetModel(id);
@@ -41,16 +40,20 @@ namespace Receptsamlingen.Mvc.Controllers
 		public ActionResult Save(RecipeModel model)
 		{
 			model.Recipe.Guid = Guid.NewGuid().ToString();
+			model.Recipe.Name.HtmlEncode();
+			model.Recipe.Description.HtmlEncode();
+			model.Recipe.Ingredients.HtmlEncode();
 			var result = Repository.Save(model.Recipe);
 
 			if (result)
 			{
-				return View("Done");
+				ViewBag.Response = Globals.InfoRecipeUpdated;
+				return View("Response");
 			}
 			else
 			{
-				// TODO: Show error message instead
-				return null;
+				ViewBag.Response = Globals.ErrorSavingRecipe;
+				return View("Response");
 			}
 		}
 
@@ -60,19 +63,43 @@ namespace Receptsamlingen.Mvc.Controllers
 			// Send in rating from view
 			// Save vote
 			// Return result view (success or error)
+			//if (RatingRepository.Instance.UserHasVoted(SessionHandler.User.Username, SessionHandler.CurrentGuid))
+			//{
+			//	ViewBag.Response = Globals.ErrorUserHasVoted;
+			//}
+			//else
+			//{
+			//	var voted = RatingRepository.Instance.Save(SessionHandler.CurrentGuid, SessionHandler.User.Username, Convert.ToInt32(ratingHidden.Value));
+			//	if (voted)
+			//	{
+			//		infoRatingLabel.Text = Globals.InfoVoteSaved;
+			//		infoRatingLabel.Visible = true;
+			//	}
+			//	else
+			//	{
+			//		infoRatingLabel.Text = Globals.ErrorSavingVote;
+			//		infoRatingLabel.Visible = true;
+			//	}
+			//}
 			return View();
 		}
 
-		// TODO: Add functionality for jQuery confirm dialog when deleting a recipe
-		// TODO: Add functionality for deleting a recipe
 		public ActionResult Delete(int id)
 		{
-			return View();
+			var recipe = RecipeRepository.Instance.GetById(id);
+			RecipeRepository.Instance.DeleteSpecials(recipe.Guid);
+			RecipeRepository.Instance.Delete(recipe.Guid);
+			ViewBag.Response = Globals.InfoRecipeDeleted;
+			return View("Response");
 		}
 
 		private RecipeModel GetModel(int id = 0)
 		{
 			var model = new RecipeModel();
+			var allCategories = Repository.GetAllCategories();
+			var allDishTypes = Repository.GetAllDishTypes();
+			var allSpecials = Repository.GetAllSpecials();
+
 			var categoryItems = new List<SelectListItem>
 				{
 					new SelectListItem {Text = "--- Välj ---", Value = "0"}
@@ -81,11 +108,6 @@ namespace Receptsamlingen.Mvc.Controllers
 				{
 					new SelectListItem {Text = "--- Välj ---", Value = "0"}
 				};
-			var allCategories = Repository.GetAllCategories();
-			categoryItems.AddRange(allCategories.Select(category => new SelectListItem { Text = category.Name, Value = category.Id.ToString() }));
-			var allDishTypes = Repository.GetAllDishTypes();
-			dishTypeItems.AddRange(allDishTypes.Select(category => new SelectListItem { Text = category.Name, Value = category.Id.ToString() }));
-			var allSpecials = Repository.GetAllSpecials();
 			var portionItems = new List<SelectListItem>
 				{
 					new SelectListItem { Text = "--- Välj ---", Value = "0" },
@@ -98,7 +120,10 @@ namespace Receptsamlingen.Mvc.Controllers
 					new SelectListItem { Text = "7", Value = "7" },
 					new SelectListItem { Text = "8", Value = "8" },
 				};
-
+			
+			categoryItems.AddRange(allCategories.Select(category => new SelectListItem { Text = category.Name.HtmlDecode(), Value = category.Id.ToString() }));
+			dishTypeItems.AddRange(allDishTypes.Select(dishType => new SelectListItem { Text = dishType.Name.HtmlDecode(), Value = dishType.Id.ToString() }));
+			
 			model.Recipe = new Recipe();
 			model.CategoryList = categoryItems;
 			model.DishTypeList = dishTypeItems;
@@ -108,17 +133,17 @@ namespace Receptsamlingen.Mvc.Controllers
 			if (id != 0)
 			{
 				var recipe = Repository.GetById(id);
-				var category = Repository.GetCategoryById(recipe.CategoryId);
+				var category = Repository.GetCategoryById(recipe.CategoryId).HtmlDecode();
 				var specials = Repository.GetSpecialsForRecipe(recipe.Guid);
 				var specialsList = (from item in specials
 									from special in allSpecials
 									where item.SpecialId == special.Id
-									select special).Aggregate(String.Empty, (current, special) => current + (special.Name + ", "));
+									select special).Aggregate(String.Empty, (current, special) => current + (special.Name.HtmlDecode() + ", "));
 				var dishType = string.Empty;
 				var avgRating = RatingRepository.GetAvarage(recipe.Guid);
 				if (recipe.DishTypeId.HasValue)
 				{
-					dishType = Repository.GetDishTypeById(recipe.DishTypeId.Value);
+					dishType = Repository.GetDishTypeById(recipe.DishTypeId.Value).HtmlDecode();
 				}
 
 				if (specialsList.EndsWith(", "))

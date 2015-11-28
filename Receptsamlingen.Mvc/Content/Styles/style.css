@@ -1,410 +1,231 @@
-﻿html
-{
+﻿html {
 	overflow-y: scroll;
 }
 
-body
-{
-    background-color:#CCCCCC;
-    font-family:Verdana;
-    font-size:0.70em;
-    margin:0 auto;
-    color:#909090;
+body {
+	padding-top: 70px;
+	background-image: url(/Content/Images/bg-squares.png);
+	background-repeat: repeat;
+	background-color: #f0f0f0;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 1.3em;
+	color: #909090;
 }
 
-p
-{
-	margin:0;
-	padding:5px 0 10px 0;
+p {
+	margin: 0;
+	padding: 5px 0 10px 0;
 }
 
-h1
-{
-	color:#FF6A00;
-    font-weight:bold;
-    font-size:1.4em;
-    padding: 0 0 10px 0;
+h1 {
+	color: #e38d13;
+	font-weight: bold;
+	font-size: 2.3em;
 }
 
-h2
-{
-	color:#FF6A00;
-    font-weight:bold;
-    font-size:1.1em;
-    padding:0 0 5px 0;
+h2 {
+	color: #e38d13;
+	font-weight: bold;
+	font-size: 1.3em;
 }
 
-h3
-{
-	color:#FF6A00;
-    font-weight:bold;
-    font-size:0.9em;
-    padding:0 0 5px 0;
+.box-content h3 {
+	margin: 0;
+	padding: 5px 0 5px 0;
+	font-size: 1.1em;
+	text-align: center;
 }
 
-ul
-{
-	list-style-type:none;
+h3 {
+	color: #e38d13;
+	font-size: 1em;
+	padding: 0 0 5px 0;
 }
 
-li
-{
-	display:inline;
+.wrapper {
+	background-color: #FFFFFF;
+	border: solid 1px #CCCCCC;
+	padding-bottom: 20px;
+	margin-top: 5px;
 }
 
-/** Placements **/
-#top
-{
-    height:177px;
-    background-color:#616161;
-    border-bottom:solid 1px #000000;
-}
-
-#logowrapper
-{
-    margin:0 auto;
-    position:relative;
-    height:177px;
-    width:900px;
-}
-
-#logoimage
-{
-	width:500px;
-	height:177px;
-	background-image:url(../Images/logo_13.png);
-	background-repeat:no-repeat;
-}
-
-#menu
-{
-    height:30px;
-	width:870px;
-    margin:-26px auto;
-}
-
-#wrapper
-{
-    margin:0 auto;
-    background-color: #FFFFFF;
-    border-left:solid 1px #909090;
-    border-right:solid 1px #909090;
-    border-bottom:solid 1px #909090;
-    width:900px;
-    min-height:400px;
-}
-
-#content
-{
-	border:solid 15px #FFFFFF;
-}
-
-/** End placements **/
-
-/** Elements **/
-
-.MainContent
-{
-	width:630px;
-	float:left;
-	margin: 15px 0 15px 15px;
-}
-
-.RightContent
-{
-	width:200px;
-	float:right;
-}
-
-.BoxWrapper
-{
+.box-wrapper {
 	border: solid 1px #909090;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	-webkit-border-radius:4px;
+	-webkit-border-radius: 4px;
 	position: relative;
-	background:#CECECE;
+	background: #CECECE;
+	margin-top: 15px;
 }
 
-.BoxContent
-{
+.box-content {
 	border: solid 1px #909090;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	-webkit-border-radius:4px;
-	position: relative;
-	background:#FFFFFF;
-	margin:5px;
-	width:173px;
-	padding: 5px 5px 10px 8px;
+	-webkit-border-radius: 4px;
+	background: #FFFFFF;
+	margin: 5px;
+	padding: 15px 5px 15px 8px;
 }
 
-.TopListContent
-{
-	padding-bottom:5px;
+.toplist-content {
+	padding-bottom: 5px;
 }
 
-.Button
-{
-	border:solid 1px #CCCCCC;
-	font-family:Verdana;
-	font-size:1.1em;
-	color:#FF6A00;
-	width:80px;
-	height:30px;
-	margin-right:10px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-border-radius:4px;
-	position: relative;
-	cursor:pointer;
+.error-page {
+	padding-top: 20px;
+	padding-left: 30px;
 }
 
-.AdminButton
-{
-	font-family:Verdana;
-	font-size:1.1em;
-	color:#FF6A00;
-	width:70px;
-	text-decoration:none;	
+.dropdownlist {
+	width: 100%;
 }
 
-.BigButton
-{
-	border:solid 1px #CCCCCC;
-	font-family:Verdana;
-	font-size:1.1em;
-	color:#FF6A00;
-	width:160px;
-	height:30px;
-	margin-right:10px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-border-radius:4px;
-	position: relative;
-	cursor:pointer;
+#rating {
+	padding-top: 7px;
+	padding-right: 7px;
+	width: 107px !important;
 }
 
-.SmallButton
-{
-	border:solid 1px #CCCCCC;
-	font-family:Verdana;
-	font-size:1.1em;
-	color:#FF6A00;
-	width:55px;
-	height:22px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-border-radius:4px;
-	position: relative;
-	cursor:pointer;
-	margin:0 0 5px 5px;
+form {
+	padding-right: 4px;
 }
 
-.AdvancedSearchButton
-{
-	position:relative;
-	top: -20px;
-	margin-right:12px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-border-radius:4px;
-	cursor:pointer;
-}
-
-.TextBox, .DropDownList
-{
-	width:145px;
-	border:solid 1px #CCCCCC;
-	font-family:Verdana;
-	font-size:1.1em;
-}
-
-.ListBox
-{
-	padding-left:10px;
-}
-
-.LoginTextBox
-{
-	width:145px;
-	border:solid 1px #CCCCCC;
-	font-family:Verdana;
-	font-size:1.1em;
-}
-
-.InfoBox .DropDownList
-{
-	position:relative;
-	top:-37px;
-}
-
-.LongTextBox
-{
-	width:395px;
-	border:solid 1px #CCCCCC;
-	font-family:Verdana;
-}
-
-.MultilineTextBox
-{
-	width:617px;
-	color:#999999;
-	border:solid 1px #CCCCCC;
-	font-weight:normal;
-	font-size:1.1em;
-	font-family:Verdana;
-	height: 150px;
-}
-
-.Icons
-{
-	padding-top:4px;
-}
-
-#rating
-{
-	padding-top:3px;
+textarea.form-control {
+	height: 200px;
+	overflow: scroll;
 }
 
 /** End elements **/
 
 /** Text and links **/
-p a:link, a:visited, li a:link
-{
-    color:#FF6A00;
-    text-decoration:none;
+.orange {
+	color: #e38d13 !important;
+	font-style: normal !important;
 }
 
-p a:hover, p a:active, li a:hover, li a:active
-{
-    color:#CECECE;
-    text-decoration:underline;
+p a:link, a:visited, li a:link {
+	color: #e38d13;
+	text-decoration: none;
 }
 
-a:link.Text, a:visited.Text
-{
-	color:#999999;
-	text-decoration:none;
+p a:hover, p a:active, li a:hover, li a:active {
+	color: #CECECE;
+	text-decoration: underline;
 }
 
-a:hover.Text, a:active.Text
-{
-	color:#FF6A00;
-	text-decoration:underline;
+a:link {
+	color: #e38d13;
 }
 
-a:link.UnitText, a:visited.UnitText
-{
-	color:#FF6A00;
-	text-decoration:none;
+a:visited {
+	color: #999999;
+	text-decoration: none;
 }
 
-a:hover.UnitText, a:active.UnitText
-{
-	text-decoration:underline;
+a:hover, a:active {
+	color: #CECECE;
+	text-decoration: underline;
 }
 
-.MenuText
-{
-    color:#909090;
-    font-weight:bold;
-    font-size:1.1em;
-    float:right;
+.info-text {
+	font-size: 1em;
+	padding-right: -3px;
 }
 
-.Text
-{
-	color:#999999;
-	font-weight:normal;
-	font-size:1.1em;
-}
-
-.UnitText
-{
-	color:#999999;
-	font-weight:normal;
-	font-size:0.9em;
-}
-
-.ErrorText
-{
-	color:#FF6A00;
-	font-weight:normal;
-	font-size:0.9em;
-}
-
-.InfoBox
-{ 
+.info-box {
 	border: solid 1px #CCCCCC;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	-webkit-border-radius:4px;	
-	background:#FFFFFF;
+	-webkit-border-radius: 4px;
+	background: #FFFFFF;
 	padding: 12px;
+	margin-left: 5px;
 }
 
 /** End text and links **/
 
 /** Other fixes **/
 
-.MarginRight
-{
-	margin-right:15px;
+ul {
+	list-style-type: none;
+	padding: 0 !important;
 }
 
-.FloatLeft
-{
-    float:left;
+.margin-right-15 {
+	margin-right: 15px;
 }
 
-.FloatRight
-{
-    float:right;
+.margin-top-5 {
+	margin-top: 5px;
 }
 
-.ClearFix
-{
-    clear:both;
+.margin-bottom-10 {
+	margin-bottom: 10px;
 }
 
-.MinHeight
-{
-	min-height:500px;
+.margin-top-25 {
+	margin-top: 25px;
 }
 
-.FontItalic
-{
-	font-style:italic;
+.padding-bottom-10 {
+	padding-bottom: 10px;
 }
 
-.FontBold
-{
-	font-weight:bold;
+.padding-right-15 {
+	padding-right: 15px;
 }
 
-.FontColorOrange
-{
-	color:#FF6A00;
+.margin-left-20 {
+	margin-left: 20px;
 }
 
-.NoBorder
-{
-	border:none;
+.float-left {
+	float: left;
 }
 
-.recipe-list
-{
-	background-color:#FFFFFF;
-	padding:3px;
-	display:block;
+.float-right {
+	float: right;
 }
 
-/*.GreyBackground
-{
-	background-color:#F4F4F4;
-	padding:3px;
-	display:block;
-}*/
+.clear-fix {
+	clear: both;
+}
+
+.recipe-list {
+	background-color: #FFFFFF;
+	padding: 3px;
+	display: block;
+}
+
+.navbar-brand {
+	padding: 0;
+}
 
 /** End other fixes **/
+
+input[type="image"] {
+	margin-left: -10px;
+	margin-top: 8px;
+}
+
+.login-error {
+	color: #e38d13;
+}
+
+.padding-top-5 {
+	padding-top: 5px;
+}
+
+.text-align-center {
+	text-align: center;
+}
+
+.width-100-percent {
+	width: 100%;
+}
+
+.search-button {
+	margin-left: -25px;
+}
