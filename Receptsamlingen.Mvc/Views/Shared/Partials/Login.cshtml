@@ -1,0 +1,58 @@
+﻿@using Receptsamlingen.Mvc.Classes
+@model Receptsamlingen.Mvc.Models.LoginModel
+
+<div class="box-wrapper">
+	<div class="box-content">
+		@if (SessionHandler.User == null && !SessionHandler.IsAuthenticated)
+		{
+			using (Html.BeginForm("DoLogin", "Login", FormMethod.Post))
+			{
+				<div class="row">
+					<div class="col-md-12 padding-bottom-10">
+						@Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Användarnamn" })
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 padding-bottom-10">
+						@Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Lösenord" })
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<input type="submit" value="Logga in &raquo;" class="btn btn-warning float-right width-100-percent" />
+					</div>
+				</div>
+				if (Model.LoggedIn != null && (bool)!Model.LoggedIn)
+				{
+					<div class="row">
+						<div class="col-md-12 padding-top-5 text-align-center">
+							<label class="info-text login-error">Fel användaruppgifter.</label>
+						</div>
+					</div>
+				}
+			}
+		}
+		else
+		{
+			using (Html.BeginForm("DoLogout", "Login", FormMethod.Post))
+			{
+				<div class="row">
+					<div class="col-md-12 padding-bottom-10">
+						<label>
+							Du är inloggad som
+							@if (SessionHandler.IsAuthenticated && SessionHandler.User != null)
+							{
+								@SessionHandler.User.Username
+							}
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<input type="submit" value="Logga ut &raquo;" class="btn btn-warning float-right width-100-percent" />
+					</div>
+				</div>
+			}
+		}
+	</div>
+</div>
