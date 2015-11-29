@@ -21,19 +21,19 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		public ActionResult Add()
 		{
-			var model = GetModel();
+			var model = Load();
 			return View("Manage", model);
 		}
 
 		public ActionResult Id(int id)
 		{
-			var model = GetModel(id);
+			var model = Load(id);
 			return View("Detail", model);
 		}
 
 		public ActionResult Edit(int id)
 		{
-			var model = GetModel(id);
+			var model = Load(id);
 			return View("Manage", model);
 		}
 
@@ -93,7 +93,7 @@ namespace Receptsamlingen.Mvc.Controllers
 			return View("Response");
 		}
 
-		private RecipeModel GetModel(int id = 0)
+		private RecipeModel Load(int id = 0)
 		{
 			var model = new RecipeModel();
 			var allCategories = Repository.GetAllCategories();

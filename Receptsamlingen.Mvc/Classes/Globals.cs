@@ -33,6 +33,13 @@ namespace Receptsamlingen.Mvc.Classes
         public const string InfoRecipeUpdated = "Tack, receptet är uppdaterat.";
         public const string InfoRecipeSaved = "Tack, receptet är sparat.";
 	    public const string InfoRecipeDeleted = "Receptet är raderat.";
+	    public const string NoSearchResults = "Sökningen gav inga resultat.";
+		public const string ErrorOnlyOneBoxCanBeSelected = "Du kan bara välja en av rutorna.";
+		public const string ErrorMustChooseBox = "Du måste välja en av rutorna.";
+		public const string ErrorNoAccountGranted = "Du får inget konto.";
+		public const string ErrorInvalidEmail = "Ogiltig e-postadress.";
+	    public const string ErrorMustGiveInfo = "Du måste ange e-postadress, ditt fulla namn och önskat användarnamn.";
+	    public const string InfoApplyApproved = "Tack, din ansökan är skickad. Svar skickas till e-postadressen du angav.";
 
         // URLs
         public const string DefaultUrl = "~/start";

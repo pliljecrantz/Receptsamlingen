@@ -1,0 +1,39 @@
+﻿@model Receptsamlingen.Mvc.Models.ApplyModel
+
+<h1>Ansök om konto</h1>
+@using (Html.BeginForm("DoApply", "Apply", FormMethod.Post))
+{
+	<div class="row">
+		<div class="col-md-12">
+			@Html.TextBoxFor(x => x.FullName, new { @class = "form-control", placeholder = "Ditt namn" })
+			<br />
+			@Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "E-postadress" })
+			<br />
+			@Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Önskat användarnamn" })
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p>OBS! Var noga med att ange rätt e-postadress, en bekräftelse skickas dit inom några dagar.</p>
+			<p>Välj en ruta för att godkännas som kontoinnehavare.</p>
+			<label>Jag är en alien.</label>
+			@Html.CheckBoxFor(x => x.ResponseAlien)
+			<br />
+			<label>Jag är en människa.</label>
+			@Html.CheckBoxFor(x => x.ResponseHuman)
+			<br /><br />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 margin-top-5">
+			@if (!string.IsNullOrWhiteSpace(Model.Result))
+			{
+				var className = Model.Result == false.ToString() ? "label label-warning info-text" : "label label-info info-text";
+				@Html.LabelFor(x=>x.Response, new { @class = className})
+			}
+		</div>
+		<div class="col-md-4">
+			<input type="submit" class="btn btn-warning float-right" value="Ansök &raquo;" />
+		</div>
+	</div>
+}

@@ -5,6 +5,6 @@ namespace Receptsamlingen.Mvc.Models
 {
     public class HomeModel
     {
-        public IList<Recipe> Recipes;
+		public IList<Recipe> Recipes { get; set; }
     }
 }

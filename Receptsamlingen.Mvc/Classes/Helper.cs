@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Receptsamlingen.Mvc.Classes
 {
@@ -34,5 +36,31 @@ namespace Receptsamlingen.Mvc.Classes
             }
             return isValid;
         }
+
+		public static void Logout()
+		{
+			SessionHandler.User = null;
+			SessionHandler.IsAuthenticated = false;
+			HttpContext.Current.Session.Clear();
+			HttpContext.Current.Session.Abandon();
+		}
+
+		public static void GenerateMail(string emailaddress, string fullName, string username)
+		{
+			var message = new MailMessage();
+			message.To.Add(new MailAddress(Globals.MailRecieverString));
+			message.From = new MailAddress(emailaddress);
+			message.Subject = Globals.MailSubjectString;
+			message.Body = String.Format("Namn: {0}<br/>E-postadress: {1}<br/>Önskat användarnamn: {2}", fullName, emailaddress, username);
+			message.IsBodyHtml = true;
+			SendMail(message);
+		}
+
+		public static void SendMail(MailMessage message)
+		{
+			var smtp = new SmtpClient(Globals.MailServerString);
+			smtp.Send(message);
+		}
+
     }
 }

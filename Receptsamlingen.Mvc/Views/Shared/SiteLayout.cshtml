@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Receptsamlingen.Mvc.Models
+<!DOCTYPE html>
 <html>
 <head>
 	<meta name="robots" content="noindex,nofollow" />
@@ -82,10 +83,10 @@
 									@Html.ActionLink("Alla recept", "index", "list")
 								</li>
 								<li role="presentation">
-									<a href="/">Sök</a>
+									@Html.ActionLink("Sök", "index", "search")
 								</li>
 								<li role="presentation">
-									<a href="/">Skaffa konto</a>
+									@Html.ActionLink("Skaffa konto", "index", "apply")
 								</li>
 							</ul>
 						</div>
@@ -98,10 +99,10 @@
 				@RenderBody()
 			</div>
 			<div class="col-md-3">
-				@Html.Partial("~/Views/Shared/Partials/Login.cshtml", new Receptsamlingen.Mvc.Models.LoginModel())
-				@* TODO: Add seach partial*@
-				@* TODO: Add toplist partial*@
-				@* TODO: Add random partial*@
+				@Html.Partial("~/Views/Shared/Partials/Login.cshtml", new LoginModel())
+				@* TODO: Add seach partial *@
+				@* TODO: Add toplist partial *@
+				@* TODO: Add random partial *@
 			</div>
 		</div>
 	</div>
