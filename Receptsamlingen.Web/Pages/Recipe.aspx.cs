@@ -14,7 +14,7 @@ namespace Receptsamlingen.Web.Pages
 
 		#region Members
 
-		protected string DeleteLinkButtonEvent = string.Empty;
+		protected string DeleteButtonEvent = string.Empty;
 
 		#endregion
 
@@ -33,7 +33,7 @@ namespace Receptsamlingen.Web.Pages
 
 			#endregion
 
-			DeleteLinkButtonEvent = Page.ClientScript.GetPostBackEventReference(deleteButton, string.Empty);
+			DeleteButtonEvent = Page.ClientScript.GetPostBackEventReference(deleteButton, string.Empty);
 
 			if (!IsPostBack)
 			{

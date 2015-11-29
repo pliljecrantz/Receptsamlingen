@@ -18,7 +18,7 @@
 				modal: true,
 				buttons: {
 					"Ja, radera!": function () {
-						eval("<%=DeleteLinkButtonEvent%>");
+						eval("<%=DeleteButtonEvent%>");
 						$(this).dialog("close");
 					},
 					"Avbryt": function () {
@@ -26,7 +26,7 @@
 					}
 				}
 			});
-			$('#deleteLinkButton').click(function (e) {
+			$('#deleteButton').click(function (e) {
 				e.preventDefault();
 				$('#dialog-confirm').dialog('open');
 			});
