@@ -20,36 +20,9 @@
 	<script src="~/Content/Scripts/external/jquery.js"></script>
 	<script src="~/Content/Scripts/bootstrap.min.js"></script>
 	<script src="~/Content/Scripts/jquery-ui.min.js"></script>
-	@*<script src="~/Content/Scripts/jquery.raty.min.js" type="text/javascript"></script>
-	<script src="~/Content/Scripts/rating-handler.js" type="text/javascript"></script>*@
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$("#dialog-confirm").dialog({
-				autoOpen: false,
-				modal: true,
-				resizable: false,
-				height: 180,
-				width: 340
-			});
-
-			$(".delete").click(function (e) {
-				e.preventDefault();
-				var targetUrl = $(this).attr("href");
-				$("#dialog-confirm").dialog({
-					buttons: {
-						"Ja, radera!": function () {
-							window.location.href = targetUrl;
-						},
-						"Avbryt": function () {
-							$(this).dialog("close");
-						}
-					}
-				});
-
-				$("#dialog-confirm").dialog("open");
-			});
-		});
-	</script>
+	<script src="~/Content/Scripts/jquery.raty.min.js" type="text/javascript"></script>
+	<script src="~/Content/Scripts/rating-handler.js" type="text/javascript"></script>
+	<script src="~/Content/Scripts/dialog-handler.js" type="text/javascript"></script>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -77,16 +50,16 @@
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
 								<li role="presentation">
-									@Html.ActionLink("Lägg in recept", "add", "recipe")
+									@Html.ActionLink("Lägg in recept", "Add", "Recipe")
 								</li>
 								<li role="presentation">
-									@Html.ActionLink("Alla recept", "index", "list")
+									@Html.ActionLink("Alla recept", "Index", "List")
 								</li>
 								<li role="presentation">
-									@Html.ActionLink("Sök", "index", "search")
+									@Html.ActionLink("Sök", "Index", "Search")
 								</li>
 								<li role="presentation">
-									@Html.ActionLink("Skaffa konto", "index", "apply")
+									@Html.ActionLink("Skaffa konto", "Index", "Apply")
 								</li>
 							</ul>
 						</div>
@@ -100,9 +73,6 @@
 			</div>
 			<div class="col-md-3">
 				@Html.Partial("~/Views/Shared/Partials/Login.cshtml", new LoginModel())
-				@* TODO: Add seach partial *@
-				@* TODO: Add toplist partial *@
-				@* TODO: Add random partial *@
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,4 @@
 ﻿@using Receptsamlingen.Mvc.Classes
-@using System.Web.Mvc
 @model Receptsamlingen.Mvc.Models.RecipeModel
 
 <h1>Lägg in recept</h1>
@@ -11,7 +10,7 @@ else
 {
 	<div class="row">
 		<div class="col-md-12">
-			<label class="Text">Receptnamn:</label>
+			<label class="orange">Receptnamn:</label>
 			<br />
 			@Html.TextBoxFor(x => x.Recipe.Name, new {@class = "form-control"})
 		</div>
@@ -20,45 +19,47 @@ else
 	<br />
 	<div class="row">
 		<div class="col-md-3 margin-bottom-10">
-			<label class="Text">Kategori:</label>
+			<label class="orange">Kategori:</label>
 			<br />
 			@Html.DropDownListFor(x => x.SelectedCategory, new SelectList(Model.CategoryList, "Value", "Text", Model.Recipe.CategoryId), new {@class = "dropdownlist"})
 		</div>
 		<div class="col-md-3 margin-bottom-10">
-			<label class="Text">Huvudråvara:</label>
+			<label class="orange">Huvudråvara:</label>
 			<br />
 			@Html.DropDownListFor(x => x.SelectedDishType, new SelectList(Model.DishTypeList, "Value", "Text", Model.Recipe.DishTypeId), new {@class = "dropdownlist"})
 		</div>
 		<div class="col-md-3 margin-bottom-10">
-			<label class="Text">Antal portioner:</label>
+			<label class="orange">Antal portioner:</label>
 			<br />
 			@Html.DropDownListFor(x => x.SelectedPortions, new SelectList(Model.Portions, "Value", "Text"), new {@class = "dropdownlist"})
 		</div>
-		<div class="col-md-3 margin-bottom-10">
-			<label class="Text">Special:</label>
+	</div>
+	<div class="row">
+		<div class="col-md-12 margin-bottom-10">
+			<label class="orange">Special:</label>
 			<br />
 			@Html.CheckBoxListFor(x => x.SpecialList, x => x.SpecialList, x => x.Id, x => x.Name, x => x.SelectedSpecials)
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<label class="Text">Ingredienser:</label>
+			<label class="orange">Ingredienser:</label>
 			<br />
 			@Html.TextAreaFor(x => x.Recipe.Ingredients, new {@class = "form-control"})
-			<label class="Text">Beskrivning:</label>
+			<label class="orange">Beskrivning:</label>
 			<br />
 			@Html.TextAreaFor(x => x.Recipe.Description, new {@class = "form-control"})
 			@using (Html.BeginForm("Index", "Home", FormMethod.Post))
 			{
 				<input type="submit" value="Avbryt" class="btn btn-default float-left" />
 			}
-			@using (Html.BeginForm("Index", "Recipe", FormMethod.Post))
-			{
-				<input type="submit" value="Rensa" class="btn btn-default float-right margin-right-15" />
-			}
 			@using (Html.BeginForm("Save", "Recipe", FormMethod.Post))
 			{
 				<input type="submit" value="Spara!" class="btn btn-warning float-right" />
+			}
+			@using (Html.BeginForm("Index", "Recipe", FormMethod.Post))
+			{
+				<input type="submit" value="Rensa" class="btn btn-default float-right margin-right-15" />
 			}
 		</div>
 	</div>

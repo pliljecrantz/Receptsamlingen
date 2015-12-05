@@ -1,63 +1,68 @@
 ﻿@using Receptsamlingen.Mvc.Classes
 @model Receptsamlingen.Mvc.Models.RecipeModel
 
-<div class="row">
-	<div class="col-md-8">
-		<h1>@Model.Recipe.Name.HtmlDecode()</h1>
-	</div>
-	<div class="col-md-4 margin-top-25">
-		@Html.HiddenFor(x => x.AvarageRating) @* TODO: Move to ViewBag *@
-		@Html.Hidden("Authenticated", SessionHandler.IsAuthenticated) @* TODO: Move to ViewBag *@
+@using (Html.BeginForm("Vote", "Recipe", FormMethod.Post))
+{
+	<div class="row">
+		<div class="col-md-9">
+			<h1>@Html.DisplayFor(x => x.Recipe.Name)</h1>
+		</div>
+		<div class="col-md-3 margin-top-25">
+		@Html.Hidden("AvarageRating", Model.AvarageRating)
+		@Html.Hidden("Authenticated", SessionHandler.IsAuthenticated)
+		@Html.Hidden("UserRating", Model.UserRating)
 		<div id="rating" class="float-left">
 			<!-- -->
 		</div>
-		@*@Html.BeginForm("Vote", "Recipe", FormMethod.Post)
+		@if (!SessionHandler.IsAuthenticated)
+		{
+			<input type="submit" value="Rösta!" class="btn btn-warning" disabled="true" />
+		}
+		else
+		{
+			<input type="submit" value="Rösta!" class="btn btn-warning"/>
+		}
+		<br />
+		<br/>
+		@if(ViewBag.Response != null)
+		{ 
+			<label class=" label label-warning info-text">@ViewBag.Response</label>
+		}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<label class="orange">Kategori:</label>
+			@Html.DisplayFor(x => x.Category)
+			<br />
+			<label class="orange">Huvudråvara:</label>
+			@Html.DisplayFor(x => x.DishType)
+			<br />
+			<label class="orange">Portioner:</label>
+			@if (Model.Recipe.Portions.HasValue && Model.Recipe.Portions.Value > 0)
 			{
-				@if (SessionHandler.IsAuthenticated)
-				{
-					<input type="submit" value="Rösta!" class="btn btn-warning" />
-					<br />
-					<br/>
-					<label class="float-right label label-warning info-text">@ViewBag.Response</label>
-				}
-			}*@
+				@Html.DisplayFor(x => x.Recipe.Portions.Value)
+			}
+			<br />
+			<label class="orange">Receptet är:</label>
+			@Html.DisplayFor(x => x.Specials)
+		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12">
-		<label class="orange">Kategori:</label>
-		@Html.DisplayFor(x => x.Category)
-		<br />
-		<br />
-		<label class="orange">Huvudråvara:</label>
-		@Html.DisplayFor(x => x.DishType)
-		<br />
-		<br />
-		<label class="orange">Portioner:</label>
-		@if (Model.Recipe.Portions.HasValue && Model.Recipe.Portions.Value > 0)
-		{
-			@Html.DisplayFor(x => x.Recipe.Portions.Value)
-		}
-		<br />
-		<br />
-		<label class="orange">Receptet är:</label>
-		@Html.DisplayFor(x => x.Specials)
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Ingredienser:</h3>
+			@Html.TextAreaFor(x => x.Recipe.Ingredients, new { @class = "form-control", @readonly = true })
+			<h3>Gör så här:</h3>
+			@Html.TextAreaFor(x => x.Recipe.Description, new { @class = "form-control", @readonly = true })
+			<br />
+			@if (SessionHandler.IsAuthenticated && SessionHandler.User.Role.Equals(20))
+			{
+				<div class="float-right">
+					@Html.ActionLink("Redigera »", "Edit", "Recipe", new { id = Model.Recipe.Id }, null)
+					@Html.ActionLink("Radera »", "Delete", "Recipe", new { id = Model.Recipe.Id }, new { @class = "delete margin-left-20" })
+				</div>
+			}
+		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		<h3>Ingredienser:</h3>
-		@Html.TextAreaFor(x => x.Recipe.Ingredients, new { @class = "form-control", @readonly = true })
-		<h3>Gör så här:</h3>
-		@Html.TextAreaFor(x => x.Recipe.Description, new { @class = "form-control", @readonly = true })
-		<br />
-		@if (SessionHandler.IsAuthenticated && SessionHandler.User.Role.Equals(20))
-		{
-			<div class="float-right">
-				@Html.ActionLink("Redigera »", "edit", "recipe", new { id = Model.Recipe.Id }, null)
-				@Html.ActionLink("Radera »", "delete", "recipe", new { id = Model.Recipe.Id }, new { @class = "delete margin-left-20" })
-			</div>
-		}
-	</div>
-</div>
+}
 @Html.Partial("~/Views/Shared/Partials/Confirm.cshtml")

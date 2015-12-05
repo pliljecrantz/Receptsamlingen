@@ -42,7 +42,7 @@
 							Du är inloggad som
 							@if (SessionHandler.IsAuthenticated && SessionHandler.User != null)
 							{
-								@SessionHandler.User.Username
+								<span class="orange">@SessionHandler.User.Username</span>
 							}
 						</label>
 					</div>

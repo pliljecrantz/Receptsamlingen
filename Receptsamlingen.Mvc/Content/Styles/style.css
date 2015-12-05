@@ -95,6 +95,7 @@ form {
 textarea.form-control {
 	height: 200px;
 	overflow: scroll;
+	margin: 0 0 10px 0;
 }
 
 /** End elements **/
@@ -142,6 +143,12 @@ a:hover, a:active {
 	background: #FFFFFF;
 	padding: 12px;
 	margin-left: 5px;
+}
+
+label {
+	display: inline !important;
+	font-weight: 500 !important;
+	margin-left: 3px;
 }
 
 /** End text and links **/

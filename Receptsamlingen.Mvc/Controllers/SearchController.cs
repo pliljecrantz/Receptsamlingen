@@ -13,6 +13,7 @@ namespace Receptsamlingen.Mvc.Controllers
         }
 
 		// TODO: Implement advanced search
+		// TODO: Implement search box and partial to be rendered on Home
 	    [HttpPost]
 	    public ActionResult DoSearch(SearchModel model)
 	    {

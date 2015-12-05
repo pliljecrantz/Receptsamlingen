@@ -23,13 +23,13 @@ namespace Receptsamlingen.Mvc.Classes
 	    public const string UserSessionKeyString = "User";
 
         // Error- and infomessages
-        public const string ErrorSavingVote = "Det gick inte att rösta, försök igen senare";
-        public const string ErrorUserHasVoted = "Du har redan röstat en gång";
+        public const string ErrorSavingVote = "Det gick inte att rösta, försök igen senare.";
+        public const string ErrorUserHasVoted = "Du har redan röstat.";
         public const string ErrorDeletingRecipe = "Det gick inte att radera receptet.";
         public const string ErrorUpdatingRecipe = "Det gick inte att uppdatera receptet.";
         public const string ErrorSavingRecipe = "Det gick inte att spara receptet, försök igen senare.";
         public const string ErrorValidatingRecipe = "Du måste skriva ett namn på receptet och välja kategori.";
-        public const string InfoVoteSaved = "Tack, din röst är sparad";
+        public const string InfoVoteSaved = "Tack, din röst är sparad.";
         public const string InfoRecipeUpdated = "Tack, receptet är uppdaterat.";
         public const string InfoRecipeSaved = "Tack, receptet är sparat.";
 	    public const string InfoRecipeDeleted = "Receptet är raderat.";

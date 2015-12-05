@@ -12,6 +12,7 @@ namespace Receptsamlingen.Mvc.Models
 		public string DishType { get; set; }
 		public int AvarageRating { get; set; }
 		public string Specials { get; set; }
+		public int UserRating { get; set; }
 
 		// Properties for adding dropdownlists and checkboxes in the view
 		public IList<SelectListItem> CategoryList { get; set; }
