@@ -28,7 +28,7 @@ namespace Receptsamlingen.Mvc.Classes
         public const string ErrorDeletingRecipe = "Det gick inte att radera receptet.";
         public const string ErrorUpdatingRecipe = "Det gick inte att uppdatera receptet.";
         public const string ErrorSavingRecipe = "Det gick inte att spara receptet, försök igen senare.";
-        public const string ErrorValidatingRecipe = "Du måste skriva ett namn på receptet och välja kategori.";
+        public const string ErrorValidatingRecipe = "Du måste ange ett namn på receptet och välja kategori.";
         public const string InfoVoteSaved = "Tack, din röst är sparad.";
         public const string InfoRecipeUpdated = "Tack, receptet är uppdaterat.";
         public const string InfoRecipeSaved = "Tack, receptet är sparat.";
@@ -38,8 +38,8 @@ namespace Receptsamlingen.Mvc.Classes
 		public const string ErrorMustChooseBox = "Du måste välja en av rutorna.";
 		public const string ErrorNoAccountGranted = "Du får inget konto.";
 		public const string ErrorInvalidEmail = "Ogiltig e-postadress.";
-	    public const string ErrorMustGiveInfo = "Du måste ange e-postadress, ditt fulla namn och önskat användarnamn.";
-	    public const string InfoApplyApproved = "Tack, din ansökan är skickad. Svar skickas till e-postadressen du angav.";
+	    public const string ErrorMustGiveInfo = "Du måste ange e-postadress, namn och önskat användarnamn.";
+	    public const string InfoApplyApproved = "Tack, din ansökan är skickad. Svar kommer till angiven e-postadress.";
 
         // URLs
         public const string DefaultUrl = "~/start";

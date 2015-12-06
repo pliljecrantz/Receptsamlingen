@@ -11,18 +11,17 @@ namespace Receptsamlingen.Mvc.Controllers
             return View(new ApplyModel());
         }
 
-		[HttpPost]
 	    public ActionResult DoApply(ApplyModel model)
 	    {
 			if (model.Human && model.Alien)
 			{
-				model.Response = Globals.ErrorOnlyOneBoxCanBeSelected;
-				model.Result = false.ToString();
+				ViewBag.Response = Globals.ErrorOnlyOneBoxCanBeSelected;
+				ViewBag.Result = false.ToString();
 			}
 			else if (model.Alien && !model.Human)
 			{
-				model.Response = Globals.ErrorNoAccountGranted;
-				model.Result = false.ToString();
+				ViewBag.Response = Globals.ErrorNoAccountGranted;
+				ViewBag.Result = false.ToString();
 			}
 			else if (!model.Alien && model.Human)
 			{
@@ -33,28 +32,28 @@ namespace Receptsamlingen.Mvc.Controllers
 					var username = model.Username.Trim().HtmlEncode();
 					if (!Helper.ValidateEmail(emailaddress))
 					{
-						model.Response = Globals.ErrorInvalidEmail;
-						model.Result = false.ToString();
+						ViewBag.Response = Globals.ErrorInvalidEmail;
+						ViewBag.Result = false.ToString();
 					}
 					else
 					{
 						Helper.GenerateMail(emailaddress, fullName, username);
-						model.Response = Globals.InfoApplyApproved;
-						model.Result = true.ToString();
+						ViewBag.Response = Globals.InfoApplyApproved;
+						ViewBag.Result = true.ToString();
 					}
 				}
 				else
 				{
-					model.Response = Globals.ErrorMustGiveInfo;
-					model.Result = false.ToString();
+					ViewBag.Response = Globals.ErrorMustGiveInfo;
+					ViewBag.Result = false.ToString();
 				}
 			}
 			else
 			{
-				model.Response = Globals.ErrorMustChooseBox;
-				model.Result = false.ToString();
+				ViewBag.Response = Globals.ErrorMustChooseBox;
+				ViewBag.Result = false.ToString();
 			}
-			return View("Index", model);
+			return View("Index");
 	    }
     }
 }

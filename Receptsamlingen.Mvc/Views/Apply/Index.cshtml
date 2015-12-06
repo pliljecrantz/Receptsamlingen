@@ -17,19 +17,19 @@
 			<p>OBS! Var noga med att ange rätt e-postadress, en bekräftelse skickas dit inom några dagar.</p>
 			<p>Välj en ruta för att godkännas som kontoinnehavare.</p>
 			<label>Jag är en alien.</label>
-			@Html.CheckBoxFor(x => x.ResponseAlien)
+			@Html.CheckBoxFor(x => x.Alien)
 			<br />
 			<label>Jag är en människa.</label>
-			@Html.CheckBoxFor(x => x.ResponseHuman)
+			@Html.CheckBoxFor(x => x.Human)
 			<br /><br />
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-8 margin-top-5">
-			@if (!string.IsNullOrWhiteSpace(Model.Result))
+			@if (!string.IsNullOrWhiteSpace(ViewBag.Result))
 			{
-				var className = Model.Result == false.ToString() ? "label label-warning info-text" : "label label-info info-text";
-				@Html.LabelFor(x=>x.Response, new { @class = className})
+				var className = ViewBag.Result == false.ToString() ? "label label-warning info-text" : "label label-info info-text";
+				<label class="@className">@ViewBag.Response</label>
 			}
 		</div>
 		<div class="col-md-4">
