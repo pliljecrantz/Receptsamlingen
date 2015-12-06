@@ -19,7 +19,6 @@ namespace Receptsamlingen.Mvc.Controllers
 			RatingRepository = RatingRepository.Instance;
 		}
 
-		// TODO: Fix so there´s only one form sending in the whole page, need because otherwise the Save method gets a null model
 		public ActionResult Add()
 		{
 			var model = Load();
@@ -40,16 +39,34 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		public ActionResult Save(RecipeModel model)
 		{
-			model.Recipe.Guid = Guid.NewGuid().ToString();
+			if (SessionHandler.CurrentGuid == null)
+			{
+				model.Recipe.Guid = Guid.NewGuid().ToString();
+			}
 			model.Recipe.Name.HtmlEncode();
 			model.Recipe.Description.HtmlEncode();
 			model.Recipe.Ingredients.HtmlEncode();
+			model.Recipe.CategoryId = Convert.ToInt32(model.SelectedCategory);
+			model.Recipe.DishTypeId = Convert.ToInt32(model.SelectedDishType);
+			model.Recipe.Portions = Convert.ToInt32(model.SelectedPortions);
+			var specials = model.SelectedSpecials;
+			
 			var result = Repository.Save(model.Recipe);
-			ViewBag.Response = result ? Globals.InfoRecipeUpdated : Globals.ErrorSavingRecipe;
+			if (result)
+			{
+				foreach (var special in specials)
+				{
+					Repository.SaveSpecial(model.Recipe.Guid, special.Id);
+				}
+				ViewBag.Response = SessionHandler.CurrentGuid == null ? Globals.InfoRecipeSaved : Globals.InfoRecipeUpdated;
+			}
+			else
+			{
+				ViewBag.Response = Globals.ErrorSavingRecipe;
+			}
 			return View("Response");
 		}
 
-		[HttpPost]
 		public ActionResult Vote(RecipeModel model)
 		{
 			if (RatingRepository.Instance.UserHasVoted(SessionHandler.User.Username, SessionHandler.CurrentGuid))
@@ -139,10 +156,8 @@ namespace Receptsamlingen.Mvc.Controllers
 				new SelectListItem {Text = "8", Value = "8"},
 			};
 
-			categoryItems.AddRange(
-				allCategories.Select(category => new SelectListItem {Text = category.Name, Value = category.Id.ToString()}));
-			dishTypeItems.AddRange(
-				allDishTypes.Select(dishType => new SelectListItem {Text = dishType.Name, Value = dishType.Id.ToString()}));
+			categoryItems.AddRange(allCategories.Select(category => new SelectListItem {Text = category.Name, Value = category.Id.ToString()}));
+			dishTypeItems.AddRange(allDishTypes.Select(dishType => new SelectListItem {Text = dishType.Name, Value = dishType.Id.ToString()}));
 
 			model.Recipe = new Recipe();
 			model.CategoryList = categoryItems;

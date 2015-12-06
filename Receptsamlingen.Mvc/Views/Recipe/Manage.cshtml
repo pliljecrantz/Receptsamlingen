@@ -4,63 +4,59 @@
 <h1>Lägg in recept</h1>
 @if (!SessionHandler.IsAuthenticated && SessionHandler.User == null)
 {
+	<br/>
 	<label class="label label-warning info-text">Du kan bara lägga in recept om du har loggat in.</label>
 }
 else
 {
-	<div class="row">
-		<div class="col-md-12">
-			<label class="orange">Receptnamn:</label>
-			<br />
-			@Html.TextBoxFor(x => x.Recipe.Name, new {@class = "form-control"})
+	using (Html.BeginForm("Save", "Recipe", FormMethod.Post))
+	{
+		<div class="row">
+			<div class="col-md-12">
+				<label class="orange">Receptnamn:</label>
+				<br />
+				@Html.TextBoxFor(x => x.Recipe.Name, new {@class = "form-control"})
+			</div>
 		</div>
-	</div>
-	<br />
-	<br />
-	<div class="row">
-		<div class="col-md-3 margin-bottom-10">
-			<label class="orange">Kategori:</label>
-			<br />
-			@Html.DropDownListFor(x => x.SelectedCategory, new SelectList(Model.CategoryList, "Value", "Text", Model.Recipe.CategoryId), new {@class = "dropdownlist"})
+		<br />
+		<br />
+		<div class="row">
+			<div class="col-md-3 margin-bottom-10">
+				<label class="orange">Kategori:</label>
+				<br />
+				@Html.DropDownListFor(x => x.SelectedCategory, new SelectList(Model.CategoryList, "Value", "Text", Model.Recipe.CategoryId), new {@class = "dropdownlist"})
+			</div>
+			<div class="col-md-3 margin-bottom-10">
+				<label class="orange">Huvudråvara:</label>
+				<br />
+				@Html.DropDownListFor(x => x.SelectedDishType, new SelectList(Model.DishTypeList, "Value", "Text", Model.Recipe.DishTypeId), new {@class = "dropdownlist"})
+			</div>
+			<div class="col-md-3 margin-bottom-10">
+				<label class="orange">Antal portioner:</label>
+				<br />
+				@Html.DropDownListFor(x => x.SelectedPortions, new SelectList(Model.Portions, "Value", "Text"), new {@class = "dropdownlist"})
+			</div>
 		</div>
-		<div class="col-md-3 margin-bottom-10">
-			<label class="orange">Huvudråvara:</label>
-			<br />
-			@Html.DropDownListFor(x => x.SelectedDishType, new SelectList(Model.DishTypeList, "Value", "Text", Model.Recipe.DishTypeId), new {@class = "dropdownlist"})
+		<div class="row">
+			<div class="col-md-12 margin-bottom-10">
+				<label class="orange">Special:</label>
+				<br />
+				@Html.CheckBoxListFor(x => x.SpecialList, x => x.SpecialList, x => x.Id, x => x.Name, x => x.SelectedSpecials)
+			</div>
 		</div>
-		<div class="col-md-3 margin-bottom-10">
-			<label class="orange">Antal portioner:</label>
-			<br />
-			@Html.DropDownListFor(x => x.SelectedPortions, new SelectList(Model.Portions, "Value", "Text"), new {@class = "dropdownlist"})
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12 margin-bottom-10">
-			<label class="orange">Special:</label>
-			<br />
-			@Html.CheckBoxListFor(x => x.SpecialList, x => x.SpecialList, x => x.Id, x => x.Name, x => x.SelectedSpecials)
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<label class="orange">Ingredienser:</label>
-			<br />
-			@Html.TextAreaFor(x => x.Recipe.Ingredients, new {@class = "form-control"})
-			<label class="orange">Beskrivning:</label>
-			<br />
-			@Html.TextAreaFor(x => x.Recipe.Description, new {@class = "form-control"})
-			@using (Html.BeginForm("Index", "Home", FormMethod.Post))
-			{
-				<input type="submit" value="Avbryt" class="btn btn-default float-left" />
-			}
-			@using (Html.BeginForm("Save", "Recipe", FormMethod.Post))
-			{
+		<div class="row">
+			<div class="col-md-12">
+				<label class="orange">Ingredienser:</label>
+				<br />
+				@Html.TextAreaFor(x => x.Recipe.Ingredients, new {@class = "form-control"})
+				<label class="orange">Beskrivning:</label>
+				<br />
+				@Html.TextAreaFor(x => x.Recipe.Description, new {@class = "form-control"})
 				<input type="submit" value="Spara!" class="btn btn-warning float-right" />
-			}
-			@using (Html.BeginForm("Index", "Recipe", FormMethod.Post))
-			{
-				<input type="submit" value="Rensa" class="btn btn-default float-right margin-right-15" />
-			}
+				<div class="float-right margin-top-5 margin-right-20">
+					@Html.ActionLink("Avbryt »", "Index", "Home")
+				</div>
+			</div>
 		</div>
-	</div>
+	}
 }

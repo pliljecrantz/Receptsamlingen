@@ -14,7 +14,6 @@ namespace Receptsamlingen.Mvc.Controllers
 	        Repository = UserRepository.Instance;
         }
 
-        [HttpPost]
         public ActionResult DoLogin(LoginModel model)
         {
             if (!string.IsNullOrWhiteSpace(model.Username) && !string.IsNullOrWhiteSpace(model.Password))
@@ -38,7 +37,6 @@ namespace Receptsamlingen.Mvc.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-		[HttpPost]
         public ActionResult DoLogout()
         {
             SessionHandler.Remove(Globals.UserSessionKeyString);

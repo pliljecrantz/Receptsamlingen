@@ -12,7 +12,7 @@ namespace Receptsamlingen.Mvc.Classes
 		{
 			get
 			{
-				return Get(Globals.UserSessionString) as User;
+				return Get(Globals.UserSessionString) != null ? Get(Globals.UserSessionString) as User : null;
 			}
 			set
 			{
@@ -36,7 +36,7 @@ namespace Receptsamlingen.Mvc.Classes
 		{
 			get
 			{
-				return Get(Globals.CurrentGuidString).ToString();
+				return Get(Globals.CurrentGuidString) != null ? Get(Globals.CurrentGuidString).ToString() : null;
 			}
 			set
 			{

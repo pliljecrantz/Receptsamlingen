@@ -188,6 +188,10 @@ ul {
 	margin-left: 20px;
 }
 
+.margin-right-20 {
+	margin-right: 20px;
+}
+
 .float-left {
 	float: left;
 }
@@ -211,6 +215,10 @@ ul {
 }
 
 /** End other fixes **/
+
+input[type="checkbox"] {
+	margin-right: 3px;
+}
 
 input[type="image"] {
 	margin-left: -10px;
