@@ -9,6 +9,7 @@ namespace Receptsamlingen.Mvc.Classes
 		public const string UserSessionString = "User";
 		public const string IsAuthenticatedSessionString = "IsAuthenticated";
 		public const string CurrentGuidString = "CurrentGuid";
+		public const string IdListString = "IdList";
 
         // Mailsettings
         public static readonly string MailSubjectString = ConfigKey("MailSubject", "Ansökan om konto");

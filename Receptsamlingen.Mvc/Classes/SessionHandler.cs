@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using Receptsamlingen.Repository;
 
 namespace Receptsamlingen.Mvc.Classes
@@ -41,6 +42,18 @@ namespace Receptsamlingen.Mvc.Classes
 			set
 			{
 				Set(Globals.CurrentGuidString, value);
+			}
+		}
+
+		public static IList<int> RecipeIdList
+		{
+			get
+			{
+				return Get(Globals.IdListString) as IList<int>;
+			}
+			set
+			{
+				Set(Globals.IdListString, value);
 			}
 		}
 

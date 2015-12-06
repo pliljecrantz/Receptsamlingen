@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using Receptsamlingen.Mvc.Classes;
-using Receptsamlingen.Mvc.Models;
+using Receptsamlingen.Mvc.Models.Partials;
 using Receptsamlingen.Repository;
 
 namespace Receptsamlingen.Mvc.Controllers

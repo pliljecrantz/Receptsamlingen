@@ -1,4 +1,4 @@
-﻿namespace Receptsamlingen.Mvc.Models
+﻿namespace Receptsamlingen.Mvc.Models.Partials
 {
     public class LoginModel
     {

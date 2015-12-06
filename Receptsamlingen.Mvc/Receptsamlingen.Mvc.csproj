@@ -116,14 +116,15 @@
     <Compile Include="Controllers\RandomController.cs" />
     <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\ToplistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplyModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\ListModel.cs" />
-    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Partials\LoginModel.cs" />
+    <Compile Include="Models\Partials\RandomModel.cs" />
+    <Compile Include="Models\Partials\ToplistModel.cs" />
     <Compile Include="Models\RecipeModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -191,6 +192,8 @@
     <Content Include="Views\Shared\Partials\Confirm.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Apply\Index.cshtml" />
+    <Content Include="Views\Shared\Partials\Toplist.cshtml" />
+    <Content Include="Views\Shared\Partials\Random.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Partials\Login.cshtml" />
@@ -229,10 +232,7 @@
   <ItemGroup>
     <Content Include="Views\Recipe\Response.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Random\" />
-    <Folder Include="Views\Toplist\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

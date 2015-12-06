@@ -1,0 +1,27 @@
+﻿@model Receptsamlingen.Mvc.Models.Partials.ToplistModel
+
+<div class="box-wrapper">
+	<div class="box-content">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>= = = Topp 5 = = =</h3>
+				@if (Model.Source != null)
+				{
+					<ul>
+						@foreach (var r in Model.Source)
+						{
+							<li>
+								&rsaquo;&rsaquo;&nbsp;@Html.ActionLink(r.Name, "Id", "Recipe", new { id = r.Id }, null)
+								<br />
+							</li>
+						}
+					</ul>
+				}
+				else
+				{
+					<p>Det finns inga röster än...</p>
+				}
+			</div>
+		</div>
+	</div>
+</div>

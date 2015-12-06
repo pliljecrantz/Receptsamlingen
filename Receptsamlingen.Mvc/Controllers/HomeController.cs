@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models;
 using Receptsamlingen.Repository;
 
@@ -8,8 +9,8 @@ namespace Receptsamlingen.Mvc.Controllers
     {
         public ActionResult Index()
         {
-            var repository = RecipeRepository.Instance;
-            var recipes = repository.GetLatest();
+			var recipes = RecipeRepository.Instance.GetLatest();
+			SetRecipeIdList();
 
             var model = new HomeModel
                 {
@@ -18,5 +19,14 @@ namespace Receptsamlingen.Mvc.Controllers
 
             return View(model);
         }
+
+		private static void SetRecipeIdList()
+		{
+			var idList = RecipeRepository.Instance.GetAllIds();
+			if (idList != null && idList.Count > 0)
+			{
+				SessionHandler.RecipeIdList = idList;
+			}
+		}
     }
 }
