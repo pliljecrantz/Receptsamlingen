@@ -6,7 +6,6 @@ namespace Receptsamlingen.Mvc.Controllers
 {
     public class RandomController : Controller
     {
-        // TODO: Implement random box and partial to be rendered on Home
         public ActionResult Randomize()
         {
 			var idList = SessionHandler.RecipeIdList;

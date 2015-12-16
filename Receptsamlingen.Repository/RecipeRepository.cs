@@ -235,5 +235,17 @@ namespace Receptsamlingen.Repository
 									  .ToList();
 			}
 		}
+
+		public IList<Recipe> Search(string text, string category, string dishType, IList<Special> specials)
+		{
+			// TODO: check value of category and dishType
+			// TODO: fix the search linq
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
+			{
+				return context.Recipes.Where(r => r.Name.Contains(text) || r.Ingredients.Contains(text) || r.Description.Contains(text))
+									  .OrderBy(r => r.Date)
+									  .ToList();
+			}
+		}
 	}
 }

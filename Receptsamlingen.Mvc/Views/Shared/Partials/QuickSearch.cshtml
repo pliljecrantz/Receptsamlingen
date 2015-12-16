@@ -1,0 +1,17 @@
+﻿@model Receptsamlingen.Mvc.Models.Partials.QuickSearchModel
+
+<div class="box-wrapper">
+	<div class="box-content">
+		@using (Html.BeginForm("DoSearch", "Search", FormMethod.Post))
+		{
+			<div class="row">
+				<div class="col-xs-9">
+					@Html.TextBoxFor(model => model.Query, new { @class = "form-control", placeholder = "Sök..." })
+				</div>
+				<div class="col-xs-3">
+					<input type="submit" value="Sök &raquo;" class="btn btn-warning float-right" />
+				</div>
+			</div>
+		}
+	</div>
+</div>

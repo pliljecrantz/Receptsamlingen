@@ -123,6 +123,7 @@
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\Partials\LoginModel.cs" />
+    <Compile Include="Models\Partials\QuickSearchModel.cs" />
     <Compile Include="Models\Partials\RandomModel.cs" />
     <Compile Include="Models\Partials\ToplistModel.cs" />
     <Compile Include="Models\RecipeModel.cs" />
@@ -136,7 +137,6 @@
     <Content Include="Content\Images\bg-squares.png" />
     <Content Include="Content\Images\brand.png" />
     <Content Include="Content\Images\favicon.ico" />
-    <Content Include="Content\Images\icon-search_small.png" />
     <Content Include="Content\Images\logo_13.png" />
     <Content Include="Content\Images\round_orange_arrow_right.png" />
     <Content Include="Content\Images\star-half.png" />
@@ -194,6 +194,7 @@
     <Content Include="Views\Apply\Index.cshtml" />
     <Content Include="Views\Shared\Partials\Toplist.cshtml" />
     <Content Include="Views\Shared\Partials\Random.cshtml" />
+    <Content Include="Views\Shared\Partials\QuickSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Partials\Login.cshtml" />
