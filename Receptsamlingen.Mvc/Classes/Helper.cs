@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
+using Receptsamlingen.Mvc.Models;
+using Receptsamlingen.Repository;
 
 namespace Receptsamlingen.Mvc.Classes
 {
@@ -60,6 +64,28 @@ namespace Receptsamlingen.Mvc.Classes
 		{
 			var smtp = new SmtpClient(Globals.MailServerString);
 			smtp.Send(message);
+		}
+
+		public static IList<Special> GetSelectedSpecials(PostedSpecials postedSpecials)
+		{
+			IList<Special> selectedSpecials = new List<Special>();
+			var postedSpecialIds = new string[0];
+
+			if (postedSpecials == null)
+			{
+				postedSpecials = new PostedSpecials();
+			}
+
+			if (postedSpecials.Ids != null && postedSpecials.Ids.Any())
+			{
+				postedSpecialIds = postedSpecials.Ids;
+			}
+
+			if (postedSpecialIds.Any())
+			{
+				selectedSpecials = RecipeRepository.Instance.GetAllSpecials().Where(x => postedSpecialIds.Any(s => x.Id.ToString().Equals(s))).ToList();
+			}
+			return selectedSpecials;
 		}
 
     }

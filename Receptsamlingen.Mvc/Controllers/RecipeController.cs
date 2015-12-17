@@ -49,7 +49,8 @@ namespace Receptsamlingen.Mvc.Controllers
 			model.Recipe.CategoryId = Convert.ToInt32(model.SelectedCategory);
 			model.Recipe.DishTypeId = Convert.ToInt32(model.SelectedDishType);
 			model.Recipe.Portions = Convert.ToInt32(model.SelectedPortions);
-			var specials = model.SelectedSpecials;
+
+			var specials = Helper.GetSelectedSpecials(model.PostedSpecials);
 			
 			var result = Repository.Save(model.Recipe);
 			if (result)

@@ -126,6 +126,7 @@
     <Compile Include="Models\Partials\QuickSearchModel.cs" />
     <Compile Include="Models\Partials\RandomModel.cs" />
     <Compile Include="Models\Partials\ToplistModel.cs" />
+    <Compile Include="Models\PostedSpecials.cs" />
     <Compile Include="Models\RecipeModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

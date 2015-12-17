@@ -236,15 +236,67 @@ namespace Receptsamlingen.Repository
 			}
 		}
 
-		public IList<Recipe> Search(string text, string category, string dishType, IList<Special> specials)
+		public IList<Recipe> Search(string query, int categoryId, int dishTypeId, IList<Special> specials)
 		{
-			// TODO: check value of category and dishType
-			// TODO: fix the search linq
+			bool searchQuery = false, searchCategory = false, searchDishType = false;
+			if (!string.IsNullOrWhiteSpace(query))
+			{
+				searchQuery = true;
+			}
+			if (categoryId != 0)
+			{
+				searchCategory = true;
+			}
+			if (dishTypeId != 0)
+			{
+				searchDishType = true;
+			}
+
+			// TODO: fix the search linq for specials
 			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
-				return context.Recipes.Where(r => r.Name.Contains(text) || r.Ingredients.Contains(text) || r.Description.Contains(text))
-									  .OrderBy(r => r.Date)
-									  .ToList();
+				var recipeList = new List<Recipe>();
+				if (searchQuery && searchCategory && searchDishType)
+				{
+					recipeList = context.Recipes.Where(r => r.Name.Contains(query) && r.CategoryId.Equals(categoryId) && r.DishTypeId.Equals(dishTypeId))
+												.OrderBy(r => r.Date)
+												.ToList();
+				}
+				else if (searchQuery && searchCategory)
+				{
+					recipeList = context.Recipes.Where(r => r.Name.Contains(query) && r.CategoryId.Equals(categoryId))
+												.OrderBy(r => r.Date)
+												.ToList();
+				}
+				else if (searchQuery && searchDishType)
+				{
+					recipeList = context.Recipes.Where(r => r.Name.Contains(query) && r.DishTypeId.Equals(dishTypeId))
+												.OrderBy(r => r.Date)
+												.ToList();
+				}
+				else if (searchCategory && searchDishType)
+				{
+					recipeList = context.Recipes.Where(r => r.CategoryId.Equals(categoryId) && r.DishTypeId.Equals(dishTypeId))
+												.OrderBy(r => r.Date)
+												.ToList();
+				}
+				else if (searchCategory)
+				{
+					recipeList = context.Recipes.Where(r => r.CategoryId.Equals(categoryId))
+												.OrderBy(r => r.Date)
+												.ToList();
+				}
+				else if (searchDishType)
+				{
+					recipeList = context.Recipes.Where(r => r.DishTypeId.Equals(dishTypeId))
+												.OrderBy(r => r.Date)
+												.ToList();
+				}
+				else if(searchQuery)
+				{
+					recipeList = context.Recipes.Where(r => r.Name.Contains(query)).OrderBy(r => r.Date).ToList();
+				}
+				return recipeList;
 			}
 		}
 	}

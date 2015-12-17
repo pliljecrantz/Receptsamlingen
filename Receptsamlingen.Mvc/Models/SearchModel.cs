@@ -21,5 +21,6 @@ namespace Receptsamlingen.Mvc.Models
 		public string SelectedCategory { get; set; }
 		public string SelectedDishType { get; set; }
 		public IList<Special> SelectedSpecials { get; set; }
+		public PostedSpecials PostedSpecials { get; set; }
 	}
 }

@@ -40,7 +40,7 @@ else
 			<div class="col-md-12 margin-bottom-10">
 				<label class="orange">Special:</label>
 				<br />
-				@Html.CheckBoxListFor(x => x.SpecialList, x => x.SpecialList, x => x.Id, x => x.Name, x => x.SelectedSpecials)
+				@Html.CheckBoxListFor(x => x.PostedSpecials.Ids, x => x.SpecialList, x => x.Id, x => x.Name, x => x.SelectedSpecials)
 			</div>
 		</div>
 		<div class="row">
