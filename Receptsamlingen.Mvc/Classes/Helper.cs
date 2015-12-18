@@ -87,6 +87,5 @@ namespace Receptsamlingen.Mvc.Classes
 			}
 			return selectedSpecials;
 		}
-
     }
 }

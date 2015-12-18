@@ -230,14 +230,14 @@ namespace Receptsamlingen.Repository
 		{
 			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
-				return context.Recipes.Where(r => r.Name.Contains(text) || r.Ingredients.Contains(text) || r.Description.Contains(text))
-									  .OrderBy(r => r.Date)
-									  .ToList();
+				return context.Recipes.Where(r => r.Name.Contains(text)).OrderBy(r => r.Date).ToList();
 			}
 		}
 
 		public IList<Recipe> Search(string query, int categoryId, int dishTypeId, IList<Special> specials)
 		{
+			var recipeList = new List<Recipe>();
+			var recipesFilteredForSpecials = new List<Recipe>();
 			bool searchQuery = false, searchCategory = false, searchDishType = false;
 			if (!string.IsNullOrWhiteSpace(query))
 			{
@@ -252,10 +252,8 @@ namespace Receptsamlingen.Repository
 				searchDishType = true;
 			}
 
-			// TODO: fix the search linq for specials
 			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
-				var recipeList = new List<Recipe>();
 				if (searchQuery && searchCategory && searchDishType)
 				{
 					recipeList = context.Recipes.Where(r => r.Name.Contains(query) && r.CategoryId.Equals(categoryId) && r.DishTypeId.Equals(dishTypeId))
@@ -296,7 +294,19 @@ namespace Receptsamlingen.Repository
 				{
 					recipeList = context.Recipes.Where(r => r.Name.Contains(query)).OrderBy(r => r.Date).ToList();
 				}
-				return recipeList;
+
+				if (specials.Count > 0)
+				{
+					recipesFilteredForSpecials = (from recipeCopy in recipeList 
+												  from special in specials 
+												  let specialCopy = special 
+												  select (from sa in context.SpecialAssigns 
+												  		  where sa.RecipeGuid == recipeCopy.Guid && sa.SpecialId == specialCopy.Id 
+												  		  select sa.RecipeGuid).FirstOrDefault() 
+												  		  into r select (from rr in recipeList where rr.Guid == r select rr)).Cast<Recipe>().ToList();
+				}
+
+				return recipesFilteredForSpecials.Count > 0 ? recipesFilteredForSpecials : recipeList;
 			}
 		}
 	}
