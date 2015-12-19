@@ -28,7 +28,7 @@ namespace Receptsamlingen.Repository
 			{
 				var query = (from w in context.Recipes
 							 orderby w.Date descending
-							 select w).Take(10);
+							 select w).Take(15);
 
 				return query.ToList();
 			}
@@ -297,13 +297,27 @@ namespace Receptsamlingen.Repository
 
 				if (specials.Count > 0)
 				{
-					recipesFilteredForSpecials = (from recipeCopy in recipeList 
-												  from special in specials 
-												  let specialCopy = special 
-												  select (from sa in context.SpecialAssigns 
-												  		  where sa.RecipeGuid == recipeCopy.Guid && sa.SpecialId == specialCopy.Id 
-												  		  select sa.RecipeGuid).FirstOrDefault() 
-												  		  into r select (from rr in recipeList where rr.Guid == r select rr)).Cast<Recipe>().ToList();
+					if (recipeList.Count > 0)
+					{
+						recipesFilteredForSpecials = (from recipeCopy in recipeList
+													  from special in specials
+													  let specialCopy = special
+													  select (from sa in context.SpecialAssigns
+															  where sa.RecipeGuid == recipeCopy.Guid && sa.SpecialId == specialCopy.Id
+															  select sa.RecipeGuid).FirstOrDefault()
+															  into r
+															  select (from rr in recipeList where rr.Guid == r select rr)).Cast<Recipe>().ToList();
+					}
+					else
+					{
+						foreach (var special in specials)
+						{
+							recipesFilteredForSpecials = (from r in context.Recipes
+														  join s in context.SpecialAssigns on r.Guid equals s.RecipeGuid
+														  where s.SpecialId == special.Id
+														  select r).ToList();
+						}
+					}
 				}
 
 				return recipesFilteredForSpecials.Count > 0 ? recipesFilteredForSpecials : recipeList;

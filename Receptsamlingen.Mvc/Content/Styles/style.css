@@ -68,7 +68,7 @@ h3 {
 	-webkit-border-radius: 4px;
 	background: #FFFFFF;
 	margin: 5px;
-	padding: 15px 5px 15px 8px;
+	padding: 10px 8px 10px 8px;
 }
 
 .toplist-content {
@@ -90,14 +90,10 @@ h3 {
 	width: 107px !important;
 }
 
-form {
-	padding-right: 4px;
-}
-
 textarea.form-control {
 	height: 200px;
 	overflow: scroll;
-	margin: 0 0 10px 0;
+	margin: 5px 0 10px 0;
 }
 
 /** End elements **/
@@ -149,7 +145,7 @@ a:hover, a:active {
 label {
 	display: inline !important;
 	font-weight: 500 !important;
-	margin-bottom: 10px !important;
+	/*margin-bottom: 10px !important;*/
 }
 
 /** End text and links **/
