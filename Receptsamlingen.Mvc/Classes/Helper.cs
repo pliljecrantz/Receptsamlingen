@@ -6,12 +6,31 @@ using System.Text.RegularExpressions;
 using System.Web;
 using Receptsamlingen.Mvc.Models;
 using Receptsamlingen.Repository;
+using Receptsamlingen.Repository.Interfaces;
 
 namespace Receptsamlingen.Mvc.Classes
 {
-    public static class Helper
+	public interface IHelper
+	{
+		string CapitalizeFirstLetter(string text);
+		bool ValidateEmail(string emailaddress);
+		void Logout();
+		void GenerateMail(string emailaddress, string fullName, string username);
+		void SendMail(MailMessage message);
+		IList<Special> GetSelectedSpecials(PostedSpecials postedSpecials);
+
+	}
+
+    public class Helper : IHelper
     {
-        public static string CapitalizeFirstLetter(string text)
+	    private readonly IRecipeRepository _recipeRepository;
+
+	    public Helper(IRecipeRepository recipeRepository)
+	    {
+		    _recipeRepository = recipeRepository;
+	    }
+
+        public string CapitalizeFirstLetter(string text)
         {
             var textFirstLetter = text.Substring(0, 1);
             var textFirstLetterUpper = textFirstLetter.ToUpper();
@@ -20,14 +39,7 @@ namespace Receptsamlingen.Mvc.Classes
             return result;
         }
 
-        public static string RemoveHtml(this string text)
-        {
-            const string pattern = @"<(.|\n)*?>";
-            var strippedText = Regex.Replace(text, pattern, String.Empty);
-            return strippedText;
-        }
-
-        public static bool ValidateEmail(string emailaddress)
+        public bool ValidateEmail(string emailaddress)
         {
             var isValid = false;
             const string expression = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
@@ -41,7 +53,7 @@ namespace Receptsamlingen.Mvc.Classes
             return isValid;
         }
 
-		public static void Logout()
+		public void Logout()
 		{
 			SessionHandler.User = null;
 			SessionHandler.IsAuthenticated = false;
@@ -49,7 +61,7 @@ namespace Receptsamlingen.Mvc.Classes
 			HttpContext.Current.Session.Abandon();
 		}
 
-		public static void GenerateMail(string emailaddress, string fullName, string username)
+		public void GenerateMail(string emailaddress, string fullName, string username)
 		{
 			var message = new MailMessage();
 			message.To.Add(new MailAddress(Globals.MailRecieverString));
@@ -60,13 +72,13 @@ namespace Receptsamlingen.Mvc.Classes
 			SendMail(message);
 		}
 
-		public static void SendMail(MailMessage message)
+		public void SendMail(MailMessage message)
 		{
 			var smtp = new SmtpClient(Globals.MailServerString);
 			smtp.Send(message);
 		}
 
-		public static IList<Special> GetSelectedSpecials(PostedSpecials postedSpecials)
+		public IList<Special> GetSelectedSpecials(PostedSpecials postedSpecials)
 		{
 			IList<Special> selectedSpecials = new List<Special>();
 			var postedSpecialIds = new string[0];
@@ -83,7 +95,7 @@ namespace Receptsamlingen.Mvc.Classes
 
 			if (postedSpecialIds.Any())
 			{
-				selectedSpecials = RecipeRepository.Instance.GetAllSpecials().Where(x => postedSpecialIds.Any(s => x.Id.ToString().Equals(s))).ToList();
+				selectedSpecials = _recipeRepository.GetAllSpecials().Where(x => postedSpecialIds.Any(s => x.Id.ToString().Equals(s))).ToList();
 			}
 			return selectedSpecials;
 		}

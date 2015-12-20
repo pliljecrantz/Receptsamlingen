@@ -1,18 +1,20 @@
 ﻿using System.Web.Mvc;
+using Ninject;
 using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models.Partials;
-using Receptsamlingen.Repository;
+using Receptsamlingen.Repository.Interfaces;
 
 namespace Receptsamlingen.Mvc.Controllers
 {
     public class LoginController : Controller
     {
-        private UserRepository Repository { get; set; }
+        [Inject]
+		public IUserRepository UserRepository { get; set; }
 
-        public LoginController()
-        {
-	        Repository = UserRepository.Instance;
-        }
+		public LoginController()
+		{
+			this.Inject();
+		}
 
         public ActionResult DoLogin(LoginModel model)
         {
@@ -20,7 +22,7 @@ namespace Receptsamlingen.Mvc.Controllers
             {
                 var username = Server.HtmlEncode(model.Username.Trim());
                 var password = Server.HtmlEncode(model.Password.Trim());
-                var user = Repository.Get(username, password);
+                var user = UserRepository.Get(username, password);
 
                 if (user != null)
                 {

@@ -1,19 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Ninject;
 using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models;
-using Receptsamlingen.Repository;
+using Receptsamlingen.Repository.Interfaces;
 
 namespace Receptsamlingen.Mvc.Controllers
 {
 	public class SearchController : Controller
 	{
-		private RecipeRepository Repository { get; set; }
+		[Inject]
+		public IRecipeRepository RecipeRepository { get; set; }
+		[Inject]
+		public IHelper Helper { get; set; }
 
 		public SearchController()
 		{
-			Repository = RecipeRepository.Instance;
+			this.Inject();
 		}
 
 		public ActionResult Index()
@@ -28,7 +32,7 @@ namespace Receptsamlingen.Mvc.Controllers
 			var category = model.SelectedCategory != null ? int.Parse(model.SelectedCategory) : 0;
 			var dishType = model.SelectedDishType != null ? int.Parse(model.SelectedDishType) : 0;
 			var specials = Helper.GetSelectedSpecials(model.PostedSpecials);
-			model.SearchResult = RecipeRepository.Instance.Search(model.Query.HtmlEncode(), category, dishType, specials);
+			model.SearchResult = RecipeRepository.Search(model.Query.HtmlEncode(), category, dishType, specials);
 			model.SearchPerformed = true;
 			model = GetModel(model);
 			return View("Index", model);
@@ -36,9 +40,9 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		private SearchModel GetModel(SearchModel model)
 		{
-			var allCategories = Repository.GetAllCategories();
-			var allDishTypes = Repository.GetAllDishTypes();
-			var allSpecials = Repository.GetAllSpecials();
+			var allCategories = RecipeRepository.GetAllCategories();
+			var allDishTypes = RecipeRepository.GetAllDishTypes();
+			var allSpecials = RecipeRepository.GetAllSpecials();
 
 			var categoryItems = new List<SelectListItem>
 			{

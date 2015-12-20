@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
+using Receptsamlingen.Repository.Interfaces;
 
 namespace Receptsamlingen.Repository
 {
-	public class RatingRepository
+	public class RatingRepository : BaseRepository, IRatingRepository
 	{
-		#region Singleton
+		//#region Singleton
 
-		private const string ConnectionString = "connectionString";
-		private static RatingRepository _instance;
+		//private const string ConnectionString = "connectionString";
+		//private static RatingRepository _instance;
 
-		private RatingRepository() { }
+		//private RatingRepository() { }
 
-		public static RatingRepository Instance
-		{
-			get { return _instance ?? (_instance = new RatingRepository()); }
-		}
+		//public static RatingRepository Instance
+		//{
+		//	get { return _instance ?? (_instance = new RatingRepository()); }
+		//}
 
-		#endregion
+		//#endregion
+
+		#region Interface members
 
 		public bool UserHasVoted(string username, string guid)
 		{
@@ -91,5 +94,8 @@ namespace Receptsamlingen.Repository
 				}
 			}
 		}
+
+		#endregion
+
 	}
 }

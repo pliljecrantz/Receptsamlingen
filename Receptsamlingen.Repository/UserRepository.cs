@@ -1,24 +1,25 @@
 ﻿using System.Configuration;
 using System.Linq;
+using Receptsamlingen.Repository.Interfaces;
 
 namespace Receptsamlingen.Repository
 {
-	public class UserRepository
+	public class UserRepository : BaseRepository, IUserRepository
 	{
-		private const string ConnectionString = "connectionString";
+		//private const string ConnectionString = "connectionString";
 
-		#region Singleton
+		//#region Singleton
 
-		private static UserRepository _instance;
+		//private static UserRepository _instance;
 
-		private UserRepository() { }
+		//private UserRepository() { }
 
-		public static UserRepository Instance
-		{
-			get { return _instance ?? (_instance = new UserRepository()); }
-		}
+		//public static UserRepository Instance
+		//{
+		//	get { return _instance ?? (_instance = new UserRepository()); }
+		//}
 
-		#endregion
+		//#endregion
 
 		public User Get(string username, string password)
 		{

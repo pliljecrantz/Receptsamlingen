@@ -2,21 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Ninject;
 using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models;
 using Receptsamlingen.Repository;
+using Receptsamlingen.Repository.Interfaces;
 
 namespace Receptsamlingen.Mvc.Controllers
 {
 	public class RecipeController : Controller
 	{
-		private RecipeRepository Repository { get; set; }
-		private RatingRepository RatingRepository { get; set; }
+		[Inject]
+		public IRecipeRepository RecipeRepository { get; set; }
+		[Inject]
+		public IRatingRepository RatingRepository { get; set; }
+		[Inject]
+		public IHelper Helper { get; set; }
 
 		public RecipeController()
 		{
-			Repository = RecipeRepository.Instance;
-			RatingRepository = RatingRepository.Instance;
+			this.Inject();
 		}
 
 		public ActionResult Add()
@@ -52,12 +57,12 @@ namespace Receptsamlingen.Mvc.Controllers
 
 			var specials = Helper.GetSelectedSpecials(model.PostedSpecials);
 			
-			var result = Repository.Save(model.Recipe);
+			var result = RecipeRepository.Save(model.Recipe);
 			if (result)
 			{
 				foreach (var special in specials)
 				{
-					Repository.SaveSpecial(model.Recipe.Guid, special.Id);
+					RecipeRepository.SaveSpecial(model.Recipe.Guid, special.Id);
 				}
 				ViewBag.Response = SessionHandler.CurrentGuid == null ? Globals.InfoRecipeSaved : Globals.InfoRecipeUpdated;
 			}
@@ -70,13 +75,13 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		public ActionResult Vote(RecipeModel model)
 		{
-			if (RatingRepository.Instance.UserHasVoted(SessionHandler.User.Username, SessionHandler.CurrentGuid))
+			if (RatingRepository.UserHasVoted(SessionHandler.User.Username, SessionHandler.CurrentGuid))
 			{
 				ViewBag.Response = Globals.ErrorUserHasVoted;
 			}
 			else
 			{
-				var voteSuccess = RatingRepository.Instance.Save(SessionHandler.CurrentGuid, SessionHandler.User.Username, Convert.ToInt32(model.UserRating));
+				var voteSuccess = RatingRepository.Save(SessionHandler.CurrentGuid, SessionHandler.User.Username, Convert.ToInt32(model.UserRating));
 				ViewBag.Response = voteSuccess ? Globals.InfoVoteSaved : Globals.ErrorSavingVote;
 			}
 			return View("Response");
@@ -84,9 +89,9 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		public ActionResult Delete(int id)
 		{
-			var recipe = RecipeRepository.Instance.GetById(id);
-			RecipeRepository.Instance.DeleteSpecials(recipe.Guid);
-			RecipeRepository.Instance.Delete(recipe.Guid);
+			var recipe = RecipeRepository.GetById(id);
+			RecipeRepository.DeleteSpecials(recipe.Guid);
+			RecipeRepository.Delete(recipe.Guid);
 			ViewBag.Response = Globals.InfoRecipeDeleted;
 			return View("Response");
 		}
@@ -97,9 +102,9 @@ namespace Receptsamlingen.Mvc.Controllers
 
 			if (id != 0)
 			{
-				var recipe = Repository.GetById(id);
-				var category = Repository.GetCategoryById(recipe.CategoryId).HtmlDecode();
-				var specials = Repository.GetSpecialsForRecipe(recipe.Guid);
+				var recipe = RecipeRepository.GetById(id);
+				var category = RecipeRepository.GetCategoryById(recipe.CategoryId).HtmlDecode();
+				var specials = RecipeRepository.GetSpecialsForRecipe(recipe.Guid);
 				var specialsList = (from item in specials
 									from special in model.SpecialList
 									where item.SpecialId == special.Id
@@ -108,7 +113,7 @@ namespace Receptsamlingen.Mvc.Controllers
 				var avgRating = RatingRepository.GetAvarage(recipe.Guid);
 				if (recipe.DishTypeId.HasValue)
 				{
-					dishType = Repository.GetDishTypeById(recipe.DishTypeId.Value);
+					dishType = RecipeRepository.GetDishTypeById(recipe.DishTypeId.Value);
 				}
 
 				if (specialsList.EndsWith(", "))
@@ -132,9 +137,9 @@ namespace Receptsamlingen.Mvc.Controllers
 		private RecipeModel GetModel()
 		{
 			var model = new RecipeModel();
-			var allCategories = Repository.GetAllCategories();
-			var allDishTypes = Repository.GetAllDishTypes();
-			var allSpecials = Repository.GetAllSpecials();
+			var allCategories = RecipeRepository.GetAllCategories();
+			var allDishTypes = RecipeRepository.GetAllDishTypes();
+			var allSpecials = RecipeRepository.GetAllSpecials();
 
 			var categoryItems = new List<SelectListItem>
 			{

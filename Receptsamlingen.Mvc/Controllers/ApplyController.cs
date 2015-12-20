@@ -1,11 +1,23 @@
 ﻿using System.Web.Mvc;
+using Ninject;
 using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models;
+using Receptsamlingen.Repository.Interfaces;
 
 namespace Receptsamlingen.Mvc.Controllers
 {
     public class ApplyController : Controller
     {
+		[Inject]
+		public IRecipeRepository RecipeRepository { get; set; }
+		[Inject]
+		public IHelper Helper { get; set; }
+
+		public ApplyController()
+		{
+			this.Inject();
+		}
+
         public ActionResult Index()
         {
             return View(new ApplyModel());

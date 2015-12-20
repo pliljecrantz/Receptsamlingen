@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Receptsamlingen.Repository.Interfaces;
 
 namespace Receptsamlingen.Repository
 {
-	public class RecipeRepository
+	public class RecipeRepository : BaseRepository, IRecipeRepository
 	{
-		private const string ConnectionString = "connectionString";
+		//private const string ConnectionString = "connectionString";
 
-		#region Singleton
+		//#region Singleton
 
-		private static RecipeRepository _instance;
+		//private static RecipeRepository _instance;
 
-		private RecipeRepository() { }
+		//private RecipeRepository() { }
 
-		public static RecipeRepository Instance
-		{
-			get { return _instance ?? (_instance = new RecipeRepository()); }
-		}
+		//public static RecipeRepository Instance
+		//{
+		//	get { return _instance ?? (_instance = new RecipeRepository()); }
+		//}
 
-		#endregion
+		//#endregion
+
+		#region Interface members
 
 		public IList<Recipe> GetLatest()
 		{
@@ -39,14 +42,6 @@ namespace Receptsamlingen.Repository
 			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return context.Recipes.Where(x => x.Id == id).ToList().FirstOrDefault();
-			}
-		}
-
-		private static Recipe GetByGuid(string guid)
-		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
-			{
-				return context.Recipes.Where(x => x.Guid == guid).ToList().FirstOrDefault();
 			}
 		}
 
@@ -323,5 +318,20 @@ namespace Receptsamlingen.Repository
 				return recipesFilteredForSpecials.Count > 0 ? recipesFilteredForSpecials : recipeList;
 			}
 		}
+
+		#endregion
+
+		#region Private methods
+
+		private static Recipe GetByGuid(string guid)
+		{
+			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
+			{
+				return context.Recipes.Where(x => x.Guid == guid).ToList().FirstOrDefault();
+			}
+		}
+
+		#endregion
+
 	}
 }

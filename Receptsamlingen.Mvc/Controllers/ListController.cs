@@ -1,15 +1,24 @@
 ﻿using System.Web.Mvc;
+using Ninject;
+using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models;
-using Receptsamlingen.Repository;
+using Receptsamlingen.Repository.Interfaces;
 
 namespace Receptsamlingen.Mvc.Controllers
 {
     public class ListController : Controller
     {
+	    [Inject]
+		public IRecipeRepository RecipeRepository { get; set; }
+
+		public ListController()
+		{
+			this.Inject();
+		}
+
 		public ActionResult Index()
 		{
-			var repository = RecipeRepository.Instance;
-			var recipes = repository.GetAll();
+			var recipes = RecipeRepository.GetAll();
 
 			var model = new ListModel
 				{
