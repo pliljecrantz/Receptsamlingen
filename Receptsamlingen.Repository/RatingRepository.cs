@@ -7,20 +7,6 @@ namespace Receptsamlingen.Repository
 {
 	public class RatingRepository : BaseRepository, IRatingRepository
 	{
-		//#region Singleton
-
-		//private const string ConnectionString = "connectionString";
-		//private static RatingRepository _instance;
-
-		//private RatingRepository() { }
-
-		//public static RatingRepository Instance
-		//{
-		//	get { return _instance ?? (_instance = new RatingRepository()); }
-		//}
-
-		//#endregion
-
 		#region Interface members
 
 		public bool UserHasVoted(string username, string guid)

@@ -8,20 +8,6 @@ namespace Receptsamlingen.Repository
 {
 	public class RecipeRepository : BaseRepository, IRecipeRepository
 	{
-		//private const string ConnectionString = "connectionString";
-
-		//#region Singleton
-
-		//private static RecipeRepository _instance;
-
-		//private RecipeRepository() { }
-
-		//public static RecipeRepository Instance
-		//{
-		//	get { return _instance ?? (_instance = new RecipeRepository()); }
-		//}
-
-		//#endregion
 
 		#region Interface members
 
