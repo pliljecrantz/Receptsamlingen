@@ -3,6 +3,7 @@ using Ninject;
 using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models;
 using Receptsamlingen.Repository.Interfaces;
+using Logger;
 
 namespace Receptsamlingen.Mvc.Controllers
 {
@@ -52,6 +53,7 @@ namespace Receptsamlingen.Mvc.Controllers
 						Helper.GenerateMail(emailaddress, fullName, username);
 						ViewBag.Response = Globals.InfoApplyApproved;
 						ViewBag.Result = true.ToString();
+						LogHandler.Log(LogType.Info, string.Format("Application done for: {0} {1} {2}", emailaddress, fullName, username));
 					}
 				}
 				else
@@ -67,5 +69,7 @@ namespace Receptsamlingen.Mvc.Controllers
 			}
 			return View("Index");
 	    }
+
+		// TODO: Add functionality for creating the user automatically
     }
 }

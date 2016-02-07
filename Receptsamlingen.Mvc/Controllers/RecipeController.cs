@@ -7,6 +7,8 @@ using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models;
 using Receptsamlingen.Repository;
 using Receptsamlingen.Repository.Interfaces;
+using System.Web;
+using Logger;
 
 namespace Receptsamlingen.Mvc.Controllers
 {
@@ -111,34 +113,42 @@ namespace Receptsamlingen.Mvc.Controllers
 			if (id != 0)
 			{
 				var recipe = RecipeRepository.GetById(id);
-				var category = RecipeRepository.GetCategoryById(recipe.CategoryId).HtmlDecode();
-				var specials = RecipeRepository.GetSpecialsForRecipe(recipe.Guid);
-				var specialsList = (from item in specials
-									from special in model.SpecialList
-									where item.SpecialId == special.Id
-									select special).Aggregate(string.Empty, (current, special) => current + (special.Name + ", "));
-				var dishType = string.Empty;
-				var avgRating = RatingRepository.GetAvarage(recipe.Guid);
-				if (recipe.DishTypeId.HasValue)
+				if (recipe != null)
 				{
-					dishType = RecipeRepository.GetDishTypeById(recipe.DishTypeId.Value);
-				}
+					var category = RecipeRepository.GetCategoryById(recipe.CategoryId).HtmlDecode();
+					var specials = RecipeRepository.GetSpecialsForRecipe(recipe.Guid);
+					var specialsList = (from item in specials
+										from special in model.SpecialList
+										where item.SpecialId == special.Id
+										select special).Aggregate(string.Empty, (current, special) => current + (special.Name + ", "));
+					var dishType = string.Empty;
+					var avgRating = RatingRepository.GetAvarage(recipe.Guid);
+					if (recipe.DishTypeId.HasValue)
+					{
+						dishType = RecipeRepository.GetDishTypeById(recipe.DishTypeId.Value);
+					}
 
-				if (specialsList.EndsWith(", "))
+					if (specialsList.EndsWith(", "))
+					{
+						specialsList = specialsList.TrimEnd(',', ' ');
+					}
+
+					model.Recipe = recipe;
+					model.Recipe.Name.HtmlDecode();
+					model.Recipe.Ingredients.HtmlDecode();
+					model.Recipe.Description.HtmlDecode();
+					model.Category = category;
+					model.DishType = dishType;
+					model.AvarageRating = avgRating;
+					model.Specials = specialsList;
+					SessionHandler.CurrentGuid = model.Recipe.Guid;
+					SessionHandler.CurrentId = model.Recipe.Id.ToString();
+				}
+				else
 				{
-					specialsList = specialsList.TrimEnd(',', ' ');
+					LogHandler.Log(LogType.Info, string.Format("Recipe with id: {0} could not be found", id));
+					throw new HttpException(404, "Not found");
 				}
-
-				model.Recipe = recipe;
-				model.Recipe.Name.HtmlDecode();
-				model.Recipe.Ingredients.HtmlDecode();
-				model.Recipe.Description.HtmlDecode();
-				model.Category = category;
-				model.DishType = dishType;
-				model.AvarageRating = avgRating;
-				model.Specials = specialsList;
-				SessionHandler.CurrentGuid = model.Recipe.Guid;
-				SessionHandler.CurrentId = model.Recipe.Id.ToString();
 			}
 			return model;
 		}
@@ -181,5 +191,8 @@ namespace Receptsamlingen.Mvc.Controllers
 			model.SpecialList = allSpecials;
 			return model;
 		}
+
+		// TODO: Add functionality for editing categories etc from UI
+		// TODO: Add functionality for adding an image to the reciep
 	}
 }

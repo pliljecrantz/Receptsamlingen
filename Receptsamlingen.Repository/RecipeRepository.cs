@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Receptsamlingen.Repository.Interfaces;
+using Logger;
 
 namespace Receptsamlingen.Repository
 {
 	public class RecipeRepository : BaseRepository, IRecipeRepository
 	{
-
 		#region Interface members
 
 		public IList<Recipe> GetLatest()
@@ -28,7 +28,7 @@ namespace Receptsamlingen.Repository
 			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return context.Recipes.Where(x => x.Id == id).ToList().FirstOrDefault();
-			}
+			}			
 		}
 
 		public IList<Recipe> GetAll()
@@ -136,7 +136,7 @@ namespace Receptsamlingen.Repository
 			}
 			catch (Exception ex)
 			{
-				// TODO: log error
+				LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", ex.StackTrace, ex.Message));
 			}
 			return result;
 		}
@@ -172,7 +172,7 @@ namespace Receptsamlingen.Repository
 			}
 			catch (Exception ex)
 			{
-				// TODO: log error
+				LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", ex.StackTrace, ex.Message));
 			}
 			return result;
 		}
@@ -195,7 +195,7 @@ namespace Receptsamlingen.Repository
 			}
 			catch(Exception ex)
 			{
-				// TODO: log error
+				LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", ex.StackTrace, ex.Message));
 			}
 			return result;
 		}
@@ -218,7 +218,7 @@ namespace Receptsamlingen.Repository
 			}
 			catch (Exception ex)
 			{
-				// TODO: log error
+				LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", ex.StackTrace, ex.Message));
 			}
 			return result;
 		}
