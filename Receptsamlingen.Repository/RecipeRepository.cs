@@ -28,7 +28,7 @@ namespace Receptsamlingen.Repository
 			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 			{
 				return context.Recipes.Where(x => x.Id == id).ToList().FirstOrDefault();
-			}			
+			}
 		}
 
 		public IList<Recipe> GetAll()
@@ -141,31 +141,19 @@ namespace Receptsamlingen.Repository
 			return result;
 		}
 
-		public bool SaveSpecial(string guid, int specialId, bool isUpdate = false)
+		public bool SaveSpecial(string guid, int specialId)
 		{
 			var result = false;
 			try
 			{
 				using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 				{
-					if (isUpdate)
+					var assign = new SpecialAssign
 					{
-						var assigned = (from c in context.SpecialAssigns where c.RecipeGuid == guid select c).FirstOrDefault();
-						if (assigned != null)
-						{
-							assigned.SpecialId = specialId;
-							assigned.RecipeGuid = guid;
-						}
-					}
-					else
-					{
-						var assign = new SpecialAssign
-						{
-							SpecialId = specialId,
-							RecipeGuid = guid
-						};
-						context.SpecialAssigns.InsertOnSubmit(assign);
-					}
+						SpecialId = specialId,
+						RecipeGuid = guid
+					};
+					context.SpecialAssigns.InsertOnSubmit(assign);
 					context.SubmitChanges();
 					result = true;
 				}
@@ -193,7 +181,7 @@ namespace Receptsamlingen.Repository
 					}
 				}
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", ex.StackTrace, ex.Message));
 			}

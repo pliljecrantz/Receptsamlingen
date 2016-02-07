@@ -15,7 +15,7 @@ namespace Receptsamlingen.Repository.Interfaces
 		IList<SpecialAssign> GetSpecialsForRecipe(string guid);
 		IList<int> GetAllIds();
 		bool Save(Recipe recipe);
-		bool SaveSpecial(string guid, int specialId, bool isUpdate = false);
+		bool SaveSpecial(string guid, int specialId);
 		bool Delete(string guid);
 		bool DeleteSpecials(string guid);
 		IList<Recipe> GetToplist();

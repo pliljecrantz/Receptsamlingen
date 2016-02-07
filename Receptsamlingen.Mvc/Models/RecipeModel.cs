@@ -15,9 +15,9 @@ namespace Receptsamlingen.Mvc.Models
 		public int UserRating { get; set; }
 
 		// Properties for adding dropdownlists and checkboxes in the view
-		public IList<SelectListItem> CategoryList { get; set; }
-		public IList<SelectListItem> DishTypeList { get; set; }
-		public IList<Special> SpecialList { get; set; }
+		public IList<SelectListItem> AllCategories { get; set; }
+		public IList<SelectListItem> AllDishTypes { get; set; }
+		public IList<Special> AllSpecials { get; set; }
 		public IList<SelectListItem> Portions { get; set; }
 
 		// Properties for when adding or editing a recipe

@@ -63,16 +63,12 @@ namespace Receptsamlingen.Mvc.Controllers
 			var result = RecipeRepository.Save(model.Recipe);
 			if (result)
 			{
+				// Delete any specials saved to the recipe first
+				var deleted = RecipeRepository.DeleteSpecials(model.Recipe.Guid);
+				// Then save the new specials added to the recipe
 				foreach (var special in specials)
 				{
-					if (SessionHandler.CurrentId != null)
-					{
-						RecipeRepository.SaveSpecial(model.Recipe.Guid, special.Id, true);
-					}
-					else
-					{
-						RecipeRepository.SaveSpecial(model.Recipe.Guid, special.Id);
-					}
+					var saved = RecipeRepository.SaveSpecial(model.Recipe.Guid, special.Id);
 				}
 				ViewBag.Response = SessionHandler.CurrentGuid == null ? Globals.InfoRecipeSaved : Globals.InfoRecipeUpdated;
 			}
@@ -117,10 +113,14 @@ namespace Receptsamlingen.Mvc.Controllers
 				{
 					var category = RecipeRepository.GetCategoryById(recipe.CategoryId).HtmlDecode();
 					var specials = RecipeRepository.GetSpecialsForRecipe(recipe.Guid);
-					var specialsList = (from item in specials
-										from special in model.SpecialList
-										where item.SpecialId == special.Id
-										select special).Aggregate(string.Empty, (current, special) => current + (special.Name + ", "));
+					var selectedSpecials = (from item in specials
+											from special in model.AllSpecials
+											where item.SpecialId == special.Id
+											select special).ToList();
+					var selectedSpecialsAsString = (from item in specials
+													from special in model.AllSpecials
+													where item.SpecialId == special.Id
+													select special).Aggregate(string.Empty, (current, special) => current + (special.Name.ToLower() + ", "));
 					var dishType = string.Empty;
 					var avgRating = RatingRepository.GetAvarage(recipe.Guid);
 					if (recipe.DishTypeId.HasValue)
@@ -128,9 +128,9 @@ namespace Receptsamlingen.Mvc.Controllers
 						dishType = RecipeRepository.GetDishTypeById(recipe.DishTypeId.Value);
 					}
 
-					if (specialsList.EndsWith(", "))
+					if (selectedSpecialsAsString.EndsWith(", "))
 					{
-						specialsList = specialsList.TrimEnd(',', ' ');
+						selectedSpecialsAsString = selectedSpecialsAsString.TrimEnd(',', ' ');
 					}
 
 					model.Recipe = recipe;
@@ -140,7 +140,8 @@ namespace Receptsamlingen.Mvc.Controllers
 					model.Category = category;
 					model.DishType = dishType;
 					model.AvarageRating = avgRating;
-					model.Specials = specialsList;
+					model.Specials = selectedSpecialsAsString;
+					model.SelectedSpecials = selectedSpecials;
 					SessionHandler.CurrentGuid = model.Recipe.Guid;
 					SessionHandler.CurrentId = model.Recipe.Id.ToString();
 				}
@@ -185,10 +186,10 @@ namespace Receptsamlingen.Mvc.Controllers
 			dishTypeItems.AddRange(allDishTypes.Select(dishType => new SelectListItem { Text = dishType.Name, Value = dishType.Id.ToString() }));
 
 			model.Recipe = new Recipe();
-			model.CategoryList = categoryItems;
-			model.DishTypeList = dishTypeItems;
+			model.AllCategories = categoryItems;
+			model.AllDishTypes = dishTypeItems;
 			model.Portions = portionItems;
-			model.SpecialList = allSpecials;
+			model.AllSpecials = allSpecials;
 			return model;
 		}
 
