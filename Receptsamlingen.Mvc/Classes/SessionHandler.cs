@@ -45,6 +45,18 @@ namespace Receptsamlingen.Mvc.Classes
 			}
 		}
 
+		public static string CurrentId
+		{
+			get
+			{
+				return Get(Globals.CurrentIdString) != null ? Get(Globals.CurrentIdString).ToString() : null;
+			}
+			set
+			{
+				Set(Globals.CurrentIdString, value);
+			}
+		}
+
 		public static IList<int> RecipeIdList
 		{
 			get

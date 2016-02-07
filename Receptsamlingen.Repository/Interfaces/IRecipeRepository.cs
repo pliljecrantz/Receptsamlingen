@@ -14,11 +14,10 @@ namespace Receptsamlingen.Repository.Interfaces
 		IList<Special> GetAllSpecials();
 		IList<SpecialAssign> GetSpecialsForRecipe(string guid);
 		IList<int> GetAllIds();
-		bool Update(Recipe recipe);
 		bool Save(Recipe recipe);
-		void SaveSpecial(string guid, int specialId);
-		void Delete(string guid);
-		void DeleteSpecials(string guid);
+		bool SaveSpecial(string guid, int specialId, bool isUpdate = false);
+		bool Delete(string guid);
+		bool DeleteSpecials(string guid);
 		IList<Recipe> GetToplist();
 		IList<Recipe> Search(string text);
 		IList<Recipe> Search(string query, int categoryId, int dishTypeId, IList<Special> specials);

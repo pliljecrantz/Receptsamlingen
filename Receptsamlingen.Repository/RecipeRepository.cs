@@ -95,102 +95,132 @@ namespace Receptsamlingen.Repository
 			}
 		}
 
-		public bool Update(Recipe recipe)
-		{
-			bool result;
-			try
-			{
-				using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
-				{
-					var oldRecipe = (from r in context.Recipes where r.Id == recipe.Id select r).FirstOrDefault();
-					if (oldRecipe != null)
-					{
-						oldRecipe.Name = recipe.Name;
-						oldRecipe.Ingredients = recipe.Ingredients;
-						oldRecipe.Description = recipe.Description;
-						oldRecipe.Portions = recipe.Portions;
-						oldRecipe.CategoryId = recipe.CategoryId;
-						oldRecipe.DishTypeId = recipe.DishTypeId;
-						oldRecipe.Date = DateTime.Now;
-						oldRecipe.Id = recipe.Id;
-						oldRecipe.Guid = recipe.Guid;
-					}
-					context.SubmitChanges();
-				}
-				result = true;
-			}
-			catch (Exception)
-			{
-				result = false;
-			}
-			return result;
-		}
-
 		public bool Save(Recipe recipe)
 		{
-			bool result;
+			var result = false;
 			try
 			{
 				using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
 				{
-					var newRecipe = new Recipe
-							{
-								Name = recipe.Name,
-								Ingredients = recipe.Ingredients,
-								Description = recipe.Description,
-								Portions = recipe.Portions,
-								CategoryId = recipe.CategoryId,
-								DishTypeId = recipe.DishTypeId,
-								Date = DateTime.Now,
-								Guid = recipe.Guid
-							};
-					context.Recipes.InsertOnSubmit(newRecipe);
+					if (recipe.Id == 0)
+					{
+						var newRecipe = new Recipe
+						{
+							Name = recipe.Name,
+							Ingredients = recipe.Ingredients,
+							Description = recipe.Description,
+							Portions = recipe.Portions,
+							CategoryId = recipe.CategoryId,
+							DishTypeId = recipe.DishTypeId,
+							Date = DateTime.Now,
+							Guid = recipe.Guid
+						};
+						context.Recipes.InsertOnSubmit(newRecipe);
+					}
+					else
+					{
+						var r = (from c in context.Recipes where c.Id == recipe.Id select c).FirstOrDefault();
+						r.Name = recipe.Name;
+						r.Ingredients = recipe.Ingredients;
+						r.Description = recipe.Description;
+						r.Portions = recipe.Portions;
+						r.CategoryId = recipe.CategoryId;
+						r.DishTypeId = recipe.DishTypeId;
+						r.Date = DateTime.Now;
+						r.Guid = recipe.Guid;
+						r.Id = recipe.Id;
+					}
 					context.SubmitChanges();
 					result = true;
 				}
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-				result = false;
+				// TODO: log error
 			}
 			return result;
 		}
 
-		public void SaveSpecial(string guid, int specialId)
+		public bool SaveSpecial(string guid, int specialId, bool isUpdate = false)
 		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
+			var result = false;
+			try
 			{
-				var assign = new SpecialAssign
+				using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
+				{
+					if (isUpdate)
+					{
+						var assigned = (from c in context.SpecialAssigns where c.RecipeGuid == guid select c).FirstOrDefault();
+						if (assigned != null)
+						{
+							assigned.SpecialId = specialId;
+							assigned.RecipeGuid = guid;
+						}
+					}
+					else
+					{
+						var assign = new SpecialAssign
 						{
 							SpecialId = specialId,
 							RecipeGuid = guid
 						};
-				context.SpecialAssigns.InsertOnSubmit(assign);
-				context.SubmitChanges();
-			}
-		}
-
-		public void Delete(string guid)
-		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
-			{
-				var q = context.Recipes.Where(x => x.Guid == guid).ToList().FirstOrDefault();
-				context.Recipes.DeleteOnSubmit(q);
-				context.SubmitChanges();
-			}
-		}
-
-		public void DeleteSpecials(string guid)
-		{
-			using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
-			{
-				var query = context.SpecialAssigns.FirstOrDefault(x => x.RecipeGuid == guid);
-				if (query != null)
-				{
-					context.SpecialAssigns.DeleteOnSubmit(query);
+						context.SpecialAssigns.InsertOnSubmit(assign);
+					}
 					context.SubmitChanges();
+					result = true;
 				}
 			}
+			catch (Exception ex)
+			{
+				// TODO: log error
+			}
+			return result;
+		}
+
+		public bool Delete(string guid)
+		{
+			var result = false;
+			try
+			{
+				using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
+				{
+					var q = context.Recipes.Where(x => x.Guid == guid).ToList().FirstOrDefault();
+					if (q != null)
+					{
+						context.Recipes.DeleteOnSubmit(q);
+						context.SubmitChanges();
+						result = true;
+					}
+				}
+			}
+			catch(Exception ex)
+			{
+				// TODO: log error
+			}
+			return result;
+		}
+
+		public bool DeleteSpecials(string guid)
+		{
+			var result = false;
+			try
+			{
+				using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
+				{
+					var query = context.SpecialAssigns.FirstOrDefault(x => x.RecipeGuid == guid);
+					if (query != null)
+					{
+						context.SpecialAssigns.DeleteOnSubmit(query);
+						context.SubmitChanges();
+						result = true;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				// TODO: log error
+			}
+			return result;
 		}
 
 		public IList<Recipe> GetToplist()
@@ -271,7 +301,7 @@ namespace Receptsamlingen.Repository
 												.OrderBy(r => r.Date)
 												.ToList();
 				}
-				else if(searchQuery)
+				else if (searchQuery)
 				{
 					recipeList = context.Recipes.Where(r => r.Name.Contains(query)).OrderBy(r => r.Date).ToList();
 				}
@@ -287,7 +317,7 @@ namespace Receptsamlingen.Repository
 															  where sa.RecipeGuid == recipeCopy.Guid && sa.SpecialId == specialCopy.Id
 															  select sa.RecipeGuid).FirstOrDefault()
 															  into r
-															  select (from rr in recipeList where rr.Guid == r select rr)).Cast<Recipe>().ToList();
+													  select (from rr in recipeList where rr.Guid == r select rr)).Cast<Recipe>().ToList();
 					}
 					else
 					{

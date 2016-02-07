@@ -44,9 +44,10 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		public ActionResult Save(RecipeModel model)
 		{
-			if (SessionHandler.CurrentGuid == null)
+			model.Recipe.Guid = SessionHandler.CurrentGuid != null ? SessionHandler.CurrentGuid : Guid.NewGuid().ToString();
+			if (SessionHandler.CurrentId != null)
 			{
-				model.Recipe.Guid = Guid.NewGuid().ToString();
+				model.Recipe.Id = Convert.ToInt32(SessionHandler.CurrentId);
 			}
 			model.Recipe.Name.HtmlEncode();
 			model.Recipe.Description.HtmlEncode();
@@ -56,13 +57,20 @@ namespace Receptsamlingen.Mvc.Controllers
 			model.Recipe.Portions = Convert.ToInt32(model.SelectedPortions);
 
 			var specials = Helper.GetSelectedSpecials(model.PostedSpecials);
-			
+
 			var result = RecipeRepository.Save(model.Recipe);
 			if (result)
 			{
 				foreach (var special in specials)
 				{
-					RecipeRepository.SaveSpecial(model.Recipe.Guid, special.Id);
+					if (SessionHandler.CurrentId != null)
+					{
+						RecipeRepository.SaveSpecial(model.Recipe.Guid, special.Id, true);
+					}
+					else
+					{
+						RecipeRepository.SaveSpecial(model.Recipe.Guid, special.Id);
+					}
 				}
 				ViewBag.Response = SessionHandler.CurrentGuid == null ? Globals.InfoRecipeSaved : Globals.InfoRecipeUpdated;
 			}
@@ -108,7 +116,7 @@ namespace Receptsamlingen.Mvc.Controllers
 				var specialsList = (from item in specials
 									from special in model.SpecialList
 									where item.SpecialId == special.Id
-									select special).Aggregate(String.Empty, (current, special) => current + (special.Name + ", "));
+									select special).Aggregate(string.Empty, (current, special) => current + (special.Name + ", "));
 				var dishType = string.Empty;
 				var avgRating = RatingRepository.GetAvarage(recipe.Guid);
 				if (recipe.DishTypeId.HasValue)
@@ -130,6 +138,7 @@ namespace Receptsamlingen.Mvc.Controllers
 				model.AvarageRating = avgRating;
 				model.Specials = specialsList;
 				SessionHandler.CurrentGuid = model.Recipe.Guid;
+				SessionHandler.CurrentId = model.Recipe.Id.ToString();
 			}
 			return model;
 		}
@@ -162,8 +171,8 @@ namespace Receptsamlingen.Mvc.Controllers
 				new SelectListItem {Text = "8", Value = "8"},
 			};
 
-			categoryItems.AddRange(allCategories.Select(category => new SelectListItem {Text = category.Name, Value = category.Id.ToString()}));
-			dishTypeItems.AddRange(allDishTypes.Select(dishType => new SelectListItem {Text = dishType.Name, Value = dishType.Id.ToString()}));
+			categoryItems.AddRange(allCategories.Select(category => new SelectListItem { Text = category.Name, Value = category.Id.ToString() }));
+			dishTypeItems.AddRange(allDishTypes.Select(dishType => new SelectListItem { Text = dishType.Name, Value = dishType.Id.ToString() }));
 
 			model.Recipe = new Recipe();
 			model.CategoryList = categoryItems;
