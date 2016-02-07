@@ -193,6 +193,6 @@ namespace Receptsamlingen.Mvc.Controllers
 		}
 
 		// TODO: Add functionality for editing categories etc from UI
-		// TODO: Add functionality for adding an image to the reciep
+		// TODO: Add functionality for adding an image to the recipe
 	}
 }
