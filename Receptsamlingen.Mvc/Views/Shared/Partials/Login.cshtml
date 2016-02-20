@@ -22,14 +22,14 @@
 						<input type="submit" value="Logga in &raquo;" class="btn btn-warning width-100-percent" />
 					</div>
 				</div>
-				if (Model.LoggedIn != null && (bool)!Model.LoggedIn)
-				{
-					<div class="row">
-						<div class="col-md-12 padding-top-5 text-align-center">
-							<label class="info-text login-error">Fel användaruppgifter.</label>
-						</div>
+			}
+			if (SessionHandler.FailedLogin)
+			{
+				<div class="row">
+					<div class="col-md-12 padding-top-5 text-align-center">
+						<label class="info-text login-error">Fel användaruppgifter.</label>
 					</div>
-				}
+				</div>
 			}
 		}
 		else

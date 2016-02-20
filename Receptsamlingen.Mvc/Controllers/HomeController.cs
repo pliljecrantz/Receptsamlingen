@@ -25,7 +25,6 @@ namespace Receptsamlingen.Mvc.Controllers
 				{
 					Recipes = recipes
 				};
-
 			return View(model);
 		}
 

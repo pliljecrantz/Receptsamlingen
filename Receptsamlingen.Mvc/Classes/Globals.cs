@@ -11,9 +11,10 @@ namespace Receptsamlingen.Mvc.Classes
 		public const string CurrentGuidString = "CurrentGuid";
 		public const string CurrentIdString = "CurrentId";
 		public const string IdListString = "IdList";
+		public const string FailedLoginSessionString = "FailedLogin";
 
-        // Mailsettings
-        public static readonly string MailSubjectString = ConfigKey("MailSubject", "Ansökan om konto");
+		// Mailsettings
+		public static readonly string MailSubjectString = ConfigKey("MailSubject", "Ansökan om konto");
         public static readonly string MailRecieverString = ConfigKey("MailReceiver", "ansok@liljecrantz.nu");
         public static readonly string MailServerString = ConfigKey("MailServer", "mail.liljecrantz.nu");
 

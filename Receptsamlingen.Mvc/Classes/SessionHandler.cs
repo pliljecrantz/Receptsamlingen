@@ -69,6 +69,18 @@ namespace Receptsamlingen.Mvc.Classes
 			}
 		}
 
+		public static bool FailedLogin
+		{
+			get
+			{
+				return Get(Globals.FailedLoginSessionString) != null ? (bool) Get(Globals.FailedLoginSessionString) : false;
+			}
+			set
+			{
+				Set(Globals.FailedLoginSessionString, value);
+			}
+		}
+
 		#endregion
 
 		#region Session Functions with failsafe handling

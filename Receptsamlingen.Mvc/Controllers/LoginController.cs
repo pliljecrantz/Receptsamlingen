@@ -28,15 +28,15 @@ namespace Receptsamlingen.Mvc.Controllers
                 {
                     SessionHandler.User = user;
 	                SessionHandler.IsAuthenticated = true;
-                    model.LoggedIn = true;
+					SessionHandler.FailedLogin = false;
                 }
                 else
                 {
 	                SessionHandler.IsAuthenticated = false;
-                    model.LoggedIn = false;
+					SessionHandler.FailedLogin = true;
                 }
             }
-            return RedirectToAction("Index", "Home");
+			return RedirectToAction("Index", "Home");
         }
 
         public ActionResult DoLogout()
