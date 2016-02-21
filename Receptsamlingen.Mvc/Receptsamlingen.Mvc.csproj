@@ -166,13 +166,13 @@
     <Compile Include="404.aspx.designer.cs">
       <DependentUpon>404.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\CacheHandler.cs" />
     <Compile Include="Classes\NinjectBindingModule.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\Globals.cs" />
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\NinjectHelper.cs" />
+    <Compile Include="Classes\Resolver.cs" />
     <Compile Include="Classes\SessionHandler.cs" />
     <Compile Include="Controllers\ApplyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
