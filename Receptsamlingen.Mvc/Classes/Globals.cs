@@ -13,8 +13,8 @@ namespace Receptsamlingen.Mvc.Classes
 		public const string IdListString = "IdList";
 		public const string FailedLoginSessionString = "FailedLogin";
 
-		// Mailsettings
-		public static readonly string MailSubjectString = ConfigKey("MailSubject", "Ansökan om konto");
+        // Mailsettings
+        public static readonly string MailSubjectString = ConfigKey("MailSubject", "Ansökan om konto");
         public static readonly string MailRecieverString = ConfigKey("MailReceiver", "ansok@liljecrantz.nu");
         public static readonly string MailServerString = ConfigKey("MailServer", "mail.liljecrantz.nu");
 
@@ -43,6 +43,7 @@ namespace Receptsamlingen.Mvc.Classes
 		public const string ErrorInvalidEmail = "Ogiltig e-postadress.";
 	    public const string ErrorMustGiveInfo = "Du måste ange e-postadress, namn och önskat användarnamn.";
 	    public const string InfoApplyApproved = "Tack, din ansökan är skickad. Svar kommer till angiven e-postadress.";
+		public const string ErrorLogin = "Fel användaruppgifter.";
 
         // URLs
         public const string DefaultUrl = "~/start";

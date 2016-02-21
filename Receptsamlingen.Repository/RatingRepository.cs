@@ -7,8 +7,6 @@ namespace Receptsamlingen.Repository
 {
 	public class RatingRepository : BaseRepository, IRatingRepository
 	{
-		#region Interface members
-
 		public bool UserHasVoted(string username, string guid)
 		{
 			var userHasVoted = false;
@@ -80,8 +78,5 @@ namespace Receptsamlingen.Repository
 				}
 			}
 		}
-
-		#endregion
-
 	}
 }

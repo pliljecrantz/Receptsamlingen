@@ -65,6 +65,7 @@ namespace Receptsamlingen.Mvc.Controllers
 			{
 				// Delete any specials saved to the recipe first
 				var deleted = RecipeRepository.DeleteSpecials(model.Recipe.Guid);
+
 				// Then save the new specials added to the recipe
 				foreach (var special in specials)
 				{
