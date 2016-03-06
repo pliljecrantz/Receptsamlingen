@@ -20,8 +20,8 @@ namespace Receptsamlingen.Mvc.Controllers
         {
             if (!string.IsNullOrWhiteSpace(model.Username) && !string.IsNullOrWhiteSpace(model.Password))
             {
-                var username = Server.HtmlEncode(model.Username.Trim());
-                var password = Server.HtmlEncode(model.Password.Trim());
+                var username = model.Username.Trim().StripHtml();
+                var password = model.Password.Trim().StripHtml();
                 var user = UserRepository.Get(username, password);
 
                 if (user != null)

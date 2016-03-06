@@ -172,7 +172,6 @@
     <Compile Include="Classes\Globals.cs" />
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\NinjectHelper.cs" />
-    <Compile Include="Classes\Resolver.cs" />
     <Compile Include="Classes\SessionHandler.cs" />
     <Compile Include="Controllers\ApplyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

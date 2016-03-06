@@ -32,7 +32,7 @@ namespace Receptsamlingen.Mvc.Controllers
 			var category = model.SelectedCategory != null ? int.Parse(model.SelectedCategory) : 0;
 			var dishType = model.SelectedDishType != null ? int.Parse(model.SelectedDishType) : 0;
 			var specials = Helper.GetSelectedSpecials(model.PostedSpecials);
-			model.SearchResult = RecipeRepository.Search(model.Query.HtmlEncode(), category, dishType, specials);
+			model.SearchResult = RecipeRepository.Search(model.Query.StripHtml(), category, dishType, specials);
 			model.SearchPerformed = true;
 			model = GetModel(model);
 			return View("Index", model);

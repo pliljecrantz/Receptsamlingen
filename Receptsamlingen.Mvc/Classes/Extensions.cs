@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using Receptsamlingen.Repository;
 
 namespace Receptsamlingen.Mvc.Classes
 {
@@ -21,7 +21,7 @@ namespace Receptsamlingen.Mvc.Classes
 				{
 					sb.Append("<tr>");
 
-					var label = htmlHelper.Label(item.Value, HttpUtility.HtmlEncode(item.Text));
+					var label = htmlHelper.Label(item.Value, HtmlEncode(item.Text));
 					var checkbox = htmlHelper.CheckBox(item.Text, new { id = item.Value }).ToHtmlString();
 
 					sb.AppendFormat("{0}{1}", "<td>" + checkbox + "</td>", "<td>" + label + "</td>");
@@ -33,7 +33,13 @@ namespace Receptsamlingen.Mvc.Classes
 			return MvcHtmlString.Create(sb.ToString());
 		}
 
-		public static string HtmlDecode(this string text)
+        public static string StripHtml(this string input)
+        {
+            var pattern = "<[^>]*>";
+            return Regex.Replace(input, pattern, string.Empty);
+        }
+
+        public static string HtmlDecode(this string text)
 		{
 			return HttpUtility.HtmlDecode(text);
 		}

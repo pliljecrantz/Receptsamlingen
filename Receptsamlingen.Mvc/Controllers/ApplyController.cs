@@ -40,9 +40,9 @@ namespace Receptsamlingen.Mvc.Controllers
 			{
 				if (model.Email != null && model.FullName != null && model.Username != null)
 				{
-					var emailaddress = model.Email.Trim().HtmlEncode();
-					var fullName = model.FullName.Trim().HtmlEncode();
-					var username = model.Username.Trim().HtmlEncode();
+					var emailaddress = model.Email.Trim().StripHtml();
+					var fullName = model.FullName.Trim().StripHtml();
+					var username = model.Username.Trim().StripHtml();
 					if (!Helper.ValidateEmail(emailaddress))
 					{
 						ViewBag.Response = Globals.ErrorInvalidEmail;
