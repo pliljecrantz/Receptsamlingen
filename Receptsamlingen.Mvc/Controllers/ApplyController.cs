@@ -11,8 +11,6 @@ namespace Receptsamlingen.Mvc.Controllers
     {
 		[Inject]
 		public IRecipeRepository RecipeRepository { get; set; }
-		[Inject]
-		public IHelper Helper { get; set; }
 
 		public ApplyController()
 		{

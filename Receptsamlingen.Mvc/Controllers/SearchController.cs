@@ -5,6 +5,7 @@ using Ninject;
 using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models;
 using Receptsamlingen.Repository.Interfaces;
+using Receptsamlingen.Repository;
 
 namespace Receptsamlingen.Mvc.Controllers
 {
@@ -12,8 +13,6 @@ namespace Receptsamlingen.Mvc.Controllers
 	{
 		[Inject]
 		public IRecipeRepository RecipeRepository { get; set; }
-		[Inject]
-		public IHelper Helper { get; set; }
 
 		public SearchController()
 		{
@@ -31,7 +30,7 @@ namespace Receptsamlingen.Mvc.Controllers
 		{
 			var category = model.SelectedCategory != null ? int.Parse(model.SelectedCategory) : 0;
 			var dishType = model.SelectedDishType != null ? int.Parse(model.SelectedDishType) : 0;
-			var specials = Helper.GetSelectedSpecials(model.PostedSpecials);
+			var specials = GetSelectedSpecials(model.PostedSpecials);
 			model.SearchResult = RecipeRepository.Search(model.Query.StripHtml(), category, dishType, specials);
 			model.SearchPerformed = true;
 			model = GetModel(model);
@@ -59,8 +58,30 @@ namespace Receptsamlingen.Mvc.Controllers
 			model.CategoryList = categoryItems;
 			model.DishTypeList = dishTypeItems;
 			model.SpecialList = allSpecials;
-			model.SelectedSpecials = Helper.GetSelectedSpecials(model.PostedSpecials);
+			model.SelectedSpecials = GetSelectedSpecials(model.PostedSpecials);
 			return model;
 		}
-	}
+
+        private IList<Special> GetSelectedSpecials(PostedSpecials postedSpecials)
+        {
+            IList<Special> selectedSpecials = new List<Special>();
+            var postedSpecialIds = new string[0];
+
+            if (postedSpecials == null)
+            {
+                postedSpecials = new PostedSpecials();
+            }
+
+            if (postedSpecials.Ids != null && postedSpecials.Ids.Any())
+            {
+                postedSpecialIds = postedSpecials.Ids;
+            }
+
+            if (postedSpecialIds.Any())
+            {
+                selectedSpecials = RecipeRepository.GetAllSpecials().Where(x => postedSpecialIds.Any(s => x.Id.ToString().Equals(s))).ToList();
+            }
+            return selectedSpecials;
+        }
+    }
 }

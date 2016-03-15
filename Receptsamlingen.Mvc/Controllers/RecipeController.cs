@@ -18,8 +18,6 @@ namespace Receptsamlingen.Mvc.Controllers
 		public IRecipeRepository RecipeRepository { get; set; }
 		[Inject]
 		public IRatingRepository RatingRepository { get; set; }
-		[Inject]
-		public IHelper Helper { get; set; }
 
 		public RecipeController()
 		{
@@ -58,7 +56,7 @@ namespace Receptsamlingen.Mvc.Controllers
 			model.Recipe.DishTypeId = Convert.ToInt32(model.SelectedDishType);
 			model.Recipe.Portions = Convert.ToInt32(model.SelectedPortions);
 
-			var specials = Helper.GetSelectedSpecials(model.PostedSpecials);
+			var specials = GetSelectedSpecials(model.PostedSpecials);
 
 			var result = RecipeRepository.Save(model.Recipe);
 			if (result)
@@ -194,7 +192,29 @@ namespace Receptsamlingen.Mvc.Controllers
 			return model;
 		}
 
-		// TODO: Add functionality for editing categories etc from UI
-		// TODO: Add functionality for adding an image to the recipe
-	}
+        private IList<Special> GetSelectedSpecials(PostedSpecials postedSpecials)
+        {
+            IList<Special> selectedSpecials = new List<Special>();
+            var postedSpecialIds = new string[0];
+
+            if (postedSpecials == null)
+            {
+                postedSpecials = new PostedSpecials();
+            }
+
+            if (postedSpecials.Ids != null && postedSpecials.Ids.Any())
+            {
+                postedSpecialIds = postedSpecials.Ids;
+            }
+
+            if (postedSpecialIds.Any())
+            {
+                selectedSpecials = RecipeRepository.GetAllSpecials().Where(x => postedSpecialIds.Any(s => x.Id.ToString().Equals(s))).ToList();
+            }
+            return selectedSpecials;
+        }
+
+        // TODO: Add functionality for editing categories etc from UI
+        // TODO: Add functionality for adding an image to the recipe
+    }
 }

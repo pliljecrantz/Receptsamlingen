@@ -11,7 +11,6 @@ namespace Receptsamlingen.Mvc.Classes
 			Bind<IRecipeRepository>().To<RecipeRepository>();
 			Bind<IRatingRepository>().To<RatingRepository>();
 			Bind<IUserRepository>().To<UserRepository>();
-			Bind<IHelper>().To<Helper>();
 		}
 	}
 }
