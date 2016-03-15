@@ -30,29 +30,27 @@ namespace Receptsamlingen.Mvc.Classes
             return isValid;
         }
 
-		public static void Logout()
-		{
-			SessionHandler.User = null;
-			SessionHandler.IsAuthenticated = false;
-			HttpContext.Current.Session.Clear();
-			HttpContext.Current.Session.Abandon();
-		}
+        public static void Logout()
+        {
+            SessionHandler.User = null;
+            SessionHandler.IsAuthenticated = false;
+            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session.Abandon();
+        }
 
-		public static void GenerateMail(string emailaddress, string fullName, string username)
-		{
-			var message = new MailMessage();
-			message.To.Add(new MailAddress(Globals.MailRecieverString));
-			message.From = new MailAddress(emailaddress);
-			message.Subject = Globals.MailSubjectString;
-			message.Body = String.Format("Namn: {0}<br/>E-postadress: {1}<br/>Önskat användarnamn: {2}", fullName, emailaddress, username);
-			message.IsBodyHtml = true;
-			SendMail(message);
-		}
+        public static void GenerateMail(string emailAddress, string fullName, string userName, string password)
+        {
+            var message = new MailMessage
+            {
+                Subject = Globals.MailSubjectString,
+                Body = string.Format("Ditt konto är skapat på receptsamlingen.net.<br/>Användarnamn: {0}<br/>Lösenord: {1}", userName, password),
+                IsBodyHtml = true
+            };
+            message.To.Add(new MailAddress(emailAddress));
+            message.From = new MailAddress(Globals.MailSenderString);
 
-		public static void SendMail(MailMessage message)
-		{
-			var smtp = new SmtpClient(Globals.MailServerString);
-			smtp.Send(message);
-		}
+            var smtp = new SmtpClient(Globals.MailServerString);
+            smtp.Send(message);
+        }
     }
 }

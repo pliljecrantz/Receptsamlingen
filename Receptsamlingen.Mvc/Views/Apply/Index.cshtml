@@ -9,7 +9,9 @@
 			<br />
 			@Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "E-postadress" })
 			<br />
-			@Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Önskat användarnamn" })
+			@Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Användarnamn" })
+            <br />
+            @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Lösenord" })
 		</div>
 	</div>
 	<div class="row">

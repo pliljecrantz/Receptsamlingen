@@ -14,9 +14,9 @@ namespace Receptsamlingen.Mvc.Classes
 		public const string FailedLoginSessionString = "FailedLogin";
 
         // Mailsettings
-        public static readonly string MailSubjectString = ConfigKey("MailSubject", "Ansökan om konto");
-        public static readonly string MailRecieverString = ConfigKey("MailReceiver", "ansok@liljecrantz.nu");
-        public static readonly string MailServerString = ConfigKey("MailServer", "mail.liljecrantz.nu");
+        public static readonly string MailSubjectString = ConfigKey("MailSubject", "Konto skapat - receptsamlingen.net");
+        public static readonly string MailSenderString = ConfigKey("MailReceiver", "no-reply@receptsamlingen.net");
+        public static readonly string MailServerString = ConfigKey("MailServer", "smtp.gmail.com");
 
         // Other strings
         public const string MainCourseString = "Huvudrätt";
@@ -44,6 +44,7 @@ namespace Receptsamlingen.Mvc.Classes
 	    public const string ErrorMustGiveInfo = "Du måste ange e-postadress, namn och önskat användarnamn.";
 	    public const string InfoApplyApproved = "Tack, din ansökan är skickad. Svar kommer till angiven e-postadress.";
 		public const string ErrorLogin = "Fel användaruppgifter.";
+        public const string ErrorCreatingAccount = "Det gick inte att skapa ditt konto. Försök gärna igen senare.";
 
         // URLs
         public const string DefaultUrl = "~/start";

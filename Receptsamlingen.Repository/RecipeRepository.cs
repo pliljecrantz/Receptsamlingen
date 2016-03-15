@@ -208,7 +208,7 @@ namespace Receptsamlingen.Repository
             }
             catch (Exception ex)
             {
-                LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", ex.StackTrace, ex.Message));
+                LogHandler.Log(LogType.Error, string.Format("Could not save recipe with name {0}", recipe.Name));
             }
             return result;
         }
@@ -232,7 +232,7 @@ namespace Receptsamlingen.Repository
             }
             catch (Exception ex)
             {
-                LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", ex.StackTrace, ex.Message));
+                LogHandler.Log(LogType.Error, string.Format("Could not save specials for recipe with GUID {0}", guid));
             }
             return result;
         }
@@ -260,7 +260,7 @@ namespace Receptsamlingen.Repository
             }
             catch (Exception ex)
             {
-                LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", ex.StackTrace, ex.Message));
+                LogHandler.Log(LogType.Error, string.Format("Could not delete recipe with GUID {0}", guid));
             }
             return result;
         }
@@ -283,7 +283,7 @@ namespace Receptsamlingen.Repository
             }
             catch (Exception ex)
             {
-                LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", ex.StackTrace, ex.Message));
+                LogHandler.Log(LogType.Error, string.Format("Could not delete specials for recipe with GUID {0}", guid));
             }
             return result;
         }
