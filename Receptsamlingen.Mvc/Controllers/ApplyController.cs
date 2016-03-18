@@ -51,10 +51,11 @@ namespace Receptsamlingen.Mvc.Controllers
                     }
                     else
                     {
-                        var userCreated = UserRepository.Create(userName, model.Password, fullName, emailAddress);
+                        var hashedPassword = HashUtility.HashPassword(model.Password);
+                        var userCreated = UserRepository.Create(userName, hashedPassword, fullName, emailAddress);
                         if (userCreated)
                         {
-                            Helper.GenerateMail(emailAddress, fullName, userName, model.Password);
+                            Helper.SendMail(emailAddress, fullName, userName, model.Password);
                             ViewBag.Response = Globals.InfoApplyApproved;
                             ViewBag.Result = true.ToString();
                             LogHandler.Log(LogType.Info, string.Format("Account created \t email: {0} fullname: {1} username: {2}", emailAddress, fullName, userName));
@@ -79,7 +80,5 @@ namespace Receptsamlingen.Mvc.Controllers
             }
             return View("Index");
         }
-
-        // TODO: Add functionality for creating the user automatically
     }
 }

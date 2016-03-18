@@ -14,7 +14,7 @@ body {
 
 p {
 	margin: 0;
-	padding: 5px 0 10px 0;
+	padding: 10px 0 10px 0;
 }
 
 h1 {
@@ -27,6 +27,10 @@ h2 {
 	color: #e38d13;
 	font-weight: bold;
 	font-size: 1.3em;
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+    margin-bottom: 20px;
 }
 
 .box-content h3 {
@@ -161,8 +165,8 @@ ul {
 	margin-right: 15px;
 }
 
-.margin-top-5 {
-	margin-top: 5px;
+.margin-top-15 {
+	margin-top: 15px;
 }
 
 .margin-bottom-10 {

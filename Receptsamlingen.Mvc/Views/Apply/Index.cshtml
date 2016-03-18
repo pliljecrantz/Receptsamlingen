@@ -3,39 +3,40 @@
 <h1>Ansök om konto</h1>
 @using (Html.BeginForm("DoApply", "Apply", FormMethod.Post))
 {
-	<div class="row">
-		<div class="col-md-12">
-			@Html.TextBoxFor(x => x.FullName, new { @class = "form-control", placeholder = "Ditt namn" })
-			<br />
-			@Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "E-postadress" })
-			<br />
-			@Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Användarnamn" })
+    <div class="row">
+        <div class="col-md-9">
+            @Html.TextBoxFor(x => x.FullName, new { @class = "form-control", placeholder = "Ditt namn" })
+            <br />
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "E-postadress" })
+            <br />
+            @Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Användarnamn" })
             <br />
             @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Lösenord" })
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<p>OBS! Var noga med att ange rätt e-postadress, en bekräftelse skickas dit inom några dagar.</p>
-			<p>Välj en ruta för att godkännas som kontoinnehavare.</p>
-			<label>Jag är en alien.</label>
-			@Html.CheckBoxFor(x => x.Alien)
-			<br />
-			<label>Jag är en människa.</label>
-			@Html.CheckBoxFor(x => x.Human)
-			<br /><br />
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-8 margin-top-5">
-			@if (!string.IsNullOrWhiteSpace(ViewBag.Result))
-			{
-				var className = ViewBag.Result == false.ToString() ? "label label-warning info-text" : "label label-info info-text";
-				<label class="@className">@ViewBag.Response</label>
-			}
-		</div>
-		<div class="col-md-4">
-			<input type="submit" class="btn btn-warning float-right" value="Ansök &raquo;" />
-		</div>
-	</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Var noga med att ange rätt e-postadress, en bekräftelse kommer att skickas dit.</p>
+            <label>Jag är en alien.</label>
+            @Html.CheckBoxFor(x => x.Alien)
+            <br />
+            <label>Jag är en människa.</label>
+            @Html.CheckBoxFor(x => x.Human)
+            <br /><br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-warning float-left" value="Ansök &raquo;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 margin-top-15">
+            @if (!string.IsNullOrWhiteSpace(ViewBag.Result))
+            {
+                var className = ViewBag.Result == false.ToString() ? "label label-warning info-text" : "label label-info info-text";
+                <label class="@className">@ViewBag.Response</label>
+            }
+        </div>
+    </div>
 }

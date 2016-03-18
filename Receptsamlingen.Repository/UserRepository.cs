@@ -1,7 +1,6 @@
 ﻿using System.Configuration;
 using System.Linq;
 using Receptsamlingen.Repository.Interfaces;
-using System;
 using Logger;
 
 namespace Receptsamlingen.Repository
@@ -16,6 +15,14 @@ namespace Receptsamlingen.Repository
 			}
 		}
 
+        public User Get(string username)
+        {
+            using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
+            {
+                return context.Users.Where(x => x.Username == username).ToList().FirstOrDefault();
+            }
+        }
+
         public bool Create(string userName, string password, string fullName, string emailAddress)
         {
             var result = false;
@@ -23,17 +30,21 @@ namespace Receptsamlingen.Repository
             {
                 using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
                 {
-                    var user = new User
+                    var existingUser = (from u in context.Users where u.Username == userName select u).FirstOrDefault();
+                    if (existingUser == null)
                     {
-                        Username = userName,
-                        Password = password,
-                        FullName = fullName,
-                        Email = emailAddress,
-                        Role = 1
-                    };
-                    context.Users.InsertOnSubmit(user);
-                    context.SubmitChanges();
-                    result = true;
+                        var user = new User
+                        {
+                            Username = userName,
+                            Password = password,
+                            FullName = fullName,
+                            Email = emailAddress,
+                            Role = 1
+                        };
+                        context.Users.InsertOnSubmit(user);
+                        context.SubmitChanges();
+                        result = true;
+                    }                    
                 }
             }
             catch

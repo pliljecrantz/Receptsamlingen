@@ -22,9 +22,10 @@ namespace Receptsamlingen.Mvc.Controllers
             {
                 var username = model.Username.Trim().StripHtml();
                 var password = model.Password.Trim().StripHtml();
-                var user = UserRepository.Get(username, password);
+                var user = UserRepository.Get(username);
+                var verifiedPassword = HashUtility.CheckPassword(password, user.Password);
 
-                if (user != null)
+                if (user != null && verifiedPassword)
                 {
                     SessionHandler.User = user;
 	                SessionHandler.IsAuthenticated = true;

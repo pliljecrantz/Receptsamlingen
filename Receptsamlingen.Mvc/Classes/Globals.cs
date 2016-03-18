@@ -16,7 +16,9 @@ namespace Receptsamlingen.Mvc.Classes
         // Mailsettings
         public static readonly string MailSubjectString = ConfigKey("MailSubject", "Konto skapat - receptsamlingen.net");
         public static readonly string MailSenderString = ConfigKey("MailReceiver", "no-reply@receptsamlingen.net");
-        public static readonly string MailServerString = ConfigKey("MailServer", "smtp.gmail.com");
+        public static readonly string MailServerString = ConfigKey("MailServer", "-");
+        public static readonly string MailUserString = ConfigKey("MailUser", "-");
+        public static readonly string MailPasswordString = ConfigKey("MailPassword", "-");
 
         // Other strings
         public const string MainCourseString = "Huvudrätt";
@@ -42,9 +44,9 @@ namespace Receptsamlingen.Mvc.Classes
 		public const string ErrorNoAccountGranted = "Du får inget konto.";
 		public const string ErrorInvalidEmail = "Ogiltig e-postadress.";
 	    public const string ErrorMustGiveInfo = "Du måste ange e-postadress, namn och önskat användarnamn.";
-	    public const string InfoApplyApproved = "Tack, din ansökan är skickad. Svar kommer till angiven e-postadress.";
+	    public const string InfoApplyApproved = "Tack, ditt konto är skapat.";
 		public const string ErrorLogin = "Fel användaruppgifter.";
-        public const string ErrorCreatingAccount = "Det gick inte att skapa ditt konto. Försök gärna igen senare.";
+        public const string ErrorCreatingAccount = "Det gick inte att skapa kontot. Försök igen senare eller prova med ett annat användarnamn.";
 
         // URLs
         public const string DefaultUrl = "~/start";

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net;
 using System.Net.Mail;
+using System.Security;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -38,18 +40,32 @@ namespace Receptsamlingen.Mvc.Classes
             HttpContext.Current.Session.Abandon();
         }
 
-        public static void GenerateMail(string emailAddress, string fullName, string userName, string password)
+        public static SecureString ConvertToSecureString(this string password)
+        {
+            var secureStr = new SecureString();
+            if (password.Length > 0)
+            {
+                foreach (var c in password.ToCharArray())
+                {
+                    secureStr.AppendChar(c);
+                }
+            }
+            return secureStr;
+        }
+
+        public static void SendMail(string emailAddress, string fullName, string userName, string password)
         {
             var message = new MailMessage
             {
                 Subject = Globals.MailSubjectString,
-                Body = string.Format("Ditt konto är skapat på receptsamlingen.net.<br/>Användarnamn: {0}<br/>Lösenord: {1}", userName, password),
+                Body = string.Format("Ditt konto är skapat på <a href='http://www.receptsamlingen.net'>receptsamlingen.net</a><br/><br/>Användarnamn: {0}<br/>Lösenord: {1}", userName, password),
                 IsBodyHtml = true
             };
             message.To.Add(new MailAddress(emailAddress));
             message.From = new MailAddress(Globals.MailSenderString);
 
             var smtp = new SmtpClient(Globals.MailServerString);
+            smtp.Credentials = new NetworkCredential(Globals.MailUserString, Globals.MailPasswordString.ConvertToSecureString());
             smtp.Send(message);
         }
     }
