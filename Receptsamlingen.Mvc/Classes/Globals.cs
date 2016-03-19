@@ -15,7 +15,8 @@ namespace Receptsamlingen.Mvc.Classes
 
         // Mailsettings
         public static readonly string MailSubjectString = ConfigKey("MailSubject", "Konto skapat - receptsamlingen.net");
-        public static readonly string MailSenderString = ConfigKey("MailReceiver", "no-reply@receptsamlingen.net");
+        public static readonly string MailReceiverString = ConfigKey("MailReceiver", "p.liljecrantz@gmail.com");
+        public static readonly string MailSenderString = ConfigKey("MailSender", "no-reply@receptsamlingen.net");
         public static readonly string MailServerString = ConfigKey("MailServer", "-");
         public static readonly string MailUserString = ConfigKey("MailUser", "-");
         public static readonly string MailPasswordString = ConfigKey("MailPassword", "-");

@@ -40,7 +40,7 @@ namespace Receptsamlingen.Mvc.Classes
             HttpContext.Current.Session.Abandon();
         }
 
-        public static SecureString ConvertToSecureString(this string password)
+        public static SecureString ToSecureString(this string password)
         {
             var secureStr = new SecureString();
             if (password.Length > 0)
@@ -62,10 +62,11 @@ namespace Receptsamlingen.Mvc.Classes
                 IsBodyHtml = true
             };
             message.To.Add(new MailAddress(emailAddress));
+            message.Bcc.Add(new MailAddress(Globals.MailReceiverString));
             message.From = new MailAddress(Globals.MailSenderString);
 
             var smtp = new SmtpClient(Globals.MailServerString);
-            smtp.Credentials = new NetworkCredential(Globals.MailUserString, Globals.MailPasswordString.ConvertToSecureString());
+            smtp.Credentials = new NetworkCredential(Globals.MailUserString, Globals.MailPasswordString.ToSecureString());
             smtp.Send(message);
         }
     }
