@@ -13,9 +13,10 @@ namespace Receptsamlingen.Mvc.Models
 		public int AvarageRating { get; set; }
 		public string Specials { get; set; }
 		public int UserRating { get; set; }
+        //public byte[] ImageData { get; set; } // TODO: In progress for adding images to recipe
 
-		// Properties for adding dropdownlists and checkboxes in the view
-		public IList<SelectListItem> AllCategories { get; set; }
+        // Properties for adding dropdownlists and checkboxes in the view
+        public IList<SelectListItem> AllCategories { get; set; }
 		public IList<SelectListItem> AllDishTypes { get; set; }
 		public IList<Special> AllSpecials { get; set; }
 		public IList<SelectListItem> Portions { get; set; }
@@ -26,5 +27,6 @@ namespace Receptsamlingen.Mvc.Models
 		public string SelectedPortions { get; set; }
 		public IList<Special> SelectedSpecials { get; set; }
 		public PostedSpecials PostedSpecials { get; set; } 
+        //public byte[] SelectedImageData { get; set; } // TODO: In progress for adding images to recipe
     }
 }

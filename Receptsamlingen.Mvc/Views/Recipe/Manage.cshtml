@@ -9,7 +9,7 @@
 }
 else
 {
-	using (Html.BeginForm("Save", "Recipe", FormMethod.Post))
+	using (Html.BeginForm("Save", "Recipe", FormMethod.Post, new { enctype = "multipart/form-data" }))
 	{
 		<div class="row">
 			<div class="col-md-12">
@@ -43,6 +43,12 @@ else
 				@Html.CheckBoxListFor(x => x.PostedSpecials.Ids, x => x.AllSpecials, x => x.Id, x => x.Name, x => x.SelectedSpecials)
 			</div>
 		</div>
+        <div class="row">
+            <div class="col-md-12 margin-bottom-10">
+                <label class="orange">Lägg till en bild:</label>
+                <input type="file" name="imagedata" />
+            </div>
+        </div>
 		<div class="row">
 			<div class="col-md-12">
 				<label class="orange">Ingredienser:</label>
@@ -52,7 +58,7 @@ else
 				<br />
 				@Html.TextAreaFor(x => x.Recipe.Description, new {@class = "form-control"})
 				<input type="submit" value="Spara!" class="btn btn-warning float-right" />
-				<div class="float-right margin-top-5 margin-right-20">
+				<div class="float-right margin-top-7 margin-right-20">
 					@Html.ActionLink("Avbryt »", "Index", "Home")
 				</div>
 			</div>

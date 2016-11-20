@@ -5,11 +5,13 @@
 		@using (Html.BeginForm("DoSearch", "Search", FormMethod.Post))
 		{
 			<div class="row">
-				<div class="col-xs-9">
+				<div class="col-md-12 padding-bottom-10">
 					@Html.TextBoxFor(model => model.Query, new { @class = "form-control", placeholder = "Sök..." })
 				</div>
-				<div class="col-xs-3">
-					<input type="submit" value="Sök &raquo;" class="btn btn-warning float-right" />
+            </div>
+            <div class="row">
+				<div class="col-md-12">
+					<input type="submit" value="Sök &raquo;" class="btn btn-warning width-100-percent" />
 				</div>
 			</div>
 		}

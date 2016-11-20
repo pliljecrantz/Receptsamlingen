@@ -173,6 +173,10 @@ ul {
 	margin-bottom: 10px;
 }
 
+.margin-top-7 {
+    margin-top: 7px;
+}
+
 .margin-top-25 {
 	margin-top: 25px;
 }
@@ -240,8 +244,4 @@ input[type="image"] {
 
 .width-100-percent {
 	width: 100%;
-}
-
-.search-button {
-	margin-left: -25px;
 }

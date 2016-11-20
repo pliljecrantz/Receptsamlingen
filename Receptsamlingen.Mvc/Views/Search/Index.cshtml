@@ -4,63 +4,60 @@
 <h1>Sök</h1>
 @using (Html.BeginForm("DoSearch", "Search", FormMethod.Post))
 {
-	<div class="row">
-		<div class="col-md-10">
-			@Html.TextBoxFor(x => x.Query, new { @class = "form-control" })
-		</div>
-		<div class="col-md-2 search-button">
-			<input type="submit" value="Sök &raquo;" class="btn btn-warning" />
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-xs-8">
+            @Html.TextBoxFor(x => x.Query, new { @class = "form-control" })
+        </div>
+        <div class="col-xs-4">
+            <input type="submit" value="Sök &raquo;" class="btn btn-warning" />
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Avancerad sök</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label class="orange">Kategori:</label>
+            <br />
+            @Html.DropDownListFor(x => x.SelectedCategory, new SelectList(Model.CategoryList, "Value", "Text"), new { @class = "dropdownlist" })
+        </div>
+        <div class="col-md-3">
+            <label class="orange">Huvudråvara:</label>
+            <br />
+            @Html.DropDownListFor(x => x.SelectedDishType, new SelectList(Model.DishTypeList, "Value", "Text"), new { @class = "dropdownlist" })
+        </div>
+        <div class="col-md-4">
+            <label class="orange">Special:</label>
+            <br />
+            @Html.CheckBoxListFor(x => x.PostedSpecials.Ids, x => x.SpecialList, x => x.Id, x => x.Name, x => x.SelectedSpecials)
+        </div>
+    </div>
 
-	<hr />
-	<div class="row">
-		<div class="col-md-12">
-			<h3>Avancerad sök</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-			<label class="orange">Kategori:</label>
-			<br />
-			@Html.DropDownListFor(x => x.SelectedCategory, new SelectList(Model.CategoryList, "Value", "Text"), new { @class = "dropdownlist" })
-		</div>
-		<div class="col-md-3">
-			<label class="orange">Huvudråvara:</label>
-			<br />
-			@Html.DropDownListFor(x => x.SelectedDishType, new SelectList(Model.DishTypeList, "Value", "Text"), new { @class = "dropdownlist" })
-		</div>
-		<div class="col-md-4">
-			<label class="orange">Special:</label>
-			<br />
-			@Html.CheckBoxListFor(x => x.PostedSpecials.Ids, x => x.SpecialList, x => x.Id, x => x.Name, x => x.SelectedSpecials)
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12">
-			@if (Model.SearchPerformed && Model.SearchResult == null)
-			{
-				<label class="label label-warning info-text">Sökningen gav inga resultat.</label>
-			}
-		</div>
-	</div>
-	<hr/>
-	<div class="row">
-		<div class="col-md-12">
-			@if (Model.SearchPerformed && Model.SearchResult != null)
-			{
-				<h3>Sökresultat</h3>
-				<ul>
-					@foreach (var r in Model.SearchResult)
-					{
-						<li>
-							&raquo;&nbsp;@Html.ActionLink(r.Name, "Id", "Recipe", new { id = r.Id }, null)
-							<br />
-						</li>
-					}
-				</ul>
-			}
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model.SearchPerformed && Model.SearchResult == null)
+            {
+                <label class="label label-warning info-text">Sökningen gav inga resultat.</label>}
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model.SearchPerformed && Model.SearchResult != null)
+            {
+                <h3>Sökresultat</h3>
+                <ul>
+                    @foreach (var r in Model.SearchResult)
+                    {
+                        <li>
+                            &raquo;&nbsp;@Html.ActionLink(r.Name, "Id", "Recipe", new { id = r.Id }, null)
+                            <br />
+                        </li>
+                    }
+                </ul>}
+        </div>
+    </div>
 }
