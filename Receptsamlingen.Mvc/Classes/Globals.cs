@@ -14,12 +14,12 @@ namespace Receptsamlingen.Mvc.Classes
 		public const string FailedLoginSessionString = "FailedLogin";
 
         // Mailsettings
-        public static readonly string MailSubjectString = ConfigKey("MailSubject", "Konto skapat - receptsamlingen.net");
-        public static readonly string MailReceiverString = ConfigKey("MailReceiver", "p.liljecrantz@gmail.com");
-        public static readonly string MailSenderString = ConfigKey("MailSender", "no-reply@receptsamlingen.net");
-        public static readonly string MailServerString = ConfigKey("MailServer", "-");
-        public static readonly string MailUserString = ConfigKey("MailUser", "-");
-        public static readonly string MailPasswordString = ConfigKey("MailPassword", "-");
+        public static readonly string MailSubjectString = GetConfigKey("MailSubject", "Konto skapat - receptsamlingen.net");
+        public static readonly string MailReceiverString = GetConfigKey("MailReceiver", "p.liljecrantz@gmail.com");
+        public static readonly string MailSenderString = GetConfigKey("MailSender", "no-reply@receptsamlingen.net");
+        public static readonly string MailServerString = GetConfigKey("MailServer", "-");
+        public static readonly string MailUserString = GetConfigKey("MailUser", "-");
+        public static readonly string MailPasswordString = GetConfigKey("MailPassword", "-");
 
         // Other strings
         public const string MainCourseString = "Huvudrätt";
@@ -54,10 +54,10 @@ namespace Receptsamlingen.Mvc.Classes
 
         #region Internal Functions
 
-        internal static string ConfigKey(string key, string defaultvalue)
+        internal static string GetConfigKey(string key, string defaultvalue)
         {
             var value = ConfigurationManager.AppSettings[key];
-            return String.IsNullOrEmpty(value) ? defaultvalue : value;
+            return string.IsNullOrWhiteSpace(value) ? defaultvalue : value;
         }
 
         #endregion
