@@ -12,6 +12,7 @@ namespace Receptsamlingen.Mvc.Classes
 		public const string CurrentIdString = "CurrentId";
 		public const string IdListString = "IdList";
 		public const string FailedLoginSessionString = "FailedLogin";
+        public const string ForceReloadSessionString = "ForceReload";
 
         // Mailsettings
         public static readonly string MailSubjectString = GetConfigKey("MailSubject", "Konto skapat - receptsamlingen.net");

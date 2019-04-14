@@ -18,7 +18,7 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		public ActionResult Index()
 		{
-			var recipes = RecipeRepository.GetLatest();
+			var recipes = RecipeRepository.GetLatest(SessionHandler.ForceReload);
 			SetRecipeIdList();
 
 			var model = new HomeModel

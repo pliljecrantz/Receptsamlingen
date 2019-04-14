@@ -9,10 +9,17 @@ namespace Receptsamlingen.Repository
 {
     public class RecipeRepository : BaseRepository, IRecipeRepository
     {
-        public IList<Recipe> GetLatest()
+        public IList<Recipe> GetLatest(bool forceReload)
         {
             var cacheKey = "GetLatest";
             var result = CacheHandler.Get(cacheKey) as List<Recipe>;
+
+            if (forceReload)
+            {
+                CacheHandler.Remove(cacheKey);
+                result = null;
+            }
+
             if (result == null)
             {
                 result = new List<Recipe>();
@@ -145,10 +152,17 @@ namespace Receptsamlingen.Repository
             return result;
         }
 
-        public IList<Recipe> GetToplist()
+        public IList<Recipe> GetToplist(bool forceReload)
         {
             var cacheKey = "GetToplist";
             var result = CacheHandler.Get(cacheKey) as List<Recipe>;
+
+            if (forceReload)
+            {
+                CacheHandler.Remove(cacheKey);
+                result = null;
+            }
+
             if (result == null)
             {
                 result = new List<Recipe>();
@@ -159,6 +173,8 @@ namespace Receptsamlingen.Repository
                                              .OrderByDescending(y => y.Total).Take(5).ToList();
 
                     result.AddRange(query.Select(q => GetByGuid(q.Id)));
+                    CacheHandler.AddCacheKeyToCollection(cacheKey);
+                    CacheHandler.Set(cacheKey, result);
                 }
             }
             return result;
@@ -276,6 +292,29 @@ namespace Receptsamlingen.Repository
                     if (query != null)
                     {
                         context.SpecialAssigns.DeleteOnSubmit(query);
+                        context.SubmitChanges();
+                        result = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHandler.Log(LogType.Error, string.Format("Could not delete specials for recipe with GUID {0}", guid));
+            }
+            return result;
+        }
+
+        public bool DeleteVotes(string guid)
+        {
+            var result = false;
+            try
+            {
+                using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
+                {
+                    var query = context.Votes.FirstOrDefault(x => x.RecipeGuid == guid);
+                    if (query != null)
+                    {
+                        context.Votes.DeleteOnSubmit(query);
                         context.SubmitChanges();
                         result = true;
                     }

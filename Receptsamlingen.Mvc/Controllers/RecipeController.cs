@@ -99,7 +99,9 @@ namespace Receptsamlingen.Mvc.Controllers
 			var recipe = RecipeRepository.GetById(id);
 			RecipeRepository.DeleteSpecials(recipe.Guid);
 			RecipeRepository.Delete(recipe.Guid);
+            RecipeRepository.DeleteVotes(recipe.Guid);
 			ViewBag.Response = Globals.InfoRecipeDeleted;
+            SessionHandler.ForceReload = true;
 			return View("Response");
 		}
 

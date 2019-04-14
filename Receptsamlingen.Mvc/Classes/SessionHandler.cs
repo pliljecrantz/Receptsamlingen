@@ -81,6 +81,18 @@ namespace Receptsamlingen.Mvc.Classes
 			}
 		}
 
+        public static bool ForceReload
+        {
+            get
+            {
+                return Get(Globals.ForceReloadSessionString) != null ? (bool)Get(Globals.ForceReloadSessionString) : false;
+            }
+            set
+            {
+                Set(Globals.ForceReloadSessionString, value);
+            }
+        }
+
 		#endregion
 
 		#region Session Functions with failsafe handling

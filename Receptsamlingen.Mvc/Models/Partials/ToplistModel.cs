@@ -22,7 +22,7 @@ namespace Receptsamlingen.Mvc.Models.Partials
 		{
 			get
 			{
-				return _source ?? (_source = RecipeRepository.GetToplist());
+				return _source ?? (_source = RecipeRepository.GetToplist(SessionHandler.ForceReload));
 			}
 		}
 	}

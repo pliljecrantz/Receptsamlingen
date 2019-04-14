@@ -10,10 +10,10 @@
 					<ul>
 						@foreach (var r in Model.Source)
 						{
-							<li>
-								&raquo;&nbsp;@Html.ActionLink(r.Name, "Id", "Recipe", new { id = r.Id }, null)
-								<br />
-							</li>
+                        <li>
+                            &raquo;&nbsp;@Html.ActionLink(r.Name, "Id", "Recipe", new { id = r.Id }, null)
+                            <br />
+                        </li>
 						}
 					</ul>
 				}
