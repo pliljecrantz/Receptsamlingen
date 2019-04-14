@@ -27,6 +27,8 @@ namespace Receptsamlingen.Mvc.Controllers
 		public ActionResult Add()
 		{
 			var model = Load();
+            SessionHandler.CurrentGuid = null;
+            SessionHandler.CurrentId = null;
 			return View("Manage", model);
 		}
 
