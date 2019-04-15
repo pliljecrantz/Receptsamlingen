@@ -13,7 +13,8 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		public ListController()
 		{
-			this.Inject();
+            ViewBag.Title = "Alla recept";
+            this.Inject();
 		}
 
 		public ActionResult Index()

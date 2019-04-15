@@ -17,6 +17,7 @@ namespace Receptsamlingen.Mvc.Controllers
 
         public ApplyController()
         {
+            ViewBag.Title = "Skapa konto";
             this.Inject();
         }
 

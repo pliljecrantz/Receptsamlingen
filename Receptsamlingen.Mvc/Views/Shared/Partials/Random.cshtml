@@ -3,10 +3,12 @@
 <div class="box-wrapper">
 	<div class="box-content">
 		<div class="row">
-			<div class="col-md-12">
-				<input type="submit" value="Slumpa fram ett recept &raquo;" class="btn btn-warning width-100-percent" />
-				@*&raquo;&nbsp;@Html.ActionLink("Slumpa fram ett recept!", "Randomize", "Random")*@
-			</div>
+            <div class="col-md-12">
+                @using (Html.BeginForm("Randomize", "Random", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="submit" value="Slumpa fram ett recept &raquo;" class="btn btn-warning width-100-percent" />
+                }
+            </div>
 		</div>
 	</div>
 </div>

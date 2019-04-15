@@ -16,7 +16,8 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		public SearchController()
 		{
-			this.Inject();
+            ViewBag.Title = "Sök";
+            this.Inject();
 		}
 
 		public ActionResult Index()

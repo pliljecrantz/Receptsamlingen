@@ -13,6 +13,7 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		public HomeController()
 		{
+            ViewBag.Title = "Start";
 			this.Inject();
 		}
 

@@ -26,6 +26,7 @@ namespace Receptsamlingen.Mvc.Controllers
 
 		public ActionResult Add()
 		{
+            ViewBag.Title = "Lägg till recept";
 			var model = Load();
             SessionHandler.CurrentGuid = null;
             SessionHandler.CurrentId = null;
@@ -35,13 +36,15 @@ namespace Receptsamlingen.Mvc.Controllers
 		public ActionResult Id(int id)
 		{
 			var model = Load(id);
-			return View("Detail", model);
+            ViewBag.Title = model.Recipe.Name;
+            return View("Detail", model);
 		}
 
 		public ActionResult Edit(int id)
 		{
 			var model = Load(id);
-			return View("Manage", model);
+            ViewBag.Title = model.Recipe.Name;
+            return View("Manage", model);
 		}
 
 		public ActionResult Save(RecipeModel model)
