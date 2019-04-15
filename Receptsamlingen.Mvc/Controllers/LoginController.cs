@@ -37,7 +37,7 @@ namespace Receptsamlingen.Mvc.Controllers
 					SessionHandler.FailedLogin = true;
                 }
             }
-			return RedirectToAction("Index", "Home");
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         public ActionResult DoLogout()
