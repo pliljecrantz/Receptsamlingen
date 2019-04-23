@@ -95,6 +95,7 @@ namespace Receptsamlingen.Mvc.Controllers
                 ViewBag.Response = Globals.ErrorSavingRecipe;
             }
 
+            ViewBag.Title = model.Recipe.Name;
             return View("Detail", model);
         }
 
