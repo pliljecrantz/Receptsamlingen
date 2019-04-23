@@ -28,5 +28,7 @@ namespace Receptsamlingen.Mvc.Models
 		public IList<Special> SelectedSpecials { get; set; }
 		public PostedSpecials PostedSpecials { get; set; } 
         //public byte[] SelectedImageData { get; set; } // TODO: In progress for adding images to recipe
+
+        public bool RecipeSaved { get; set; }
     }
 }

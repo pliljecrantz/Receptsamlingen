@@ -6,6 +6,7 @@ namespace Receptsamlingen.Repository.Interfaces
 	{
 		IList<Recipe> GetLatest(bool forceReload);
 		Recipe GetById(int id);
+        Recipe GetByGuid(string guid);
 		IList<Recipe> GetAll();
 		IList<DishType> GetAllDishTypes();
 		string GetDishTypeById(int id);

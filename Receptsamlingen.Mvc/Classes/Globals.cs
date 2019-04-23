@@ -37,7 +37,6 @@ namespace Receptsamlingen.Mvc.Classes
         public const string ErrorSavingRecipe = "Det gick inte att spara receptet, försök igen senare.";
         public const string ErrorValidatingRecipe = "Du måste ange ett namn på receptet och välja kategori.";
         public const string InfoVoteSaved = "Tack, din röst är sparad.";
-        public const string InfoRecipeUpdated = "Tack, receptet är uppdaterat.";
         public const string InfoRecipeSaved = "Tack, receptet är sparat.";
 	    public const string InfoRecipeDeleted = "Receptet är raderat.";
 	    public const string NoSearchResults = "Sökningen gav inga resultat.";

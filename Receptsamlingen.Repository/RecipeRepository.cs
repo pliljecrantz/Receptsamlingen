@@ -43,6 +43,14 @@ namespace Receptsamlingen.Repository
             }
         }
 
+        public Recipe GetByGuid(string guid)
+        {
+            using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
+            {
+                return context.Recipes.Where(x => x.Guid == guid).ToList().FirstOrDefault();
+            }
+        }
+
         public IList<Recipe> GetAll()
         {
             var cacheKey = "GetAll";
@@ -426,18 +434,6 @@ namespace Receptsamlingen.Repository
                 }
 
                 return recipesFilteredForSpecials.Count > 0 ? recipesFilteredForSpecials : recipeList;
-            }
-        }
-
-        #endregion
-
-        #region Private methods
-
-        private static Recipe GetByGuid(string guid)
-        {
-            using (var context = new ReceptsamlingenDataContext(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString))
-            {
-                return context.Recipes.Where(x => x.Guid == guid).ToList().FirstOrDefault();
             }
         }
 
