@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Logger;
 using Ninject;
 using Receptsamlingen.Mvc.Classes;
 using Receptsamlingen.Mvc.Models;
@@ -15,7 +16,8 @@ namespace Receptsamlingen.Mvc.Controllers
 		{
             ViewBag.Title = "Start";
 			this.Inject();
-		}
+            LogHandler.Log(LogType.Info, "Home Controller ctor called");
+        }
 
 		public ActionResult Index()
 		{
