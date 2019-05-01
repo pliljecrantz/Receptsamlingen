@@ -16,7 +16,6 @@ namespace Receptsamlingen.Mvc.Controllers
 		{
             ViewBag.Title = "Start";
 			this.Inject();
-            LogHandler.Log(LogType.Info, "Home Controller ctor called");
         }
 
 		public ActionResult Index()

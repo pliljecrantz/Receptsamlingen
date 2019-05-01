@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using log4net;
 
 namespace Logger
@@ -14,9 +15,9 @@ namespace Logger
 
 	public static class LogHandler
 	{
-		public static void Log(LogType type, object message)
+		public static void Log(string nameOfLogger, LogType type, object message)
 		{
-			var log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+			var log = LogManager.GetLogger(nameOfLogger);
 			switch (type)
 			{
 				case LogType.Debug:

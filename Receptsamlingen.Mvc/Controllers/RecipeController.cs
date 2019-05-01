@@ -169,7 +169,7 @@ namespace Receptsamlingen.Mvc.Controllers
                 }
                 else
                 {
-                    LogHandler.Log(LogType.Info, string.Format("Recipe with id: {0} could not be found", id));
+                    LogHandler.Log(nameof(RecipeController), LogType.Info, string.Format("Recipe with id: {0} could not be found", id));
                     throw new HttpException(404, "Not found");
                 }
             }

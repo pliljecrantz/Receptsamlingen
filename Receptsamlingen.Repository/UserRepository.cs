@@ -49,7 +49,7 @@ namespace Receptsamlingen.Repository
             }
             catch
             {
-                LogHandler.Log(LogType.Error, string.Format("Could not create user {0} with e-mail {1}", userName, emailAddress));
+                LogHandler.Log(nameof(UserRepository), LogType.Error, string.Format("Could not create user {0} with e-mail {1}", userName, emailAddress));
             }
             return result;
         }

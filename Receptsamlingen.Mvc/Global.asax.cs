@@ -31,7 +31,7 @@ namespace Receptsamlingen.Mvc
                     var httpException = exception as HttpException;
                     if (httpException != null)
                     {
-                        LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", httpException.StackTrace, httpException.Message));
+                        LogHandler.Log(nameof(GlobalConfiguration), LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", httpException.StackTrace, httpException.Message));
                         if (httpException.GetHttpCode() == 404)
                         {
                             if (!HttpContext.Current.Request.Path.EndsWith("/404", StringComparison.InvariantCultureIgnoreCase))
@@ -50,7 +50,7 @@ namespace Receptsamlingen.Mvc
                 }
                 else
                 {
-                    LogHandler.Log(LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", exception.StackTrace, exception.Message));
+                    LogHandler.Log(nameof(GlobalConfiguration), LogType.Error, string.Format("Stack trace: {0}\tMessage: {1}", exception.StackTrace, exception.Message));
                     if (!HttpContext.Current.Request.Path.EndsWith("/Error", StringComparison.InvariantCultureIgnoreCase))
                     {
                         Context.Server.TransferRequest("~/Error.aspx", true);

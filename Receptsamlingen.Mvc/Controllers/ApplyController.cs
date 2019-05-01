@@ -59,7 +59,7 @@ namespace Receptsamlingen.Mvc.Controllers
                             Helper.SendMail(emailAddress, fullName, userName, model.Password);
                             ViewBag.Response = Globals.InfoApplyApproved;
                             ViewBag.Result = true.ToString();
-                            LogHandler.Log(LogType.Info, string.Format("Account created \t email: {0} fullname: {1} username: {2}", emailAddress, fullName, userName));
+                            LogHandler.Log(nameof(ApplyController), LogType.Info, string.Format("Account created \t email: {0} fullname: {1} username: {2}", emailAddress, fullName, userName));
                         }
                         else
                         {
