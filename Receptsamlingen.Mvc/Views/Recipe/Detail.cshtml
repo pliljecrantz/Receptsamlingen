@@ -3,7 +3,7 @@
 
 @using (Html.BeginForm("Vote", "Recipe", FormMethod.Post))
 {
-    if (Model.RecipeSaved && ViewBag.Response != string.Empty)
+    if ((Model.RecipeSaved.HasValue && ViewBag.Response != string.Empty) || (Model.RatingSaved.HasValue && ViewBag.Response != string.Empty))
     {
         <div class="row">
             <div class="col-md-12 margin-bottom-10">

@@ -92,6 +92,7 @@ namespace Receptsamlingen.Mvc.Controllers
             }
             else
             {
+                model.RecipeSaved = false;
                 ViewBag.Response = Globals.ErrorSavingRecipe;
             }
 
@@ -101,6 +102,7 @@ namespace Receptsamlingen.Mvc.Controllers
 
         public ActionResult Vote(RecipeModel model)
         {
+            var ratingSaved = false;
             if (RatingRepository.UserHasVoted(SessionHandler.User.Username, SessionHandler.CurrentGuid))
             {
                 ViewBag.Response = Globals.ErrorUserHasVoted;
@@ -108,9 +110,19 @@ namespace Receptsamlingen.Mvc.Controllers
             else
             {
                 var voteSuccess = RatingRepository.Save(SessionHandler.CurrentGuid, SessionHandler.User.Username, Convert.ToInt32(model.UserRating));
-                ViewBag.Response = voteSuccess ? Globals.InfoVoteSaved : Globals.ErrorSavingVote;
+                if (voteSuccess)
+                {
+                    ratingSaved = true;
+                    ViewBag.Response = Globals.InfoVoteSaved;
+                }
+                else
+                {
+                    ViewBag.Response = Globals.ErrorSavingVote;
+                }
             }
-            return View("Response");
+            model = Load(Convert.ToInt32(SessionHandler.CurrentId));
+            model.RatingSaved = ratingSaved;
+            return View("Detail", model);
         }
 
         public ActionResult Delete(int id)

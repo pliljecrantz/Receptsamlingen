@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace Receptsamlingen.Mvc.Classes
 {
@@ -31,7 +30,7 @@ namespace Receptsamlingen.Mvc.Classes
 
         // Error- and infomessages
         public const string ErrorSavingVote = "Det gick inte att rösta, försök igen senare.";
-        public const string ErrorUserHasVoted = "Du har redan röstat.";
+        public const string ErrorUserHasVoted = "Du har redan röstat en gång tidigare.";
         public const string ErrorDeletingRecipe = "Det gick inte att radera receptet.";
         public const string ErrorUpdatingRecipe = "Det gick inte att uppdatera receptet.";
         public const string ErrorSavingRecipe = "Det gick inte att spara receptet, försök igen senare.";
