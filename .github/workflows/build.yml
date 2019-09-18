@@ -23,6 +23,6 @@ jobs:
       run: nuget restore
       
     - name: MSBuild
-      working-directory: Receptsamlingen
-      run: msbuild Receptsamlingen.Mvc/Receptsamlingen.Mvc.csproj
+      working-directory: Receptsamlingen.Mvc
+      run: msbuild Receptsamlingen.Mvc.csproj
     
