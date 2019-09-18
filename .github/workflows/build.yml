@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 2.2.108
         
-    - name: Nuget restore
-      run: dotnet restore Receptsamlingen\Receptsamlingen.sln
+    #- name: Nuget restore
+     # run: dotnet restore Receptsamlingen\Receptsamlingen.sln
       
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build Receptsamlingen\Receptsamlingen.Mvc\Receptsamlingen.Mvc.csproj --configuration Release
