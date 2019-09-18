@@ -20,7 +20,7 @@ jobs:
       uses: warrenbuckley/Setup-MSBuild@v1
 
     - name: Nuget Restore
-      working-directory: Receptsamlingen
+      working-directory: Receptsamlingen/Receptsamlingen.Mvc
       run: nuget restore
       
     - name: MSBuild
