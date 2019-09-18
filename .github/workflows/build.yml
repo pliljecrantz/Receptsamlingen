@@ -30,4 +30,4 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: web
-        path: publish\bin
+        path: %GITHUB_WORKSPACE%\publish\bin
