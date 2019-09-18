@@ -19,8 +19,7 @@ jobs:
         dotnet-version: 2.2.108
         
     - name: Nuget restore
-      run: dotnet restore
-      working-directory: Receptsamlingen/Receptsamlingen.Mvc
+      run: dotnet restore Receptsamlingen\Receptsamlingen.sln
       
     - name: Build with dotnet
       run: dotnet build --configuration Release
