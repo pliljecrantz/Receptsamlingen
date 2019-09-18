@@ -13,13 +13,22 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 2.2.108
+   # - name: Setup .NET Core
+   #   uses: actions/setup-dotnet@v1
+    ##  with:
+    #    dotnet-version: 2.2.108
         
     #- name: Nuget restore
      # run: dotnet restore Receptsamlingen\Receptsamlingen.sln
+     
+      name: Setup Nuget
+      uses: warrenbuckley/Setup-Nuget@v1
+
+    - name: Nuget Restore
+      working-directory: Receptsamlingen
+      run: nuget restore  
       
     - name: Build with dotnet
-      run: dotnet build Receptsamlingen\Receptsamlingen.Mvc\Receptsamlingen.Mvc.csproj --configuration Release
+     # run: dotnet build Receptsamlingen\Receptsamlingen.Mvc\Receptsamlingen.Mvc.csproj --configuration Release
+     run: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe" Receptsamlingen.sln
+    
