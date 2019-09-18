@@ -20,14 +20,9 @@ jobs:
       uses: warrenbuckley/Setup-MSBuild@v1
 
     - name: Nuget Restore
-      working-directory: Receptsamlingen/Receptsamlingen.Mvc
       run: nuget restore
       
     - name: MSBuild
       working-directory: Receptsamlingen
       run: msbuild Receptsamlingen.Mvc/Receptsamlingen.Mvc.csproj
-      
-   # - name: Build with dotnet
-     # run: dotnet build Receptsamlingen\Receptsamlingen.Mvc\Receptsamlingen.Mvc.csproj --configuration Release
-     #run: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe" Receptsamlingen.sln
     
