@@ -20,7 +20,7 @@ jobs:
         
     - name: Nuget restore
       run: dotnet restore
-      working-directory: Receptsamlingen/Receptsamlingen.Mvc/Receptsamlingen.Mvc.csproj
+      working-directory: Receptsamlingen
       
     - name: Build with dotnet
       run: dotnet build --configuration Release
