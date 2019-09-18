@@ -24,10 +24,10 @@ jobs:
       
     - name: MSBuild
       working-directory: Receptsamlingen.Mvc
-      run: msbuild Receptsamlingen.Mvc.csproj /p:WebProjectOutputDir=publish /p:OutDir=publish\bin\
+      run: msbuild Receptsamlingen.Mvc.csproj /p:WebProjectOutputDir=publish
     
     - name: publish build artifacts back to GitHub
       uses: actions/upload-artifact@master
       with:
         name: web
-        path: %GITHUB_WORKSPACE%\publish\bin
+        path: bin\Debug
