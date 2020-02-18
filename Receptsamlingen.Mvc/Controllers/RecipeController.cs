@@ -89,6 +89,7 @@ namespace Receptsamlingen.Mvc.Controllers
                 ViewBag.Response = Globals.InfoRecipeSaved;
                 SessionHandler.CurrentGuid = model.Recipe.Guid;
                 SessionHandler.CurrentId = model.Recipe.Id.ToString();
+                SessionHandler.ForceReload = true;
             }
             else
             {

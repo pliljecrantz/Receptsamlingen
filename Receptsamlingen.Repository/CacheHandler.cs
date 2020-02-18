@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Caching;
 
@@ -26,7 +27,7 @@ namespace Receptsamlingen.Repository
             {
                 Remove(cacheKey);
             }
-            HttpRuntime.Cache.Add(cacheKey, value, null, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+            HttpRuntime.Cache.Add(cacheKey, value, null, DateTime.Now.AddDays(30), TimeSpan.Zero, CacheItemPriority.High, null);
         }
 
         public static void Remove(string cacheKey)
