@@ -221,7 +221,6 @@ namespace Receptsamlingen.Repository
                         r.Portions = recipe.Portions;
                         r.CategoryId = recipe.CategoryId;
                         r.DishTypeId = recipe.DishTypeId;
-                        r.Date = DateTime.Now;
                         r.Guid = recipe.Guid;
                         r.Id = recipe.Id;
                     }
