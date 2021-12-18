@@ -1,1 +1,1 @@
-[![Build Status](https://dev.azure.com/pliljecrantz/Receptsamlingen/_apis/build/status/CI%20Receptsamlingen?branchName=master)](https://dev.azure.com/pliljecrantz/Receptsamlingen/_build/latest?definitionId=2&branchName=master)
+![Workflow Status](https://github.com/pliljecrantz/Receptsamlingen/actions/workflows/pipeline.yml/badge.svg)
