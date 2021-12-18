@@ -31,7 +31,7 @@ jobs:
       run: nuget restore Receptsamlingen.sln
       
     - name: Build and publish Web App
-      run: msbuild Receptsamlingen.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+      run: msbuild Receptsamlingen.sln /p:Configuration=Release /p:DeployOnBuild=true
  
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
