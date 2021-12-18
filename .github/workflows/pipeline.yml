@@ -31,13 +31,13 @@ jobs:
       run: nuget restore Receptsamlingen.sln
       
     - name: Build and publish Web App
-      run: msbuild Receptsamlingen.sln /p:Configuration=Release /p:DeployOnBuild=true
+      run: msbuild Receptsamlingen.sln /p:Configuration=Release /p:DeployOnBuild=true /p:OutDir=${{env.DOTNET_ROOT}}/receptsamlingen
  
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
         name: published_webapp
-        path: bin\Release\Publish
+        path: ${{env.DOTNET_ROOT}}/receptsamlingen
 
   deploy:
     runs-on: windows-latest
