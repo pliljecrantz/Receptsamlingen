@@ -8,9 +8,6 @@ on:
   push:
     branches: 
       - master
-  pull_request:
-    branches:
-      - master
 
 jobs:
   build:
@@ -21,13 +18,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     
-    - name: Setup MSBuild path
+    - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
        
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
      
-    - name: Restore NuGet Packages
+    - name: Restore NuGet packages
       run: nuget restore Receptsamlingen.sln
       
     - name: Build and publish Web App
