@@ -1,22 +1,23 @@
-using System;
-using System.Web;
-using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-using Ninject;
-using Ninject.Web.Common;
-using Receptsamlingen.Mvc;
-using Receptsamlingen.Mvc.Classes;
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Receptsamlingen.Mvc.App_Start.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Receptsamlingen.Mvc.App_Start.NinjectWebCommon), "Stop")]
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
-
-namespace Receptsamlingen.Mvc
+namespace Receptsamlingen.Mvc.App_Start
 {
-	public static class NinjectWebCommon 
+    using System;
+    using System.Web;
+
+    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+
+    using Ninject;
+    using Ninject.Web.Common;
+    using Ninject.Web.Common.WebHost;
+
+    public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
-        /// Starts the application
+        /// Starts the application.
         /// </summary>
         public static void Start() 
         {
@@ -24,7 +25,7 @@ namespace Receptsamlingen.Mvc
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -32,7 +33,7 @@ namespace Receptsamlingen.Mvc
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -60,7 +61,6 @@ namespace Receptsamlingen.Mvc
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-			kernel.Load<NinjectBindingModule>();
-        }        
+        }
     }
 }
