@@ -28,7 +28,7 @@ jobs:
       uses: NuGet/setup-nuget@v1.0.5
      
     - name: Restore NuGet Packages
-      run: nuget restore SimpleFrameworkApp.sln
+      run: nuget restore Receptsamlingen.sln
       
     - name: Build and publish Web App
       run: msbuild Receptsamlingen.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
