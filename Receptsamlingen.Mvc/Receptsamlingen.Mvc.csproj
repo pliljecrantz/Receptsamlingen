@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Receptsamlingen.Mvc</RootNamespace>
     <AssemblyName>Receptsamlingen.Mvc</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -31,6 +31,7 @@
     <TargetFrameworkProfile />
     <ApplicationInsightsResourceId>/subscriptions/348a1f42-3571-4eeb-88d6-06c628f7ffbe/resourcegroups/Default-Web-WestEurope/providers/microsoft.insights/components/Receptsamlingen.Mvc</ApplicationInsightsResourceId>
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

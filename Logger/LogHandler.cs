@@ -1,10 +1,8 @@
-﻿using System;
-using System.Reflection;
-using log4net;
+﻿using NLog;
 
 namespace Logger
 {
-	public enum LogType
+    public enum LogType
 	{
 		Debug,
 		Info,
@@ -40,7 +38,18 @@ namespace Logger
 
 		public static void Configure()
 		{
-			log4net.Config.XmlConfigurator.Configure();
+			var config = new NLog.Config.LoggingConfiguration();
+
+			// Targets where to log to: File and Console
+			var logfile = new NLog.Targets.FileTarget("logfile") { FileName = "log.txt" };
+			var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
+
+			// Rules for mapping loggers to targets            
+			config.AddRule(LogLevel.Info, LogLevel.Fatal, logconsole);
+			config.AddRule(LogLevel.Debug, LogLevel.Fatal, logfile);
+
+			// Apply config           
+			LogManager.Configuration = config;
 		}
 	}
 }
