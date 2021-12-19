@@ -9,23 +9,19 @@ on:
     branches: 
       - master
 
-jobs:
-  prepare:
-    runs-on: windows-latest
-    steps: 
-      - name: Checkout code
-        uses: actions/checkout@v2
-    
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
-
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.0.5
-        
+jobs:        
   build:
     runs-on: windows-latest
-    needs: prepare
-    steps:     
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+        
     - name: Restore NuGet packages
       run: nuget restore Receptsamlingen.sln
       
