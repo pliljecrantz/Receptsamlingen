@@ -53,6 +53,12 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
       
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+        
+    - name: Restore NuGet packages
+      run: nuget restore Receptsamlingen.sln
+      
     - name: Build solution
       run: msbuild Receptsamlingen.sln /p:Configuration=Release
 
